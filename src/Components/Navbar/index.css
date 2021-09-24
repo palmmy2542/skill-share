@@ -1,0 +1,36 @@
+.navbar {
+    height:54px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    border-bottom: 1px solid #868686;
+    padding: 16px 36px;
+    text-align: center;
+    position: relative;
+}
+
+.icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.icon-setting {
+    margin-right: auto;
+}
+
+.icon-logout {
+    margin-left: auto;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  max-width: 126px;
+  height: 100%;
+  display: flex;
+  align-items: center; /** Y-axis align **/
+  justify-content: center; /** X-axis align **/
+}
