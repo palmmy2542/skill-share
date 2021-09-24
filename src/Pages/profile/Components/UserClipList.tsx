@@ -9,7 +9,6 @@ const UserClipList = (props: any) => {
       <Row>
         <Col span={24}>
           <Tabs defaultActiveKey="1" centered tabPosition={"bottom"}>
-            ImFilm
             <TabPane
               tab={
                 <span>
