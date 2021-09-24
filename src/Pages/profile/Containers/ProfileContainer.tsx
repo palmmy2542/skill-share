@@ -4,6 +4,7 @@ import UserAvatar from "../Components/UserAvatar";
 import UserInformation from "../Components/UserInformation";
 import { Button, Divider } from "antd";
 import UserClipList from "../Components/UserClipList";
+import "../index.css";
 
 const ProfileContainer = (props: any) => {
   return (

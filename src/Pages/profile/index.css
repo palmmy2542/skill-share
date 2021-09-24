@@ -1,3 +1,8 @@
+#profile {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
 .ant-avatar {
   padding: 12px 16px;
   width: 36px;
