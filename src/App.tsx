@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <div className="layout">
         <Switch>
-          <Route exact path="/profile/:id">
+          <Route exact path="/:username">
             <Profile />
           </Route>
           <Route exact path="/">
