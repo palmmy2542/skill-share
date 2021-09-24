@@ -6,3 +6,8 @@
   background-color: #d3d3d3;
   color: #FFF;
 }
+
+.ant-divider {
+  color: red;
+  border-left: 2px solid rgb(82, 82, 82);
+}
