@@ -7,7 +7,25 @@
   color: #FFF;
 }
 
+.ant-row {
+  margin-bottom: 24px;
+}
+
 .ant-divider {
   color: red;
-  border-left: 2px solid rgb(82, 82, 82);
+  height: 100%;
+}
+
+.ant-divider-vertical {
+  height: 100%!important;
+}
+
+.ant-tabs-nav-list {
+  width: 100%;
+}
+
+.ant-tabs-tab {
+  width: 50%;
+  display: block!important;
+  font-size: 24px!important;
 }

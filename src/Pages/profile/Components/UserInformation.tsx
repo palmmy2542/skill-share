@@ -12,29 +12,27 @@ const UserInformation = (props: any) => {
   } = useUserDataContext();
   return (
     <>
-      <Row
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          textAlign: "center",
-        }}
-      >
-        <Col style={{ width: "128px" }}>
+      <Row>
+        <Col span={2} />
+        <Col span={6}>
           <Title level={2}>{subscribing}</Title>
           <Text>Subscribing</Text>
         </Col>
-        <Divider type="vertical" />
-        <Col style={{ width: "128px" }}>
+        <Col span={1}>
+          <Divider type="vertical" />
+        </Col>
+        <Col span={6}>
           <Title level={2}>{subscribers}</Title>
           <Text>Subscribers</Text>
         </Col>
-        <Divider type="vertical" />
-        <Col style={{ width: "128px" }}>
+        <Col span={1}>
+          <Divider type="vertical" />
+        </Col>
+        <Col span={6}>
           <Title level={2}>{clips}</Title>
           <Text>Clips</Text>
         </Col>
-        {/* <Col span={8}></Col>
-        <Col span={8}></Col> */}
+        <Col span={2} />
       </Row>
     </>
   );
