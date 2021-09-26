@@ -1,0 +1,14 @@
+#register {
+  padding-top: 48px;
+  padding-bottom: 48px;   
+}
+
+#register-form {
+  margin-top: 32px;
+  padding: 48px;
+}
+
+.register-form-button {
+  margin-top: 32px;
+  width: 100%;
+}
