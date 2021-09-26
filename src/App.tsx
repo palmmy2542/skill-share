@@ -14,14 +14,14 @@ function App() {
       <UserDataProvider>
         <div className="layout">
           <Switch>
+            <Route exact path="/login">
+              <Login />
+            </Route>
             <Route exact path="/:username">
               <Profile />
             </Route>
             <Route exact path="/">
               <Home />
-            </Route>
-            <Route exact path="/login">
-              <Login />
             </Route>
           </Switch>
         </div>
