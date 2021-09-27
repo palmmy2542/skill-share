@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "./Pages/home/index";
-
 import Profile from "./Pages/profile/index";
+import Login from "./Pages/login/index";
 import "./App.css";
 import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
 import Navbar from "./Components/Navbar/Navbar";
@@ -14,6 +14,9 @@ function App() {
       <UserDataProvider>
         <div className="layout">
           <Switch>
+            <Route exact path="/login">
+              <Login />
+            </Route>
             <Route exact path="/:username">
               <Profile />
             </Route>
