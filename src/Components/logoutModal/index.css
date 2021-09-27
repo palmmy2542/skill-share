@@ -1,0 +1,25 @@
+.ant-modal-confirm-body .ant-modal-confirm-title, .ant-modal-confirm-body .ant-modal-confirm-content{
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 10%;
+}
+
+
+@media only screen and (max-width: 975px) {
+    .ant-modal-confirm-body .ant-modal-confirm-title, .ant-modal-confirm-body .ant-modal-confirm-content{
+        font-size: 20px;
+    }
+
+    .ant-modal-confirm .ant-modal-confirm-btns{
+        float: none;
+        text-align-last: center;
+    }
+
+    .ant-btn{
+        width: 100px;
+    }
+
+    .ant-btn:first-of-type {
+        margin-right: 15px;
+    }
+}
