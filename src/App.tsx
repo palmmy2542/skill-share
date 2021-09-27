@@ -6,6 +6,7 @@ import Profile from "./Pages/profile/index";
 import "./App.css";
 import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
 import Navbar from "./Components/Navbar/Navbar";
+import BottomNav from "./Components/BottomNav/BottomNav";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           </Switch>
         </div>
       </UserDataProvider>
+      <BottomNav />
     </div>
   );
 }
