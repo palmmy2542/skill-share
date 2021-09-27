@@ -1,0 +1,23 @@
+#layout {
+  background: #fff;
+}
+
+#login {
+  padding-top: 48px;
+  padding-bottom: 48px;   
+}
+
+#login-form {
+  margin-top: 32px;
+  padding: 48px;
+}
+
+.login-form-forgot {
+  float: left;
+  color: black;
+}
+
+.login-form-button {
+  margin-top: 32px;
+  width: 100%;
+}
