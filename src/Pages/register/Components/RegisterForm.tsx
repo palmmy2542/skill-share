@@ -7,12 +7,11 @@ import { BiPhone } from "react-icons/bi";
 const RegisterForm = (props: any) => {
   const { handleRegister,history, ...prop } = props;
   const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
     handleRegister(values).then((res: any) => {
       if (res) {
         console.log(res);
         console.log("Register success!");
-        history.push('/login')
+        history.push("/login");
       }
     });
   };
