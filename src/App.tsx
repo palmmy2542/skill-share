@@ -7,28 +7,32 @@ import Login from "./Pages/login/index";
 import "./App.css";
 import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
 import Navbar from "./Components/Navbar/Navbar";
+import { UserAuthenticationProvider } from "./Domains/UserAuthentication/useUserAuthentication";
 
 function App() {
   return (
     <div className="App">
       <Navbar name="Default" />
-      <UserDataProvider>
-        <div className="layout">
-          <Switch>
-            <Route exact path="/register">
-              <Register />
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/:username">
-              <Profile />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </div>
-      </UserDataProvider>
+      <UserAuthenticationProvider>
+        <UserDataProvider>
+          <div className="layout">
+            <Switch>
+              <Route exact path="/register">
+                <Register />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/:username">
+                <Profile />
+              </Route>
+              <Route exact path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </div>
+        </UserDataProvider>
+      </UserAuthenticationProvider>
     </div>
   );
 }
