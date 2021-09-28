@@ -5,20 +5,28 @@ import "./index.css";
 
 const { confirm } = Modal;
 
-function showLogoutConfirm() {
+const showLogoutConfirm = ({
+  logout,
+  history,
+}: {
+  logout: () => void;
+  history: any;
+}) => {
   confirm({
-    title: 'Oh no! You\'re leaving...?',
-    content: 'are you sure?',
-    style:{ top: "30vh" },
+    title: "Oh no! You're leaving...?",
+    content: "are you sure?",
+    style: { top: "30vh" },
     icon: <ExclamationCircleOutlined />,
-    okText:"log out",
-    cancelText:"cancel",
+    okText: "log out",
+    cancelText: "cancel",
 
     onOk() {
-      console.log('Log out');
+      console.log(logout);
+      logout();
+      history.push("/login");
     },
   });
-} 
+}; 
 
 export default showLogoutConfirm;
 
