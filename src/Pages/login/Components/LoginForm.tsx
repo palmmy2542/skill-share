@@ -2,17 +2,21 @@ import '../index.css';
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { InputValue } from "../../../Domains/UserAuthentication/utils";
+import { useState } from "react";
+import { PoweroffOutlined } from "@ant-design/icons";
 
 const LoginForm = (props: any) => {
   const { handleLogin, history, ...prop } = props;
+  const [isLoading, setIsloading] = useState(false);
 
   const onFinish = (values: InputValue) => {
+    setIsloading(true);
     handleLogin(values).then((res: any) => {
       if (res) {
-        console.log(res);
         console.log("Login success!");
         history.push(`/${values.username}`);
       }
+      setIsloading(false);
     });
   };
 
@@ -63,6 +67,8 @@ const LoginForm = (props: any) => {
           htmlType="submit"
           size="large"
           className="login-form-button"
+          // icon={<PoweroffOutlined />}
+          loading={isLoading}
         >
           Log in
         </Button>

@@ -4,7 +4,7 @@
 
 #login {
   padding-top: 48px;
-  padding-bottom: 48px;   
+  /* padding-bottom: 48px;    */
 }
 
 #login-form {
@@ -19,5 +19,11 @@
 
 .login-form-button {
   margin-top: 32px;
+  width: 100%;
+}
+
+.ant-layout-footer {
+  position:fixed;
+  bottom: 0;
   width: 100%;
 }
