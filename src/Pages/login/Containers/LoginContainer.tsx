@@ -8,11 +8,11 @@ const LoginContainer = (props: any) => {
   const { login } = useUserAuthenticationContext();
   const history = useHistory();
   return (
-    <div id="login">
+    <div id="login" className="page-layout">
       <h1>Log in</h1>
       <LoginForm handleLogin={login} history={history} />
       <Footer>
-        Don't have an account? <a href="/#">Sign up!</a>
+        Don't have an account? <a href="/register">Sign up!</a>
       </Footer>
     </div>
   );

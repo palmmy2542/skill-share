@@ -45,3 +45,15 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.page-layout {
+  padding-left: 128px;
+  padding-right: 128px;
+}
+
+@media only screen and (max-width: 975px) {
+  .page-layout {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}

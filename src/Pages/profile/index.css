@@ -1,8 +1,6 @@
 #profile {
   padding-top: 32px;
   padding-bottom: 32px;
-  padding-left: 128px;
-  padding-right: 128px;
 }
 
 .ant-avatar {
@@ -41,7 +39,5 @@
 @media only screen and (max-width: 975px) {
   #profile {
     padding-bottom: 24px;
-    padding-left: 0px;
-    padding-right: 0px;
   }
 }

@@ -67,7 +67,6 @@ const LoginForm = (props: any) => {
           htmlType="submit"
           size="large"
           className="login-form-button"
-          // icon={<PoweroffOutlined />}
           loading={isLoading}
         >
           Log in

@@ -8,7 +8,7 @@ const RegisterContainer = (props: any) => {
   const history = useHistory();
 
   return (
-    <div id="register">
+    <div id="register" className="page-layout">
       <h1>Sign up</h1>
       <RegisterForm handleRegister={register} history={history} />
     </div>

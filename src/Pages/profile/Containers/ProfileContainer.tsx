@@ -18,7 +18,7 @@ const ProfileContainer = (props: any) => {
   return (
     <>
       <Navbar name={userParam} />
-      <div id="profile">
+      <div id="profile" className="page-layout">
         <UserAvatar>
           <UserOutlined />
         </UserAvatar>
