@@ -9,7 +9,7 @@ const useUserData = () => {
     username: "",
     subscribing: 0,
     subscribers: 0,
-    clips: 1,
+    clips: [0, 0, 0],
   });
   const { canAccessService } = useUserAuthenticationContext();
   const token = canAccessService();

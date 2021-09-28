@@ -3,9 +3,9 @@ import { Row, Col, Tabs } from "antd";
 import { ImFilm, ImLock } from "react-icons/im";
 import Clip from "../../../Components/Clip";
 const { TabPane } = Tabs;
-const clips = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
 const UserClipList = (props: any) => {
+  const { clips } = props;
   return (
     <>
       <Tabs defaultActiveKey="1" centered tabPosition={"bottom"}>
@@ -27,7 +27,7 @@ const UserClipList = (props: any) => {
         />
       </Tabs>
       <Row gutter={[8, 8]}>
-        {clips.map(() => (
+        {clips.map((index: number) => (
           <Col xs={8} md={8}>
             <Clip />
           </Col>
