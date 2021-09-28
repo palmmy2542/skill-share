@@ -1,19 +1,31 @@
 import "../index.css";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { FaRegIdCard } from "react-icons/fa";
 import { BiPhone } from "react-icons/bi";
+import { useState } from "react";
 
 const RegisterForm = (props: any) => {
-  const { handleRegister,history, ...prop } = props;
+  const { handleRegister, history, ...prop } = props;
+  const [isLoading, setIsloading] = useState(false);
+  const [setError, setIsError] = useState(false);
+
   const onFinish = (values: any) => {
-    handleRegister(values).then((res: any) => {
-      if (res) {
-        console.log(res);
-        console.log("Register success!");
-        history.push("/login");
-      }
-    });
+    setIsloading(true);
+    handleRegister(values)
+      .then((res: any) => {
+        if (res) {
+          console.log(res);
+          console.log("Register success!");
+          history.push("/login");
+        }
+      })
+      .catch((err: any) => {
+        console.log(err);
+        message.error("Username is existing. Please change your username.");
+        setIsloading(false);
+        setIsError(true);
+      });
   };
 
   return (
@@ -121,6 +133,7 @@ const RegisterForm = (props: any) => {
           htmlType="submit"
           size="large"
           className="register-form-button"
+          loading={isLoading}
         >
           Sign up
         </Button>
