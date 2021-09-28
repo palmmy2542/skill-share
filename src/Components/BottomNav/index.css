@@ -1,0 +1,43 @@
+.bottom-nav {
+    height: 54px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #868686;
+    position: fixed;
+}
+
+.bottom-nav-btn {
+    color: #000;
+    padding-top: 16px;
+    width: 33.33%;
+    display: inline-block;
+    font-size: 12px;
+    justify-items: center;
+    align-items: center;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.icon-plus {
+    cursor: pointer;
+    font-size: 32px;
+}
+
+@media only screen and (max-width: 975px) {
+    .bottom-nav {
+        height: 48px;
+    }
+    
+    .bottom-nav-btn {
+        padding-top: 8px;
+        font-size: 10px;
+    }
+    .icon-plus {
+        font-size: 30px;
+    }
+  }
