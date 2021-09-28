@@ -1,6 +1,8 @@
 #profile {
   padding-top: 32px;
   padding-bottom: 32px;
+  padding-left: 128px;
+  padding-right: 128px;
 }
 
 .ant-avatar {
@@ -9,7 +11,7 @@
   height: 36px;
   border-radius: 50%;
   background-color: #d3d3d3;
-  color: #FFF;
+  color: #fff;
 }
 
 .ant-row {
@@ -23,7 +25,7 @@
 }
 
 .ant-divider-vertical {
-  height: 100%!important;
+  height: 100% !important;
 }
 
 .ant-tabs-nav-list {
@@ -32,12 +34,14 @@
 
 .ant-tabs-tab {
   width: 50%;
-  display: block!important;
-  font-size: 24px!important;
+  display: block !important;
+  font-size: 24px !important;
 }
 
 @media only screen and (max-width: 975px) {
   #profile {
     padding-bottom: 24px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }

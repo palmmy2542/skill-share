@@ -2,14 +2,11 @@ import React from "react";
 import { Row, Col, Divider } from "antd";
 
 import { Typography } from "antd";
-import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
 
 const { Title, Text } = Typography;
 
 const UserInformation = (props: any) => {
-  const {
-    userData: { subscribing, subscribers, clips },
-  } = useUserDataContext();
+  const { subscribing, subscribers, clips } = props;
   return (
     <>
       <Row>
@@ -29,7 +26,7 @@ const UserInformation = (props: any) => {
           <Divider type="vertical" />
         </Col>
         <Col span={6}>
-          <Title level={2}>{clips}</Title>
+          <Title level={2}>{clips.length ?? 0}</Title>
           <Text>Clips</Text>
         </Col>
         <Col span={2} />

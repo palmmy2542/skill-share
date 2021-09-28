@@ -1,12 +1,16 @@
 .navbar {
     height:54px;
+    width: 100%;
     display:flex;
     justify-content:center;
     align-items: center;
     border-bottom: 1px solid #868686;
+    background-color: #ffff;
     padding: 16px 36px;
     text-align: center;
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .icon {

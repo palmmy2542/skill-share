@@ -60,7 +60,6 @@ const useUserAuthentication = () => {
       email,
       tel,
     });
-    console.log(response);
 
     if (response.statusText) {
       return response.data;
@@ -69,10 +68,41 @@ const useUserAuthentication = () => {
     return null;
   };
 
+  const isUserSignIn = (): boolean => {
+    if (canAccessService()) {
+      return true;
+    } else return false;
+  };
+
+  const logout = (): void => {
+    if (isUserSignIn()) {
+      localStorage.removeItem("skillToken");
+      localStorage.removeItem("username");
+    }
+  };
+
+  const getAccessToken = (): Token | null => {
+    const token: string | null = localStorage.getItem("skillToken");
+    return token === null ? null : JSON.parse(token);
+  };
+
+  const canAccessService = (): string | null => {
+    const now = new Date();
+    const item: Token | null = getAccessToken();
+    if (item === null) return null;
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem("skillToken");
+      return null;
+    } else return item.token;
+  };
+
   return {
     userData,
     login,
+    logout,
     register,
+    canAccessService,
+    isUserSignIn,
   };
 };
 
