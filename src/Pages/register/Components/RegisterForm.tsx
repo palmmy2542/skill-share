@@ -6,7 +6,7 @@ import { BiPhone } from "react-icons/bi";
 import { useState } from "react";
 
 const RegisterForm = (props: any) => {
-  const { handleRegister, history, ...prop } = props;
+  const { handleRegister, history } = props;
   const [isLoading, setIsloading] = useState(false);
 
   const onFinish = (values: any) => {

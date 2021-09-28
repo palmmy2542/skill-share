@@ -5,7 +5,7 @@ import { baseUrl } from "../../const";
 import useUserAuthenticationContext from "../UserAuthentication/useUserAuthentication";
 
 const useUserData = () => {
-  const [userData, setUserData] = useState({
+  const [userData] = useState({
     username: "",
     subscribing: 0,
     subscribers: 0,

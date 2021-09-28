@@ -6,7 +6,6 @@ import Register from "./Pages/register/index";
 import Login from "./Pages/login/index";
 import "./App.css";
 import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
-import BottomNav from "./Components/BottomNav/BottomNav";
 import { UserAuthenticationProvider } from "./Domains/UserAuthentication/useUserAuthentication";
 
 function App() {

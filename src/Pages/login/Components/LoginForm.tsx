@@ -1,12 +1,11 @@
 import '../index.css';
-import { Form, Input, Button, message } from "antd";
+import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { InputValue } from "../../../Domains/UserAuthentication/utils";
 import { useState } from "react";
-import { PoweroffOutlined } from "@ant-design/icons";
 
 const LoginForm = (props: any) => {
-  const { handleLogin, history, ...prop } = props;
+  const { handleLogin, history } = props;
   const [isLoading, setIsloading] = useState(false);
 
   const onFinish = (values: InputValue) => {

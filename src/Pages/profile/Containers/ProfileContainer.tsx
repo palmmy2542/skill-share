@@ -2,7 +2,7 @@ import React from "react";
 import { UserOutlined } from "@ant-design/icons";
 import UserAvatar from "../Components/UserAvatar";
 import UserInformation from "../Components/UserInformation";
-import { Button, Divider } from "antd";
+import { Button } from "antd";
 import UserClipList from "../Components/UserClipList";
 import "../index.css";
 import Navbar from "../../../Components/Navbar/Navbar";
