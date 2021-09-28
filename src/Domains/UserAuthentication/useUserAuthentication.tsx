@@ -61,7 +61,7 @@ const useUserAuthentication = () => {
       tel,
     });
 
-    if (response.statusText) {
+    if (response.status === 201) {
       return response.data;
     }
 

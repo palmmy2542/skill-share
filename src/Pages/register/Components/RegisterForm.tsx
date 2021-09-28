@@ -15,10 +15,11 @@ const RegisterForm = (props: any) => {
     handleRegister(values)
       .then((res: any) => {
         if (res) {
-          console.log(res);
           console.log("Register success!");
           history.push("/login");
         }
+        setIsloading(false);
+
       })
       .catch((err: any) => {
         console.log(err);
