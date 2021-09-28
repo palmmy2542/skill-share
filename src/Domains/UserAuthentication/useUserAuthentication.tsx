@@ -1,3 +1,4 @@
+import { message } from "antd";
 import axios, { AxiosResponse } from "axios";
 import constate from "constate";
 import { useState } from "react";
@@ -41,6 +42,7 @@ const useUserAuthentication = () => {
       }
     } catch (err) {
       console.log(err);
+      message.error("username or password is incorrect. Please try again.");
     }
   };
 

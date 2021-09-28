@@ -8,7 +8,6 @@ import { useState } from "react";
 const RegisterForm = (props: any) => {
   const { handleRegister, history, ...prop } = props;
   const [isLoading, setIsloading] = useState(false);
-  const [setError, setIsError] = useState(false);
 
   const onFinish = (values: any) => {
     setIsloading(true);
@@ -19,13 +18,11 @@ const RegisterForm = (props: any) => {
           history.push("/login");
         }
         setIsloading(false);
-
       })
       .catch((err: any) => {
         console.log(err);
         message.error("Username is existing. Please change your username.");
         setIsloading(false);
-        setIsError(true);
       });
   };
 
