@@ -1,7 +1,7 @@
 import axios from "axios";
 import constate from "constate";
 import { useState } from "react";
-import { baseUrl } from "../../const";
+import { AUTHENTICATION_HOST } from "../../const";
 import useUserAuthenticationContext from "../UserAuthentication/useUserAuthentication";
 
 const useUserData = () => {
@@ -18,7 +18,7 @@ const useUserData = () => {
     if (token) {
       const response = await axios({
         method: "GET",
-        url: `${baseUrl}/api/v1/me`,
+        url: `${AUTHENTICATION_HOST}/api/v1/me`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
