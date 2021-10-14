@@ -37,12 +37,13 @@ const UserClipList = (props: any) => {
               height: "250px",
             }}
           >
-            <Clip
+            {/* <Clip
               url={
                 "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
               }
+              isPlay={false}
               index={index}
-            />
+            /> */}
           </Col>
         ))}
       </Row>
