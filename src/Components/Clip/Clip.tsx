@@ -1,10 +1,6 @@
 import React from "react";
 import "./index.css";
 import ReactHlsPlayer from "react-hls-player";
-import { Button } from "antd";
-
-const GLOBAL_HEIGHT = 444.44;
-const GLOBAL_WIDTH = 250;
 
 const Clip = () => {
   const playerRef = React.useRef<HTMLVideoElement | null>(null);
