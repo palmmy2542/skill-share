@@ -28,7 +28,7 @@ const ProfileContainer = (props: any) => {
           clips={clips}
         />
         <Button size={"large"}>Edit profile</Button>
-        <UserClipList clips={clips} />
+        {/* <UserClipList clips={clips} /> */}
       </div>
       <BottomNav />
     </>
