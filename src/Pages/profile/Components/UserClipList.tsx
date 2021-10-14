@@ -28,7 +28,11 @@ const UserClipList = (props: any) => {
       </Tabs>
       <Row gutter={[8, 8]}>
         {clips.map((index: number) => (
-          <Col xs={8} md={8}>
+          <Col
+            xs={8}
+            md={8}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
             <Clip />
           </Col>
         ))}

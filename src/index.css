@@ -16,3 +16,9 @@ code {
     monospace;
 }
 
+video {
+  /* aspect-ratio: 9/16; */
+  /* width: 250px;
+  aspect-ratio: auto 250 / 444.44;
+  height: 444.44px; */
+}
