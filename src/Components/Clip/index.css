@@ -1,5 +1,5 @@
 .clip {
-  min-height: 400px;
+  min-height: 100%;
   width: 100%;
   display: "flex";
   justify-content: "center";
@@ -9,6 +9,6 @@
 
 @media only screen and (max-width: 975px) {
   .clip {
-    min-height: 250px;
+    min-height: 100%;
   }
 }
