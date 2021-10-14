@@ -24,7 +24,6 @@ const ClipFeed = () => {
     setCurrentIndex(to);
   };
 
-  console.log("clips", clips);
   return (
     <div style={{ overflow: "hidden" }}>
       <Carousel

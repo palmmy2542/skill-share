@@ -1,0 +1,14 @@
+.clip {
+  min-height: 100%;
+  width: 100%;
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+  background: "#000";
+}
+
+@media only screen and (max-width: 975px) {
+  .clip {
+    min-height: 100%;
+  }
+}

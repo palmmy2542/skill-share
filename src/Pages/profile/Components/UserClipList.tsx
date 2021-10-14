@@ -1,7 +1,8 @@
 import React from "react";
 import { Row, Col, Tabs } from "antd";
 import { ImFilm, ImLock } from "react-icons/im";
-import Clip from "../../../Components/Clip";
+import PreviewClip from "../../../Components/PreviewClip";
+
 const { TabPane } = Tabs;
 
 const UserClipList = (props: any) => {
@@ -37,13 +38,14 @@ const UserClipList = (props: any) => {
               height: "250px",
             }}
           >
-            {/* <Clip
+            <PreviewClip
               url={
                 "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
               }
               isPlay={false}
               index={index}
-            /> */}
+              key={index}
+            />
           </Col>
         ))}
       </Row>
