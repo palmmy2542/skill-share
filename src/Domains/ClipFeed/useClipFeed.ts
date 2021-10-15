@@ -11,6 +11,11 @@ const useClipFeed = () => {
       name: "TEST1",
       url: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
       isPlay: false,
+      comments: [
+        { name: "Name_1", comment: "Comment_1" },
+        { name: "Name_2", comment: "Comment_2" },
+        { name: "Name_3", comment: "Comment_3" },
+      ],
     },
     {
       title: "First Video0 2",
@@ -20,6 +25,11 @@ const useClipFeed = () => {
       name: "TEST2",
       url: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
       isPlay: false,
+      comments: [
+        { name: "Name_1", comment: "Comment_1" },
+        { name: "Name_2", comment: "Comment_2" },
+        { name: "Name_3", comment: "Comment_3" },
+      ],
     },
     {
       title: "First Video0 3",
@@ -29,6 +39,11 @@ const useClipFeed = () => {
       name: "TEST3",
       url: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
       isPlay: false,
+      comments: [
+        { name: "Name_1", comment: "Comment_1" },
+        { name: "Name_2", comment: "Comment_2" },
+        { name: "Name_3", comment: "Comment_3" },
+      ],
     },
     {
       title: "First Video0 4",
@@ -38,6 +53,11 @@ const useClipFeed = () => {
       name: "TEST4",
       url: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
       isPlay: false,
+      comments: [
+        { name: "Name_1", comment: "Comment_1" },
+        { name: "Name_2", comment: "Comment_2" },
+        { name: "Name_3", comment: "Comment_3" },
+      ],
     },
   ]);
 

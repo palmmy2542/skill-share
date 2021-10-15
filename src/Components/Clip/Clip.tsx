@@ -13,6 +13,7 @@ const Clip = ({
   title,
   description,
   tags,
+  handleOpenVideoComment,
 }: {
   name?: string | undefined;
   url: string;
@@ -22,6 +23,7 @@ const Clip = ({
   title: string;
   description: string;
   tags: Array<string>;
+  handleOpenVideoComment: () => void;
 }) => {
   const playerRef = React.useRef<HTMLVideoElement | null>(null);
   const [isShowControl, setIsShowControl] = useState(false);
@@ -113,6 +115,7 @@ const Clip = ({
           fontSize: "40px",
           zIndex: 100,
         }}
+        onClick={() => handleOpenVideoComment()}
       />
       <div
         style={{
