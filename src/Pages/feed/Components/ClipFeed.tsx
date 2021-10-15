@@ -41,24 +41,20 @@ const ClipFeed = () => {
         afterChange={() => setShouldPlay(true)}
         beforeChange={(from, to) => handleChange(from, to)}
       >
-        {clips.map(
-          (
-            { name, url, isPlay, title, description, tags },
-            index
-          ) => (
-            <Clip
-              name={name}
-              url={url}
-              height={"100vh"}
-              key={index+name}
-              index={index}
-              isPlay={isPlay}
-              title={title}
-              description={description}
-              tags={tags}
-            />
-          )
-        )}
+        {clips.map(({ name, url, isPlay, title, description, tags }, index) => (
+          <Clip
+            name={name}
+            url={url}
+            height={"100vh"}
+            key={index + name}
+            index={index}
+            isPlay={isPlay}
+            title={title}
+            description={description}
+            tags={tags}
+            handleOpenVideoComment={handleOpenVideoComment}
+          />
+        ))}
       </Carousel>
     </div>
   );
