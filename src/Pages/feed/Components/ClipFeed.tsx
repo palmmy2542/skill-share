@@ -20,7 +20,6 @@ const ClipFeed = () => {
     const temp = clips.slice();
     temp[from].isPlay = false;
     temp[to].isPlay = true;
-    console.log(from, to);
     setShouldPlay(false);
     setClips(temp);
     setCurrentIndex(to);
@@ -44,20 +43,19 @@ const ClipFeed = () => {
       >
         {clips.map(
           (
-            { name, url, isPlay, title, description, tags, comments },
+            { name, url, isPlay, title, description, tags },
             index
           ) => (
             <Clip
               name={name}
               url={url}
               height={"100vh"}
-              key={index}
+              key={index+name}
               index={index}
               isPlay={isPlay}
               title={title}
               description={description}
               tags={tags}
-              handleOpenVideoComment={handleOpenVideoComment}
             />
           )
         )}

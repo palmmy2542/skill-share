@@ -3,6 +3,9 @@ import "./index.css";
 import ReactHlsPlayer from "react-hls-player";
 import { Avatar, Button, Typography } from "antd";
 import { MessageOutlined, UserOutlined } from "@ant-design/icons";
+import ReactPlayer from "react-player";
+
+let COUNTER = 0;
 
 const Clip = ({
   name,
@@ -51,20 +54,15 @@ const Clip = ({
   // console.log("@" + name + "." + index.toString());
   // console.log("isPlay", isPlay);
   // console.log("isPlaying", isPlaying);
-  useEffect(() => {
-    if (isPlay && !isPlaying) {
-      setIsPlaying(true);
-      // console.log("@" + name + "." + index.toString());
-      // console.log("isPlay", isPlay);
-      // console.log("isPlaying", isPlaying);
-      // console.log("Play!!");
-      // console.log("ref", playerRef.current);
-      // playVideo();
-    } else if (!isPlay && isPlaying) {
-      pauseVideo();
-      setIsPlaying(false);
-    }
-  }, [isPlay]);
+  // useEffect(() => {
+  //   if (isPlay && COUNTER % 2 === 0) {
+  //     COUNTER += 1;
+  //   } else if (!isPlay) {
+  //   }
+  // }, [isPlay]);
+
+  // console.log("@" + name + "." + index.toString());
+  // console.log(isPlay);
 
   return (
     <div
@@ -145,7 +143,16 @@ const Clip = ({
           ))}
         </span>
       </div>
-      <ReactHlsPlayer
+      <ReactPlayer
+        url={url}
+        autoPlay={false}
+        controls={true}
+        width="100%"
+        height="100vh"
+        playerRef={playerRef}
+        className={"clip"}
+      />
+      {/* <ReactHlsPlayer
         src={url}
         autoPlay={false}
         controls={true}
@@ -153,7 +160,7 @@ const Clip = ({
         height="100vh"
         playerRef={playerRef}
         className={"clip"}
-      ></ReactHlsPlayer>
+      ></ReactHlsPlayer> */}
     </div>
   );
 };
