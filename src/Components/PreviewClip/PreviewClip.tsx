@@ -39,6 +39,7 @@ const PreviewClip = ({
         alignItems: "center",
         position: "relative",
         width: "100%",
+        cursor: "pointer",
       }}
       onMouseOver={(e) => {
         e.preventDefault();
@@ -62,6 +63,7 @@ const PreviewClip = ({
     >
       <ReactPlayer
         url={url}
+        muted
         autoPlay={false}
         playing={isPlaying}
         controls={false}
