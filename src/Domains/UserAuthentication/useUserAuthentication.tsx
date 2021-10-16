@@ -98,6 +98,8 @@ const useUserAuthentication = () => {
     } else return item.token;
   };
 
+  console.log("xxxx");
+
   return {
     userData,
     login,

@@ -1,3 +1,4 @@
+import { message } from "antd";
 import axios from "axios";
 import constate from "constate";
 import { useEffect, useState } from "react";
@@ -100,17 +101,20 @@ const useUserData = () => {
   useEffect(() => {
     getMe()
       .then((res) => {
-        setUserData({
-          username: res.username,
-          id: res.id,
-          fname: res.fname,
-          lname: res.lname,
-          subscribers: res.subscribers ?? 0,
-          subscribing: res.subscribing ?? 0,
-        });
+        if (res) {
+          localStorage.setItem("skillUsername", res.username);
+          setUserData({
+            username: res.username,
+            id: res.id,
+            fname: res.fname,
+            lname: res.lname,
+            subscribers: res.subscribers ?? 0,
+            subscribing: res.subscribing ?? 0,
+          });
+        }
       })
       .catch((err) => {
-        setErrorMessage(err.response.data.message);
+        // message.error(err.response.data.message);
       });
   }, []);
 
@@ -121,7 +125,7 @@ const useUserData = () => {
     getMe,
     token,
     isMe,
-    isSubscribed
+    isSubscribed,
   };
 };
 

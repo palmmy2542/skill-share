@@ -16,6 +16,7 @@ const ProfileContainer = (props: any) => {
   const { username, id, fname, lname, subscribing, subscribers } = userData;
   const history = useHistory();
 
+
   const renderButton = () => {
     if (isMe) {
       return <Button size={"middle"}>Edit profile</Button>;
