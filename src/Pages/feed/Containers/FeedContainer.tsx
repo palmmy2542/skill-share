@@ -1,8 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useParams } from "react-router";
-import Clip from "../../../Components/Clip";
 import ClipFeed from "../Components/ClipFeed";
-import CommentSection from "./CommentSection";
 
 const FeedContainer = (props: any) => {
   const { userParam, videoId } =

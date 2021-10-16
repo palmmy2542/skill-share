@@ -23,6 +23,8 @@ const Clip = ({
   title,
   description,
   tags,
+  isFirst,
+  isLast,
   handleOpenVideoComment,
   handleNext,
   handleBack,
@@ -40,6 +42,8 @@ const Clip = ({
   title: string;
   description: string;
   tags: Array<string>;
+  isFirst: boolean;
+  isLast: boolean;
   handleOpenVideoComment: () => void;
   handleNext: () => void;
   handleBack: () => void;
@@ -53,32 +57,6 @@ const Clip = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isExpandable, setIsExpandable] = useState(true);
 
-  function playVideo() {
-    if (playerRef && playerRef.current) {
-      // playerRef.current.play();
-    }
-  }
-
-  function pauseVideo() {
-    console.log(playerRef);
-    if (playerRef && playerRef.current) {
-      console.log("Call");
-
-      // playerRef.current.pause();
-    }
-  }
-
-  // console.log("@" + name + "." + index.toString());
-  // console.log("isPlay", isPlay);
-  // console.log("isPlaying", isPlaying);
-  useEffect(() => {
-    if (!isPlay) {
-      pauseVideo();
-    }
-  }, [isPlay]);
-
-  // console.log(isPlay);
-
   return (
     <div
       id={"@" + name + "." + index.toString()}
@@ -89,13 +67,11 @@ const Clip = ({
         alignItems: "center",
         position: "relative",
       }}
-      onMouseUp={(e: any) => {
-        if (e.target.tagName === "VIDEO") handleFaderToggle();
-        console.log(e.target.tagName);
+      onMouseMove={(e: any) => {
+        if (e.target.tagName === "VIDEO") setIsFade(true);
       }}
       onTouchEnd={(e: any) => {
-        if (e.target.tagName === "VIDEO") handleFaderToggle();
-        console.log(e.target.tagName);
+        setIsFade(true);
       }}
     >
       <Fader isFade={isFade} setIsFade={setIsFade}>
@@ -131,26 +107,35 @@ const Clip = ({
               justifyContent: "space-between",
               translate: "50% 0",
               width: "100%",
-              padding: "0 16px",
               zIndex: 1000,
             }}
           >
-            <LeftCircleOutlined
-              style={{
-                color: "#FFF",
-                fontSize: "48px",
-                cursor: "pointer",
-              }}
-              onClick={() => handleBack()}
-            />
-            <RightCircleOutlined
-              style={{
-                color: "#FFF",
-                fontSize: "48px",
-                cursor: "pointer",
-              }}
-              onClick={() => handleNext()}
-            />
+            {!isFirst && (
+              <LeftCircleOutlined
+                style={{
+                  color: "#FFF",
+                  fontSize: "48px",
+                  zIndex: 1000,
+                  cursor: "pointer",
+                  position: "absolute",
+                  left: 10,
+                }}
+                onClick={() => handleBack()}
+              />
+            )}
+            {!isLast && (
+              <RightCircleOutlined
+                style={{
+                  color: "#FFF",
+                  fontSize: "48px",
+                  zIndex: 1000,
+                  cursor: "pointer",
+                  position: "absolute",
+                  right: 10,
+                }}
+                onClick={() => handleNext()}
+              />
+            )}
           </div>
           <MessageOutlined
             style={{
@@ -184,13 +169,13 @@ const Clip = ({
             >
               {description}
             </Typography.Paragraph>
-            <span style={{ display: "inline-flex" }}>
+            {/* <span style={{ display: "inline-flex" }}>
               {tags.map((tag) => (
                 <Typography.Paragraph style={{ color: "#FFF" }}>
                   {`#${tag}`}
                 </Typography.Paragraph>
               ))}
-            </span>
+            </span> */}
           </div>
         </div>
       </Fader>
@@ -206,6 +191,7 @@ const Clip = ({
         height="100vh"
         ref={playerRef}
         className={"clip"}
+        loop
       />
       {/* <ReactHlsPlayer
         src={url}

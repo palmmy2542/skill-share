@@ -49,7 +49,7 @@ const CommentSection = ({
           <Input placeholder="Do you have something in mind ?" />
         </Form.Item>
         <Form.Item>
-          <Button icon={<RightOutlined />}></Button>
+          <Button icon={<RightOutlined />} style={{ margin: 0 }}></Button>
         </Form.Item>
       </Form>
     </Drawer>

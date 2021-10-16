@@ -1,26 +1,9 @@
-import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
 import { Carousel } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
-import React, {
-  TouchEvent,
-  WheelEvent,
-  useRef,
-  useState,
-  useEffect,
-  MutableRefObject,
-} from "react";
-import { BrowserView, isMobile } from "react-device-detect";
+import React, { useRef, useState } from "react";
 import Clip from "../../../Components/Clip";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
 import CommentSection from "../Containers/CommentSection";
-import styled, { keyframes } from "styled-components";
-import { fadeIn } from "react-animations";
-
-const bounceAnimation = keyframes`${fadeIn}`;
-
-const FadeDiv = styled.div`
-  animation: 1s ${bounceAnimation};
-`;
 
 const ClipFeed = () => {
   const { clips, setClips } = useClipFeedContext();
@@ -49,7 +32,7 @@ const ClipFeed = () => {
   const handlePause = () => {
     const temp = clips.slice();
     temp.forEach((item) => (item.isPlay = false));
-    // temp[currentIndex].isPlay = true;
+    temp[currentIndex].isPlay = true;
     setClips(temp);
   };
 
@@ -69,8 +52,6 @@ const ClipFeed = () => {
     setIsFade(!isFade);
   };
 
-  console.log(clips);
-
   return (
     <div style={{ overflow: "hidden" }}>
       <CommentSection
@@ -79,6 +60,7 @@ const ClipFeed = () => {
         comments={clips[currentIndex].comments}
       />
       <Carousel
+        infinite={false}
         ref={ref}
         dots={false}
         arrows={true}
@@ -92,6 +74,8 @@ const ClipFeed = () => {
             url={url}
             height={"100vh"}
             key={index + name}
+            isFirst={index === 0}
+            isLast={index === clips.length - 1}
             index={index}
             isPlay={isPlay}
             title={title}

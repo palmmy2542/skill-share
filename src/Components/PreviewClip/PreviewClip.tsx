@@ -41,24 +41,6 @@ const PreviewClip = ({
     }
   }
 
-  // console.log("@" + name + "." + index.toString());
-  // console.log("isPlay", isPlay);
-  // console.log("isPlaying", isPlaying);
-  // useEffect(() => {
-  //   if (isPlay && !isPlaying) {
-  //     setIsPlaying(true);
-  //     // console.log("@" + name + "." + index.toString());
-  //     // console.log("isPlay", isPlay);
-  //     // console.log("isPlaying", isPlaying);
-  //     // console.log("Play!!");
-  //     // console.log("ref", playerRef.current);
-  //     // playVideo();
-  //   } else if (!isPlay && isPlaying) {
-  //     pauseVideo();
-  //     setIsPlaying(false);
-  //   }
-  // }, [isPlay]);
-
   return (
     <div
       id={"@" + name + "." + index.toString()}
