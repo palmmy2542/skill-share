@@ -10,37 +10,43 @@ import "./App.css";
 import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
 import { ClipFeedProvider } from "./Domains/ClipFeed/useClipFeed";
 import ClipFeed from "./Pages/feed/Components/ClipFeed";
-import { UserAuthenticationProvider } from "./Domains/UserAuthentication/useUserAuthentication";
+import useUserAuthenticationContext, {
+  UserAuthenticationProvider,
+} from "./Domains/UserAuthentication/useUserAuthentication";
 
 function App() {
+  const { canAccessService } = useUserAuthenticationContext();
   const username = localStorage.getItem("skillUsername");
 
   return (
     <div className="App">
-      <UserAuthenticationProvider>
-        <UserDataProvider>
-          <ClipFeedProvider>
-            <Switch>
-              {/* <Route exact path="/">
+      <UserDataProvider>
+        <ClipFeedProvider>
+          <Switch>
+            {/* <Route exact path="/">
                 <ClipFeed />
               </Route> */}
-              <Route exact path="/register">
-                <Register />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-
-              <Route exact path="/:userParam">
-                <Profile />
-              </Route>
+            {!canAccessService() && (
               <Route path="/">
                 <Login />
               </Route>
-            </Switch>
-          </ClipFeedProvider>
-        </UserDataProvider>
-      </UserAuthenticationProvider>
+            )}
+            <Route exact path="/register">
+              <Register />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+
+            <Route exact path="/:userParam">
+              <Profile />
+            </Route>
+            <Route path="/">
+              <Login />
+            </Route>
+          </Switch>
+        </ClipFeedProvider>
+      </UserDataProvider>
     </div>
   );
 }

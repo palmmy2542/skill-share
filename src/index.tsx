@@ -5,10 +5,13 @@ import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
+import { UserAuthenticationProvider } from "./Domains/UserAuthentication/useUserAuthentication";
 
 ReactDOM.render(
   <Router>
-    <App />
+    <UserAuthenticationProvider>
+      <App />
+    </UserAuthenticationProvider>
   </Router>,
   document.getElementById("root")
 );
