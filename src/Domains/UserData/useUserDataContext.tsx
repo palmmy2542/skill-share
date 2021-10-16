@@ -1,16 +1,22 @@
 import axios from "axios";
 import constate from "constate";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AUTHENTICATION_HOST } from "../../const";
-import { ClipProp } from "../../interface";
+import { ClipProp, UserAccount } from "../../interface";
 import useUserAuthenticationContext from "../UserAuthentication/useUserAuthentication";
 
 const useUserData = () => {
-  const [userData] = useState({
+  const [userData, setUserData] = useState<UserAccount>({
+    id: "",
     username: "",
+    fname: "",
+    lname: "",
     subscribing: 0,
     subscribers: 0,
   });
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isMe, setIsMe] = useState<boolean>(true);
+  const [isSubscribed, setIsScribed] = useState(false);
   const [clips, setClips] = useState<Array<ClipProp>>([
     {
       title: "First Video0 1",
@@ -72,6 +78,8 @@ const useUserData = () => {
   const { canAccessService } = useUserAuthenticationContext();
   const token = canAccessService();
 
+  const handleSubscribe = () => {};
+
   const getMe = async (): Promise<any> => {
     if (token) {
       const response = await axios({
@@ -89,16 +97,31 @@ const useUserData = () => {
     return null;
   };
 
-  getMe().then((res) => {
-    console.log(res);
-    // setUserData({ ...res, ...userData });
-  });
+  useEffect(() => {
+    getMe()
+      .then((res) => {
+        setUserData({
+          username: res.username,
+          id: res.id,
+          fname: res.fname,
+          lname: res.lname,
+          subscribers: res.subscribers ?? 0,
+          subscribing: res.subscribing ?? 0,
+        });
+      })
+      .catch((err) => {
+        setErrorMessage(err.response.data.message);
+      });
+  }, []);
 
+  console.log(userData);
   return {
     userData,
     clips,
     getMe,
     token,
+    isMe,
+    isSubscribed
   };
 };
 

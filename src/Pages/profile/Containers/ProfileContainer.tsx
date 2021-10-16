@@ -7,17 +7,32 @@ import UserClipList from "../Components/UserClipList";
 import "../index.css";
 import Navbar from "../../../Components/Navbar/Navbar";
 import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
 
 const ProfileContainer = (props: any) => {
-  const { userData, clips } = useUserDataContext();
+  const { userData, clips, isMe, isSubscribed } = useUserDataContext();
   const { userParam } = useParams<{ userParam: string }>();
-  const { subscribing, subscribers } = userData;
+  const { username, id, fname, lname, subscribing, subscribers } = userData;
+  const history = useHistory();
+
+  const renderButton = () => {
+    if (isMe) {
+      return <Button size={"middle"}>Edit profile</Button>;
+    } else if (isSubscribed) {
+      return <Button size={"middle"}>Un subscribe</Button>;
+    } else if (!isSubscribed) {
+      return (
+        <Button size={"middle"} type={"primary"}>
+          subscribe
+        </Button>
+      );
+    }
+  };
 
   return (
     <>
-      <Navbar name={userParam} />
+      <Navbar name={username} />
       <div id="profile" className="page-layout">
         <UserAvatar>
           <UserOutlined />
@@ -27,8 +42,8 @@ const ProfileContainer = (props: any) => {
           subscribers={subscribers}
           clips={clips}
         />
-        <Button size={"middle"}>Edit profile</Button>
-        <UserClipList clips={clips} />
+        {renderButton()}
+        {/* <UserClipList clips={clips} /> */}
       </div>
       <BottomNav />
     </>

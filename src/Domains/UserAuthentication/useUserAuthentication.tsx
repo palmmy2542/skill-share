@@ -20,7 +20,7 @@ const useUserAuthentication = () => {
     try {
       const response: AxiosResponse = await axios({
         method: "POST",
-        url: `${AUTHENTICATION_HOST}/api/v1/signin`,
+        url: `${AUTHENTICATION_HOST}/account/signin`,
         data: {
           username: username,
           password: password,
