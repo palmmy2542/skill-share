@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
-import "./index.css";
-import ReactHlsPlayer from "react-hls-player";
-import { Avatar, Button, Typography } from "antd";
 import {
   LeftCircleOutlined,
   MessageOutlined,
   RightCircleOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { Avatar, Typography } from "antd";
+import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import Fader from "../Fader/Fader";
-
-let COUNTER = 0;
+import "./index.css";
 
 const Clip = ({
   isFade,

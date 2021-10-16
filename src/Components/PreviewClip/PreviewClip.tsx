@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
-import "./index.css";
-import ReactHlsPlayer from "react-hls-player";
-import { Avatar, Button, Typography } from "antd";
-import { MessageOutlined, UserOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
 import ReactPlayer from "react-player";
+import "./index.css";
 
 const PreviewClip = ({
   name,

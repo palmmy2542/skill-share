@@ -76,10 +76,9 @@ const useUserData = () => {
     if (token) {
       const response = await axios({
         method: "GET",
-        url: `${AUTHENTICATION_HOST}/api/v1/me`,
+        url: `${AUTHENTICATION_HOST}/account/me`,
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `${token.trim()}`,
         },
       });
       console.log("response: ", response);
@@ -87,7 +86,6 @@ const useUserData = () => {
         return response.data;
       }
     }
-
     return null;
   };
 
