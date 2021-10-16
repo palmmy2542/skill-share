@@ -37,7 +37,7 @@ const useClipFeed = () => {
         "Fugiat pariatur in do reprehenderit nisi deserunt Lorem incididunt qui nulla. Adipisicing proident aliqua consectetur excepteur labore commodo. Nisi sunt ex veniam irure exercitation ex culpa incididunt. Veniam aute aliquip incididunt nulla. Sit nulla tempor enim incididunt velit elit irure elit in esse et qui. Deserunt non duis do velit cupidatat. Sunt amet laboris occaecat laboris dolore laborum officia adipisicing quis incididunt elit.Non laboris consectetur pariatur sit irure fugiat. Enim irure nostrud ut reprehenderit non fugiat nisi incididunt cupidatat sunt minim cillum eiusmod velit. Minim elit sunt commodo id labore nostrud duis excepteur minim eu veniam proident dolore. Exercitation dolore ut Lorem ipsum. Ad duis ut ipsum non ipsum excepteur id ex duis esse in laboris enim reprehenderit. Sit eu commodo proident enim magna pariatur deserunt voluptate minim nostrud mollit ea.",
       tags: ["game", "love", "comedy"],
       name: "TEST3",
-      url: "https://skill-share-streaming-app.herokuapp.com/video/sample/index.m3u8",
+      url: "https://skill-share-streaming-app.herokuapp.com/video/vertical_sample/index.m3u8",
       isPlay: false,
       comments: [
         { name: "Name_1", comment: "Comment_1" },

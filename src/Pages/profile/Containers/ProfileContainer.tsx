@@ -11,9 +11,9 @@ import { useParams } from "react-router";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
 
 const ProfileContainer = (props: any) => {
-  const { userData } = useUserDataContext();
+  const { userData, clips } = useUserDataContext();
   const { userParam } = useParams<{ userParam: string }>();
-  const { subscribing, subscribers, clips } = userData;
+  const { subscribing, subscribers } = userData;
 
   return (
     <>

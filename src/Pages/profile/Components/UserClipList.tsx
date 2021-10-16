@@ -2,11 +2,11 @@ import React from "react";
 import { Row, Col, Tabs } from "antd";
 import { ImFilm, ImLock } from "react-icons/im";
 import PreviewClip from "../../../Components/PreviewClip";
+import { ClipProp } from "../../../interface";
 
 const { TabPane } = Tabs;
 
-const UserClipList = (props: any) => {
-  const { clips } = props;
+const UserClipList = ({ clips }: { clips: ClipProp[] }) => {
   return (
     <>
       <Tabs defaultActiveKey="1" centered tabPosition={"bottom"}>
@@ -28,26 +28,24 @@ const UserClipList = (props: any) => {
         />
       </Tabs>
       <Row gutter={[8, 8]}>
-        {clips.map((index: number) => (
-          <Col
-            xs={8}
-            md={8}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              height: "250px",
-            }}
-          >
-            <PreviewClip
-              url={
-                "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
-              }
-              isPlay={false}
-              index={index}
-              key={index}
-            />
-          </Col>
-        ))}
+        {clips.map(
+          (
+            { name, url, isPlay, title, description, tags }: ClipProp,
+            index: number
+          ) => (
+            <Col
+              xs={8}
+              md={8}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                height: "250px",
+              }}
+            >
+              <PreviewClip url={url} isPlay={false} index={index} key={index} />
+            </Col>
+          )
+        )}
       </Row>
     </>
   );

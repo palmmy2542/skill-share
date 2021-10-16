@@ -3,6 +3,7 @@ import "./index.css";
 import ReactHlsPlayer from "react-hls-player";
 import { Avatar, Button, Typography } from "antd";
 import { MessageOutlined, UserOutlined } from "@ant-design/icons";
+import ReactPlayer from "react-player";
 
 const PreviewClip = ({
   name,
@@ -17,28 +18,16 @@ const PreviewClip = ({
   index: number;
   isPlay?: boolean;
 }) => {
-  const playerRef = React.useRef<HTMLVideoElement | null>(null);
   const [isShowControl, setIsShowControl] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isExpandable, setIsExpandable] = useState(true);
 
   function playVideo() {
-    if (playerRef && playerRef.current) {
-      playerRef.current.play();
-    }
+    setIsPlaying(true);
   }
 
   function pauseVideo() {
-    if (playerRef && playerRef.current) {
-      playerRef.current.pause();
-    }
-  }
-
-  function toggleControls() {
-    if (playerRef && playerRef.current) {
-      console.log(playerRef.current.controls);
-      playerRef.current.controls = !playerRef.current.controls;
-    }
+    setIsPlaying(false);
   }
 
   return (
@@ -46,10 +35,10 @@ const PreviewClip = ({
       id={"@" + name + "." + index.toString()}
       style={{
         background: "#000",
-        height: `${height && height}`,
         display: "flex",
         alignItems: "center",
         position: "relative",
+        width: "100%",
       }}
       onMouseOver={(e) => {
         e.preventDefault();
@@ -71,17 +60,17 @@ const PreviewClip = ({
       //   setIsPlaying(!isPlaying);
       // }}
     >
-      <ReactHlsPlayer
-        src={url}
+      <ReactPlayer
+        url={url}
         autoPlay={false}
+        playing={isPlaying}
         controls={false}
         width="100%"
-        height="100vh"
-        playerRef={playerRef}
+        height="100%"
         onMouseLeave={() => pauseVideo()}
         onMouseEnter={() => playVideo()}
         className={"clip"}
-      ></ReactHlsPlayer>
+      ></ReactPlayer>
     </div>
   );
 };
