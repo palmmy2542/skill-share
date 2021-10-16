@@ -79,7 +79,7 @@ const useUserAuthentication = () => {
   const logout = (): void => {
     if (isUserSignIn()) {
       localStorage.removeItem("skillToken");
-      localStorage.removeItem("username");
+      localStorage.removeItem("skillUsername");
     }
   };
 
@@ -97,8 +97,6 @@ const useUserAuthentication = () => {
       return null;
     } else return item.token;
   };
-
-  console.log("xxxx");
 
   return {
     userData,

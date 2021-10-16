@@ -99,6 +99,7 @@ const useUserData = () => {
   };
 
   useEffect(() => {
+    let isCancelled = false;
     getMe()
       .then((res) => {
         if (res) {
@@ -116,6 +117,10 @@ const useUserData = () => {
       .catch((err) => {
         // message.error(err.response.data.message);
       });
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   console.log(userData);
