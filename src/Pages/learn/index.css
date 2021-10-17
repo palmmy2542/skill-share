@@ -1,6 +1,8 @@
 #search-page {
   padding-top: 32px;
   padding-bottom: 64px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .ant-input {
@@ -16,8 +18,7 @@
 }
 
 .ant-input-search {
-  padding: 0% 5% 5% 5%;
-  width: 100%;
+  margin-bottom: 24px;
 }
 
 .ant-tabs-tab-btn {

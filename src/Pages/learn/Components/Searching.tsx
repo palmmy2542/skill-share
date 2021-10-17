@@ -32,7 +32,7 @@ const Searching = ({
   };
 
   return (
-    <div id="search" className="page-layout">
+    <div>
       <Divider />
       <Tabs defaultActiveKey="1" onChange={callback}>
         <TabPane tab="Users" key="1">

@@ -28,7 +28,7 @@ const LearnContainer = () => {
   };
 
   return (
-    <div id="search-page" className="page-layout">
+    <div id="search-page">
       <Search
         placeholder="search..."
         allowClear
@@ -52,7 +52,7 @@ const LearnContainer = () => {
       {searchShow ? (
         <Searching searchField={searchField} clips={clips} />
       ) : (
-        <div style={{ textAlign: "left", padding: "12px" }}>
+        <div style={{ textAlign: "left" }}>
           <Typography.Title level={3}>Trending</Typography.Title>
           <BasicCarousel itemList={clips} />
           <Typography.Title level={3}>Recommend</Typography.Title>
