@@ -9,8 +9,9 @@ const BottomNav = ({ username }: { username: string }) => {
       <a className="bottom-nav-btn" href="/learn">
         <PlayCircleOutlined className="icon" />
       </a>
-      <a className="bottom-nav-btn" href="/newVideo">
-        <PlusCircleTwoTone className="icon-plus" />
+      <a className="bottom-nav-btn" href="/upload">
+        <PlusCircleTwoTone className="icon-plus"/>
+        <p></p>
       </a>
       <a className="bottom-nav-btn" href={`/${username}`}>
         <UserOutlined className="icon" />
