@@ -1,5 +1,12 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import Home from "./Pages/home/index";
+import Profile from "./Pages/profile/index";
+import Register from "./Pages/register/index";
+import Login from "./Pages/login/index";
+import Feed from "./Pages/feed";
+import Search from "./Pages/search/index";
+
 import "./App.css";
 import { ClipFeedProvider } from "./Domains/ClipFeed/useClipFeed";
 import useUserAuthenticationContext from "./Domains/UserAuthentication/useUserAuthentication";
@@ -37,6 +44,9 @@ function App() {
             </Route>
             <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path="/search">
+              <Search />
             </Route>
             <Route exact path="/:userParam">
               <Profile />
