@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Home from "./Pages/home/index";
 import Profile from "./Pages/profile/index";
 import Register from "./Pages/register/index";
@@ -8,12 +8,13 @@ import Feed from "./Pages/feed";
 import Search from "./Pages/search/index";
 
 import "./App.css";
-import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
 import { ClipFeedProvider } from "./Domains/ClipFeed/useClipFeed";
-import ClipFeed from "./Pages/feed/Components/ClipFeed";
-import useUserAuthenticationContext, {
-  UserAuthenticationProvider,
-} from "./Domains/UserAuthentication/useUserAuthentication";
+import useUserAuthenticationContext from "./Domains/UserAuthentication/useUserAuthentication";
+import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
+import Feed from "./Pages/feed";
+import Login from "./Pages/login/index";
+import Profile from "./Pages/profile/index";
+import Register from "./Pages/register/index";
 
 function App() {
   const { canAccessService } = useUserAuthenticationContext();
@@ -24,14 +25,20 @@ function App() {
       <UserDataProvider>
         <ClipFeedProvider>
           <Switch>
-            {<Route exact path="/">
-                <ClipFeed />
-              </Route>}
-            {/*!canAccessService() && (
-              <Route path="/">
-                <Login />
-              </Route>
-            )*/}
+            <Route
+              exact
+              path="/"
+              render={() => {
+                if (canAccessService()) {
+                  return <Redirect to={`/${username}`} />;
+                } else {
+                  return <Redirect to={`/login`} />;
+                }
+              }}
+            ></Route>
+            <Route exact path="/learn/:style">
+              <Feed />
+            </Route>
             <Route exact path="/register">
               <Register />
             </Route>
@@ -43,9 +50,6 @@ function App() {
             </Route>
             <Route exact path="/:userParam">
               <Profile />
-            </Route>
-            <Route path="/">
-              <Login />
             </Route>
           </Switch>
         </ClipFeedProvider>

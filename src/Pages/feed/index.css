@@ -4,3 +4,7 @@
   align-items: center;
   width: 100%;
 }
+
+.ant-drawer-body{
+  padding: 0!important;
+}
