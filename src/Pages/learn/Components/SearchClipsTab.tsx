@@ -5,16 +5,19 @@ import PreviewClip from "../../../Components/PreviewClip";
 import { ClipProp } from "../../../interface";
 import BasicCarousel from "./BasicCarousel";
 
-const SearchClipsTab = ({ searchWord }: { searchWord: string }) => {
-  const { clips, setClips } = useClipFeedContext();
-  console.log("searchWord", searchWord);
+const SearchClipsTab = ({
+  searchWord,
+  clips,
+}: {
+  searchWord: string;
+  clips: Array<ClipProp>;
+}) => {
   const filteredClips = clips.filter((clip) => {
     return (
       clip.title.toLowerCase().includes(searchWord.toLowerCase()) ||
       clip.description.toLowerCase().includes(searchWord.toLowerCase())
     );
   });
-  console.log(filteredClips);
   return (
     <div id="search-clips">
       <BasicCarousel itemList={filteredClips} />
