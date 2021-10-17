@@ -5,6 +5,7 @@ import Profile from "./Pages/profile/index";
 import Register from "./Pages/register/index";
 import Login from "./Pages/login/index";
 import Feed from "./Pages/feed";
+import Upload from "./Pages/upload/index";
 
 import "./App.css";
 import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
@@ -23,6 +24,9 @@ function App() {
               </Route>
               <Route exact path="/login">
                 <Login />
+              </Route>
+              <Route exact path="/upload">
+                <Upload />
               </Route>
               <Route exact path="/:userParam/:videoId">
                 <Feed />

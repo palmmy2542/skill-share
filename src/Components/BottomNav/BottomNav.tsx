@@ -9,7 +9,7 @@ const BottomNav = () => {
         <PlayCircleOutlined className="icon"/>
         <p> Learn </p>
       </a>
-      <a className="bottom-nav-btn" href="/newVideo">
+      <a className="bottom-nav-btn" href="/upload">
         <PlusCircleTwoTone className="icon-plus"/>
         <p></p>
       </a>
