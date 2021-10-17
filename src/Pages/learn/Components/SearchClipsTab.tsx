@@ -1,23 +1,24 @@
-import '../index.css';
+import "../index.css";
 import { Row, Col, Avatar } from "antd";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
 import PreviewClip from "../../../Components/PreviewClip";
 import { ClipProp } from "../../../interface";
+import BasicCarousel from "./BasicCarousel";
 
 const SearchClipsTab = ({ searchWord }: { searchWord: string }) => {
   const { clips, setClips } = useClipFeedContext();
+  console.log("searchWord", searchWord);
   const filteredClips = clips.filter((clip) => {
     return (
       clip.title.toLowerCase().includes(searchWord.toLowerCase()) ||
       clip.description.toLowerCase().includes(searchWord.toLowerCase())
     );
   });
-
-  console.log(searchWord);
   console.log(filteredClips);
   return (
     <div id="search-clips">
-      <Row gutter={[12, 18]} style={{ padding: "0% 5%" }}>
+      <BasicCarousel itemList={filteredClips} />
+      {/* <Row gutter={[12, 18]} style={{ padding: "0% 5%" }}>
         {filteredClips.map(
           (
             { name, url, isPlay, title, description, tags }: ClipProp,
@@ -35,7 +36,7 @@ const SearchClipsTab = ({ searchWord }: { searchWord: string }) => {
             </Col>
           )
         )}
-      </Row>
+      </Row> */}
     </div>
   );
 };

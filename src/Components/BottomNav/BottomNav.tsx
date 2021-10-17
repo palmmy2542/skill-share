@@ -5,7 +5,7 @@ import "./index.css";
 const BottomNav = ({ username }: { username: string }) => {
   return (
     <div className="bottom-nav">
-      <a className="bottom-nav-btn" href="/learn">
+      <a className="bottom-nav-btn" href="/search">
         <PlayCircleOutlined className="icon" />
         <p> Learn </p>
       </a>

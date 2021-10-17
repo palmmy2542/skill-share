@@ -44,7 +44,7 @@ const ProfileContainer = (props: any) => {
           clips={clips}
         />
         {renderButton()}
-        {/* <UserClipList clips={clips} /> */}
+        <UserClipList clips={clips} />
       </div>
       <BottomNav username={username} />
     </>

@@ -36,27 +36,9 @@ const PreviewClip = ({
         alignItems: "center",
         position: "relative",
         width: "100%",
+        height: `${height ?? undefined}`,
         cursor: "pointer",
       }}
-      onMouseOver={(e) => {
-        e.preventDefault();
-        if (!isPlaying && e.target instanceof HTMLVideoElement) {
-          e.target.play();
-          setIsPlaying(true);
-        }
-      }}
-      onMouseLeave={(e) => {
-        e.preventDefault();
-        if (!isPlaying && e.target instanceof HTMLVideoElement) {
-          e.target.pause();
-          setIsPlaying(false);
-        }
-      }}
-      // onClick={() => {
-      //   if (!isPlaying) playVideo();
-      //   else pauseVideo();
-      //   setIsPlaying(!isPlaying);
-      // }}
     >
       <ReactPlayer
         url={url}

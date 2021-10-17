@@ -6,6 +6,7 @@ import Register from "./Pages/register/index";
 import Login from "./Pages/login/index";
 import Feed from "./Pages/feed";
 import Search from "./Pages/search/index";
+import Learn from "./Pages/learn/index";
 
 import "./App.css";
 import { ClipFeedProvider } from "./Domains/ClipFeed/useClipFeed";
@@ -32,8 +33,8 @@ function App() {
                 }
               }}
             ></Route>
-            <Route exact path="/learn/:style">
-              <Feed />
+            <Route exact path="/learn">
+              <Learn />
             </Route>
             <Route exact path="/register">
               <Register />
