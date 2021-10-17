@@ -31,6 +31,9 @@ function App() {
                 <Login />
               </Route>
             )}
+            <Route exact path="/learn/:style">
+              <Feed />
+            </Route>
             <Route exact path="/register">
               <Register />
             </Route>

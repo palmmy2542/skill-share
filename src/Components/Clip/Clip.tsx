@@ -1,4 +1,5 @@
 import {
+  CloseOutlined,
   LeftCircleOutlined,
   MessageOutlined,
   RightCircleOutlined,
@@ -29,6 +30,7 @@ const Clip = ({
   setIsFade,
   handlePlay,
   handlePause,
+  handleClose,
 }: {
   isFade: boolean;
   name?: string | undefined;
@@ -48,6 +50,7 @@ const Clip = ({
   handlePause: () => void;
   handleFaderToggle: () => void;
   setIsFade: React.Dispatch<React.SetStateAction<boolean>>;
+  handleClose: () => void;
 }) => {
   const playerRef = React.useRef<ReactPlayer | null>(null);
   const [isShowControl, setIsShowControl] = useState(false);
@@ -73,6 +76,18 @@ const Clip = ({
     >
       <Fader isFade={isFade} setIsFade={setIsFade}>
         <div>
+          <CloseOutlined
+            style={{
+              position: "absolute",
+              top: "5%",
+              left: "3%",
+              color: "#FFF",
+              fontSize: "32px",
+              zIndex: 100,
+              cursor: "pointer",
+            }}
+            onClick={handleClose}
+          />
           <div
             style={{
               position: "absolute",
@@ -130,7 +145,7 @@ const Clip = ({
                   position: "absolute",
                   right: 10,
                 }}
-                onClick={() => handleNext()}
+                onClick={(e) => handleNext()}
               />
             )}
           </div>
