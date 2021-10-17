@@ -5,6 +5,7 @@ import Profile from "./Pages/profile/index";
 import Register from "./Pages/register/index";
 import Login from "./Pages/login/index";
 import Feed from "./Pages/feed";
+import Search from "./Pages/search/index";
 
 import "./App.css";
 import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
@@ -23,21 +24,23 @@ function App() {
       <UserDataProvider>
         <ClipFeedProvider>
           <Switch>
-            {/* <Route exact path="/">
+            {<Route exact path="/">
                 <ClipFeed />
-              </Route> */}
-            {!canAccessService() && (
+              </Route>}
+            {/*!canAccessService() && (
               <Route path="/">
                 <Login />
               </Route>
-            )}
+            )*/}
             <Route exact path="/register">
               <Register />
             </Route>
             <Route exact path="/login">
               <Login />
             </Route>
-
+            <Route exact path="/search">
+              <Search />
+            </Route>
             <Route exact path="/:userParam">
               <Profile />
             </Route>
