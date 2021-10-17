@@ -8,9 +8,11 @@ import BasicCarousel from "./BasicCarousel";
 const SearchClipsTab = ({
   searchWord,
   clips,
+  handleOpen,
 }: {
   searchWord: string;
   clips: Array<ClipProp>;
+  handleOpen: () => void;
 }) => {
   const filteredClips = clips.filter((clip) => {
     return (
@@ -20,7 +22,7 @@ const SearchClipsTab = ({
   });
   return (
     <div id="search-clips">
-      <BasicCarousel itemList={filteredClips} />
+      <BasicCarousel itemList={filteredClips} handleOpen={handleOpen} />
       {/* <Row gutter={[12, 18]} style={{ padding: "0% 5%" }}>
         {filteredClips.map(
           (

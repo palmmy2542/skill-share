@@ -37,7 +37,13 @@ var settings = {
   ],
 };
 
-const BasicCarousel = ({ itemList }: { itemList: Array<any> }) => {
+const BasicCarousel = ({
+  itemList,
+  handleOpen,
+}: {
+  itemList: Array<any>;
+  handleOpen: () => void;
+}) => {
   return (
     <Carousel {...settings} draggable={true}>
       {itemList.map(
@@ -51,6 +57,8 @@ const BasicCarousel = ({ itemList }: { itemList: Array<any> }) => {
               width: "100%",
               cursor: "pointer",
             }}
+            onClick={handleOpen}
+            className={"test"}
           >
             <PreviewClip
               url={url}

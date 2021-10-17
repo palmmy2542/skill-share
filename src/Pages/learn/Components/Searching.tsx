@@ -16,9 +16,11 @@ function callback(key: any) {
 const Searching = ({
   searchField,
   clips,
+  handleOpen,
 }: {
   searchField: string;
   clips: Array<ClipProp>;
+  handleOpen: () => void;
 }) => {
   const searchList = (tab: string) => {
     switch (tab) {
@@ -27,7 +29,13 @@ const Searching = ({
       // case "Tags":
       //   return ( <SearchTagsTab searchWord={searchField}/> );
       case "Clips":
-        return <SearchClipsTab searchWord={searchField} clips={clips} />;
+        return (
+          <SearchClipsTab
+            searchWord={searchField}
+            clips={clips}
+            handleOpen={handleOpen}
+          />
+        );
     }
   };
 
