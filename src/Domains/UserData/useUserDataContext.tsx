@@ -99,10 +99,10 @@ const useUserData = () => {
   };
 
   useEffect(() => {
-    let isCancelled = false;
+    let isCancelled = true;
     getMe()
       .then((res) => {
-        if (res) {
+        if (res && isCancelled) {
           localStorage.setItem("skillUsername", res.username);
           setUserData({
             username: res.username,
@@ -119,7 +119,7 @@ const useUserData = () => {
       });
 
     return () => {
-      isCancelled = true;
+      isCancelled = false;
     };
   }, []);
 

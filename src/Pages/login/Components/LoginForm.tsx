@@ -15,8 +15,7 @@ const LoginForm = (props: any) => {
         console.log("Login success!");
         history.push(`/${values.username}`);
         history.push(0);
-      }
-      setIsloading(false);
+      } else setIsloading(false);
     });
   };
 
