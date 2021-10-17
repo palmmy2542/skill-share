@@ -1,18 +1,13 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import Home from "./Pages/home/index";
+import { Redirect, Route, Switch } from "react-router-dom";
+import "./App.css";
+import { ClipFeedProvider } from "./Domains/ClipFeed/useClipFeed";
+import useUserAuthenticationContext from "./Domains/UserAuthentication/useUserAuthentication";
+import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
+import Feed from "./Pages/feed";
+import Login from "./Pages/login/index";
 import Profile from "./Pages/profile/index";
 import Register from "./Pages/register/index";
-import Login from "./Pages/login/index";
-import Feed from "./Pages/feed";
-
-import "./App.css";
-import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
-import { ClipFeedProvider } from "./Domains/ClipFeed/useClipFeed";
-import ClipFeed from "./Pages/feed/Components/ClipFeed";
-import useUserAuthenticationContext, {
-  UserAuthenticationProvider,
-} from "./Domains/UserAuthentication/useUserAuthentication";
 
 function App() {
   const { canAccessService } = useUserAuthenticationContext();
@@ -23,14 +18,17 @@ function App() {
       <UserDataProvider>
         <ClipFeedProvider>
           <Switch>
-            {/* <Route exact path="/">
-                <ClipFeed />
-              </Route> */}
-            {!canAccessService() && (
-              <Route path="/">
-                <Login />
-              </Route>
-            )}
+            <Route
+              exact
+              path="/"
+              render={() => {
+                if (canAccessService()) {
+                  return <Redirect to={`/${username}`} />;
+                } else {
+                  return <Redirect to={`/login`} />;
+                }
+              }}
+            ></Route>
             <Route exact path="/learn/:style">
               <Feed />
             </Route>
@@ -40,12 +38,8 @@ function App() {
             <Route exact path="/login">
               <Login />
             </Route>
-
             <Route exact path="/:userParam">
               <Profile />
-            </Route>
-            <Route path="/">
-              <Login />
             </Route>
           </Switch>
         </ClipFeedProvider>
