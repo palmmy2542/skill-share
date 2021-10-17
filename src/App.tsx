@@ -11,10 +11,6 @@ import "./App.css";
 import { ClipFeedProvider } from "./Domains/ClipFeed/useClipFeed";
 import useUserAuthenticationContext from "./Domains/UserAuthentication/useUserAuthentication";
 import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
-import Feed from "./Pages/feed";
-import Login from "./Pages/login/index";
-import Profile from "./Pages/profile/index";
-import Register from "./Pages/register/index";
 
 function App() {
   const { canAccessService } = useUserAuthenticationContext();
