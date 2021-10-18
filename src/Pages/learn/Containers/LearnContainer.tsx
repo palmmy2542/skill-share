@@ -75,6 +75,9 @@ const LearnContainer = () => {
           searchField={searchField}
           clips={clips}
           handleOpen={handleOpen}
+          handleClickSlide={handleClickSlide}
+          handleSetIsDrag={handleSetIsDrag}
+          isDrag={isDrag}
         />
       ) : (
         <div style={{ textAlign: "left" }}>

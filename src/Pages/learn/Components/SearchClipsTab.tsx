@@ -9,10 +9,16 @@ const SearchClipsTab = ({
   searchWord,
   clips,
   handleOpen,
+  handleClickSlide,
+  handleSetIsDrag,
+  isDrag,
 }: {
   searchWord: string;
   clips: Array<ClipProp>;
   handleOpen: () => void;
+  handleClickSlide: (index: number) => void;
+  handleSetIsDrag: (state: boolean) => void;
+  isDrag: boolean;
 }) => {
   const filteredClips = clips.filter((clip) => {
     return (
@@ -22,7 +28,7 @@ const SearchClipsTab = ({
   });
   return (
     <div id="search-clips">
-      {/* <Row gutter={[12, 18]} style={{ padding: "0% 5%" }}>
+      <Row gutter={[12, 18]} style={{ padding: "0% 5%" }}>
         {filteredClips.map(
           (
             { name, url, isPlay, title, description, tags }: ClipProp,
@@ -36,11 +42,20 @@ const SearchClipsTab = ({
                 height: "250px",
               }}
             >
-              <PreviewClip url={url} isPlay={false} index={index} key={index} />
+              <PreviewClip
+                url={url}
+                isPlay={false}
+                index={index}
+                key={index}
+                handleClickSlide={handleClickSlide}
+                handleSetIsDrag={handleSetIsDrag}
+                isDrag={isDrag}
+                handleOpen={handleOpen}
+              />
             </Col>
           )
         )}
-      </Row> */}
+      </Row>
     </div>
   );
 };

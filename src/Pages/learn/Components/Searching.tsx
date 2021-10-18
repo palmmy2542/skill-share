@@ -17,10 +17,16 @@ const Searching = ({
   searchField,
   clips,
   handleOpen,
+  handleClickSlide,
+  handleSetIsDrag,
+  isDrag,
 }: {
   searchField: string;
   clips: Array<ClipProp>;
   handleOpen: () => void;
+  handleClickSlide: (index: number) => void;
+  handleSetIsDrag: (state: boolean) => void;
+  isDrag: boolean;
 }) => {
   const searchList = (tab: string) => {
     switch (tab) {
@@ -34,6 +40,9 @@ const Searching = ({
             searchWord={searchField}
             clips={clips}
             handleOpen={handleOpen}
+            handleClickSlide={handleClickSlide}
+            handleSetIsDrag={handleSetIsDrag}
+            isDrag={isDrag}
           />
         );
     }
