@@ -16,3 +16,9 @@ export interface ClipProp {
   isPlay: boolean;
   comments: Array<{ name: string; comment: string }>;
 }
+
+export interface UploadClip {
+  title: string;
+  description: string;
+  video: Array<any>;
+}
