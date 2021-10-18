@@ -26,11 +26,10 @@ const BottomNav = ({ username }: { username: string }) => {
   };
   return (
     <div className="bottom-nav">
-      <PlayCircleOutlined
-        className="icon bottom-nav-btn"
-        style={{ fontSize: "30px" }}
-        onClick={() => handlePush("/learn")}
-      />
+      <a href={"/learn"} className={"bottom-nav-btn"}>
+        <PlayCircleOutlined className="icon " style={{ fontSize: "30px" }} />
+      </a>
+
       <PlusCircleTwoTone className="icon-plus" onClick={handleOpen} />
       <Drawer
         placement={"bottom"}
@@ -44,11 +43,9 @@ const BottomNav = ({ username }: { username: string }) => {
       >
         <UploadForm />
       </Drawer>
-      <UserOutlined
-        className="icon bottom-nav-btn"
-        style={{ fontSize: "30px" }}
-        onClick={() => handlePush(`/${username}`)}
-      />
+      <a href={`/${username}`} className={"bottom-nav-btn"}>
+        <UserOutlined className="icon" style={{ fontSize: "30px" }} />
+      </a>
     </div>
   );
 };
