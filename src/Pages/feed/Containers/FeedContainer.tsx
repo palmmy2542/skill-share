@@ -29,7 +29,7 @@ const FeedContainer = (props: any) => {
         destroyOnClose
         className={"ant-drawer-body"}
       >
-        <ClipFeed handleClose={handleClose} />
+        {/* <ClipFeed handleClose={handleClose} /> */}
       </Drawer>
     </div>
   );

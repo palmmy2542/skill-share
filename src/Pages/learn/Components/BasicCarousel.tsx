@@ -40,9 +40,15 @@ var settings = {
 const BasicCarousel = ({
   itemList,
   handleOpen,
+  handleClickSlide,
+  handleSetIsDrag,
+  isDrag,
 }: {
   itemList: Array<any>;
   handleOpen: () => void;
+  handleClickSlide: (index: number) => void;
+  handleSetIsDrag: (state: boolean) => void;
+  isDrag: boolean;
 }) => {
   return (
     <Carousel {...settings} draggable={true}>
@@ -57,8 +63,7 @@ const BasicCarousel = ({
               width: "100%",
               cursor: "pointer",
             }}
-            onClick={handleOpen}
-            className={"test"}
+            // onClick={handleOpen}
           >
             <PreviewClip
               url={url}
@@ -66,6 +71,10 @@ const BasicCarousel = ({
               index={index}
               key={index}
               height={"250px"}
+              handleClickSlide={handleClickSlide}
+              handleSetIsDrag={handleSetIsDrag}
+              isDrag={isDrag}
+              handleOpen={handleOpen}
             />
           </div>
         )

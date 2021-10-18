@@ -8,12 +8,20 @@ const PreviewClip = ({
   height = undefined,
   index,
   isPlay,
+  handleClickSlide,
+  handleSetIsDrag,
+  isDrag,
+  handleOpen,
 }: {
   name?: string | undefined;
   url: string;
   height?: string | undefined;
   index: number;
   isPlay?: boolean;
+  handleClickSlide?: (index: number) => void;
+  handleSetIsDrag: (state: boolean) => void;
+  isDrag: boolean;
+  handleOpen: () => void;
 }) => {
   const [isShowControl, setIsShowControl] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -38,6 +46,19 @@ const PreviewClip = ({
         width: "100%",
         height: `${height ?? undefined}`,
         cursor: "pointer",
+      }}
+      onMouseDown={() => {
+        handleSetIsDrag(false);
+      }}
+      onMouseMove={() => {
+        if (!isDrag) handleSetIsDrag(true);
+      }}
+      onClick={() => {
+        console.log(isDrag, index);
+        if (typeof handleClickSlide === "function" && !isDrag) {
+          handleClickSlide(index);
+          handleOpen();
+        }
       }}
     >
       <ReactPlayer

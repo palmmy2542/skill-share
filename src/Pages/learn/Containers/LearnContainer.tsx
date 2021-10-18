@@ -13,6 +13,8 @@ const { Search } = Input;
 const LearnContainer = () => {
   const [searchField, setSearchField] = useState("");
   const [searchShow, setSearchShow] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isDrag, setIsDrag] = useState<boolean>(false);
   const {
     userData: { username },
   } = useUserDataContext();
@@ -26,6 +28,14 @@ const LearnContainer = () => {
 
   const handleOpen = () => {
     setVisible(true);
+  };
+
+  const handleSetIsDrag = (state: boolean) => {
+    setIsDrag(state);
+  };
+
+  const handleClickSlide = (index: number) => {
+    setCurrentIndex(index);
   };
 
   const onSearch = (e: any) => {
@@ -69,11 +79,29 @@ const LearnContainer = () => {
       ) : (
         <div style={{ textAlign: "left" }}>
           <Typography.Title level={3}>Trending</Typography.Title>
-          <BasicCarousel itemList={clips} handleOpen={handleOpen} />
+          <BasicCarousel
+            itemList={clips}
+            handleOpen={handleOpen}
+            handleClickSlide={handleClickSlide}
+            handleSetIsDrag={handleSetIsDrag}
+            isDrag={isDrag}
+          />
           <Typography.Title level={3}>Recommend</Typography.Title>
-          <BasicCarousel itemList={clips} handleOpen={handleOpen} />
+          <BasicCarousel
+            itemList={clips}
+            handleOpen={handleOpen}
+            handleClickSlide={handleClickSlide}
+            handleSetIsDrag={handleSetIsDrag}
+            isDrag={isDrag}
+          />
           <Typography.Title level={3}>Cooking</Typography.Title>
-          <BasicCarousel itemList={clips} handleOpen={handleOpen} />
+          <BasicCarousel
+            itemList={clips}
+            handleOpen={handleOpen}
+            handleClickSlide={handleClickSlide}
+            handleSetIsDrag={handleSetIsDrag}
+            isDrag={isDrag}
+          />
         </div>
       )}
       <BottomNav username={username} />
@@ -86,7 +114,11 @@ const LearnContainer = () => {
         destroyOnClose
         className={"ant-drawer-body"}
       >
-        <ClipFeed handleClose={handleClose} />
+        <ClipFeed
+          handleClose={handleClose}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+        />
       </Drawer>
     </div>
   );

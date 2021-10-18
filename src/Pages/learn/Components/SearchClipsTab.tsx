@@ -22,7 +22,6 @@ const SearchClipsTab = ({
   });
   return (
     <div id="search-clips">
-      <BasicCarousel itemList={filteredClips} handleOpen={handleOpen} />
       {/* <Row gutter={[12, 18]} style={{ padding: "0% 5%" }}>
         {filteredClips.map(
           (

@@ -42,7 +42,7 @@ const UserClipList = ({ clips }: { clips: ClipProp[] }) => {
                 height: "250px",
               }}
             >
-              <PreviewClip url={url} isPlay={false} index={index} key={index} />
+              {/* <PreviewClip url={url} isPlay={false} index={index} key={index} /> */}
             </Col>
           )
         )}
