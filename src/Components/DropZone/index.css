@@ -1,0 +1,22 @@
+.clip-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 16;
+  width: 100%;
+
+}
+
+.drop-zone{
+  display: flex;
+  justify-content: center;
+
+
+}
+
+@media only screen and (max-width: 576px) {
+  .clip-wrapper {
+    width: 50%;
+  }
+}
+

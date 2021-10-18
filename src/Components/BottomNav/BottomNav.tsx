@@ -31,13 +31,7 @@ const BottomNav = ({ username }: { username: string }) => {
         style={{ fontSize: "30px" }}
         onClick={() => handlePush("/learn")}
       />
-      {/* <a className="bottom-nav-btn" href="/upload">
-        <PlusCircleTwoTone className="icon-plus" />
-
-      </a> */}
-
       <PlusCircleTwoTone className="icon-plus" onClick={handleOpen} />
-
       <Drawer
         placement={"bottom"}
         visible={visible}
