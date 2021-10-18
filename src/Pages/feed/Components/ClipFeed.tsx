@@ -9,12 +9,15 @@ const ClipFeed = ({
   handleClose,
   currentIndex,
   setCurrentIndex,
+  clips,
+  setClips,
 }: {
   handleClose: () => void;
   currentIndex: number;
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
+  clips: any[];
+  setClips: React.Dispatch<React.SetStateAction<any>>;
 }) => {
-  const { clips, setClips } = useClipFeedContext();
   const ref = useRef<CarouselRef | null>(null);
   const [shouldPlay, setShouldPlay] = useState(true);
   const [visible, setVisible] = useState(false);

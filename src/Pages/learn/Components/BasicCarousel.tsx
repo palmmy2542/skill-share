@@ -63,7 +63,7 @@ const BasicCarousel = ({
               width: "100%",
               cursor: "pointer",
             }}
-            // onClick={handleOpen}
+            key={index}
           >
             <PreviewClip
               url={url}

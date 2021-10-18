@@ -18,7 +18,7 @@ const LearnContainer = () => {
   const {
     userData: { username },
   } = useUserDataContext();
-  const { clips } = useClipFeedContext();
+  const { clips, setClips } = useClipFeedContext();
 
   const [visible, setVisible] = useState(false);
 
@@ -118,6 +118,8 @@ const LearnContainer = () => {
           handleClose={handleClose}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
+          clips={clips}
+          setClips={setClips}
         />
       </Drawer>
     </div>

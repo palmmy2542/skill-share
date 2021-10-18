@@ -127,6 +127,7 @@ const useUserData = () => {
   return {
     userData,
     clips,
+    setClips,
     getMe,
     token,
     isMe,

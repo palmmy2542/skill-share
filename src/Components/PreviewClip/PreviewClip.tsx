@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
+import useClipFeedContext from "../../Domains/ClipFeed/useClipFeed";
 import "./index.css";
 
 const PreviewClip = ({
@@ -54,7 +55,6 @@ const PreviewClip = ({
         if (!isDrag) handleSetIsDrag(true);
       }}
       onClick={() => {
-        console.log(isDrag, index);
         if (typeof handleClickSlide === "function" && !isDrag) {
           handleClickSlide(index);
           handleOpen();

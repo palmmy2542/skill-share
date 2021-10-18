@@ -11,11 +11,11 @@ import { useHistory, useParams } from "react-router";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
 
 const ProfileContainer = (props: any) => {
-  const { userData, clips, isMe, isSubscribed } = useUserDataContext();
+  const { userData, clips, setClips, isMe, isSubscribed } =
+    useUserDataContext();
   const { userParam } = useParams<{ userParam: string }>();
   const { username, id, fname, lname, subscribing, subscribers } = userData;
   const history = useHistory();
-
 
   const renderButton = () => {
     if (isMe) {
@@ -44,7 +44,7 @@ const ProfileContainer = (props: any) => {
           clips={clips}
         />
         {renderButton()}
-        <UserClipList clips={clips} />
+        <UserClipList clips={clips} setClips={setClips} />
       </div>
       <BottomNav username={username} />
     </>
