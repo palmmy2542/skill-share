@@ -52,6 +52,7 @@ const DropZone = ({
         minHeight: 300,
         padding: 4,
         position: "relative",
+        margin: "auto",
       }}
       key={file?.[0].name}
     >

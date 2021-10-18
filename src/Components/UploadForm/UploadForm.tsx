@@ -6,6 +6,7 @@ import { upload } from "./util";
 import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
 import { UploadClip } from "../../interface";
 import DropZone from "../DropZone/DropZone";
+import "./index.css";
 
 const UploadForm = () => {
   const [form] = Form.useForm();
@@ -33,6 +34,7 @@ const UploadForm = () => {
         <Form.Item
           name="video"
           rules={[{ required: true, message: "Please upload your clip" }]}
+          style={{ width: "100%" }}
         >
           <DropZone handleAddVideo={handleAddVideo} file={video} />
         </Form.Item>

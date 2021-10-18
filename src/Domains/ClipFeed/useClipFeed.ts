@@ -9,7 +9,7 @@ const useClipFeed = () => {
         "Enim id ullamco minim pariatur excepteur fugiat qui enim aliquip deserunt nostrud mollit. Aute esse commodo minim et nulla aliqua elit dolor tempor amet sunt incididunt Lorem sit. Occaecat aliqua ullamco sit elit nulla labore quis. Qui eu velit cillum consectetur aliqua pariatur dolor.Minim amet labore commodo enim consectetur mollit aliquip. In minim Lorem voluptate ex excepteur ex pariatur laborum fugiat. Deserunt eiusmod pariatur cillum pariatur consectetur nulla enim proident fugiat. Exercitation consectetur aliquip exercitation anim occaecat qui.",
       tags: ["game", "love", "comedy"],
       name: "TEST1",
-      url: "https://skill-share-streaming-app.herokuapp.com/video/sample2/playlist.m3u8",
+      url: "https://skill-share-streaming-app.herokuapp.com/video/616d0921b4496682144f3d5d/playlist.m3u8",
       isPlay: true,
       comments: [
         { name: "Name_1", comment: "Comment_1" },
@@ -23,7 +23,7 @@ const useClipFeed = () => {
         "Enim id ullamco minim pariatur excepteur fugiat qui enim aliquip deserunt nostrud mollit. Aute esse commodo minim et nulla aliqua elit dolor tempor amet sunt incididunt Lorem sit. Occaecat aliqua ullamco sit elit nulla labore quis. Qui eu velit cillum consectetur aliqua pariatur dolor.Minim amet labore commodo enim consectetur mollit aliquip. In minim Lorem voluptate ex excepteur ex pariatur laborum fugiat. Deserunt eiusmod pariatur cillum pariatur consectetur nulla enim proident fugiat. Exercitation consectetur aliquip exercitation anim occaecat qui.",
       tags: ["game", "love", "comedy"],
       name: "TEST1",
-      url: "https://skill-share-streaming-app.herokuapp.com/video/sample2/playlist.m3u8",
+      url: "https://skill-share-streaming-app.herokuapp.com/video/616d0921b4496682144f3d5d/playlist.m3u8",
       isPlay: true,
       comments: [
         { name: "Name_1", comment: "Comment_1" },
