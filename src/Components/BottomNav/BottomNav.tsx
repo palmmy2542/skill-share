@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import "./index.css";
 import { Button, Divider, Drawer } from "antd";
-import UploadForm from "../../Pages/upload/Components/UploadForm";
+import UploadForm from "../UploadForm/UploadForm";
 import { useHistory } from "react-router";
 
 const BottomNav = ({ username }: { username: string }) => {

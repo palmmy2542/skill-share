@@ -1,37 +1,29 @@
 import { Upload, Button, Input, Form } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import { AUTHENTICATION_HOST } from "../../../const";
-import DropZone from "../../../Components/DropZone/DropZone";
+
 import { file } from "@babel/types";
 import { useState } from "react";
+import { upload } from "./util";
+import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
+import { UploadClip } from "../../interface";
+import DropZone from "../DropZone/DropZone";
 
 const UploadForm = () => {
   const [form] = Form.useForm();
   const [video, setVideo] = useState();
+  const { canAccessService } = useUserAuthenticationContext();
   const { TextArea } = Input;
 
   const handleAddVideo = (file: any) => {
-    console.log(file);
-    form.setFieldsValue({ file: file });
+    form.setFieldsValue({ video: file });
     setVideo(file);
   };
 
-  const onFinish = (values: any) => {
-    console.log(values);
+  const onFinish = (values: UploadClip) => {
+    upload({ token: canAccessService(), body: values });
   };
-  console.log(video);
 
   return (
     <div className="upload-layout">
-      {/* <Upload
-        listType="text"
-        maxCount={1}
-        beforeUpload={(file) => console.log(file)}
-      >
-        <Button icon={<UploadOutlined />} className="file-button" size="large">
-          Select file
-        </Button>
-      </Upload> */}
       <Form
         form={form}
         layout="vertical"
@@ -39,7 +31,7 @@ const UploadForm = () => {
         onFinish={onFinish}
       >
         <Form.Item
-          name="file"
+          name="video"
           rules={[{ required: true, message: "Please upload your clip" }]}
         >
           <DropZone handleAddVideo={handleAddVideo} file={video} />
@@ -51,7 +43,11 @@ const UploadForm = () => {
         >
           <Input />
         </Form.Item>
-        <Form.Item name="description" label="Description">
+        <Form.Item
+          name="description"
+          label="Description"
+          rules={[{ required: true, message: "Please describe your clip" }]}
+        >
           <TextArea rows={3} />
         </Form.Item>
         <Form.Item>
