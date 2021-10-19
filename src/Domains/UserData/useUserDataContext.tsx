@@ -4,6 +4,7 @@ import constate from "constate";
 import { useEffect, useState } from "react";
 import { AUTHENTICATION_HOST } from "../../const";
 import { ClipProp, UserAccount } from "../../interface";
+import useClipFeedContext from "../ClipFeed/useClipFeed";
 import useUserAuthenticationContext from "../UserAuthentication/useUserAuthentication";
 
 const useUserData = () => {

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AUTHENTICATION_HOST } from "../../const";
 import { ClipProp } from "../../interface";
 
+
 const useClipFeed = () => {
   const [clips, setClips] = useState([
     {
@@ -107,6 +108,9 @@ const useClipFeed = () => {
     },
   ]);
 
+  const getStreamingUrl = (videoId: string) =>
+    `https://skill-share-streaming-app.herokuapp.com/video/${videoId}/playlist.m3u8`;
+
   const getAllVideo = async (token: string | undefined): Promise<any> => {
     if (token) {
       return axios({
@@ -118,7 +122,7 @@ const useClipFeed = () => {
       })
         .then((response) => {
           if (response.status === 200) {
-            console.log("All video: ", response.data);
+            // console.log("All video: ", response.data);
             return response.data;
           }
         })
@@ -140,7 +144,7 @@ const useClipFeed = () => {
         },
       }).then((response) => {
         if (response.status === 200) {
-          console.log("Random video: ", response.data);
+          // console.log("Random video: ", response.data);
           return response.data;
         }
       });
@@ -148,21 +152,21 @@ const useClipFeed = () => {
     return null;
   };
 
-  const getVideoByVideoId = async (
+  const getVideoByUserId = async (
     token: string | undefined,
-    videoId: string
+    id: string
   ): Promise<Array<ClipProp> | null> => {
-    if (token && videoId) {
+    if (token && id) {
       return axios({
         method: "GET",
-        url: `${AUTHENTICATION_HOST}/videos/${videoId}`,
+        url: `${AUTHENTICATION_HOST}/videos/video?userId=${id}`,
         headers: {
           Authorization: `${token.trim()}`,
         },
       })
         .then((response) => {
           if (response.status === 200) {
-            console.log("video by ", `${videoId}:`, response.data);
+            // console.log("video by ", `${id}:`, response.data);
             return response.data;
           }
         })
@@ -176,7 +180,8 @@ const useClipFeed = () => {
     setClips,
     getAllVideo,
     getRandomVideo,
-    getVideoByVideoId,
+    getVideoByUserId,
+    getStreamingUrl,
   };
 };
 

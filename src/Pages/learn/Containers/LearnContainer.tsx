@@ -43,8 +43,7 @@ const LearnContainer = () => {
 
   console.log(clipTrending);
 
-  const { getAllVideo, getRandomVideo, getVideoByVideoId } =
-    useClipFeedContext();
+  const { getAllVideo, getRandomVideo, getStreamingUrl } = useClipFeedContext();
 
   const token = canAccessService();
 
@@ -86,7 +85,7 @@ const LearnContainer = () => {
               return {
                 title: videoUploaded.title,
                 description: videoUploaded.description,
-                url: videoUploaded.videoLink,
+                url: getStreamingUrl(videoUploaded.videoId),
                 name: `TEST ${index}`,
                 isPlay: false,
                 comments: [
