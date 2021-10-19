@@ -54,7 +54,7 @@ const useUserAuthentication = () => {
     email,
     tel,
   }: SignUpInputValue): Promise<any> => {
-    const response = await axios.post(`${AUTHENTICATION_HOST}/api/v1/signup`, {
+    const response = await axios.post(`${AUTHENTICATION_HOST}/account/signup`, {
       username,
       password,
       fname,
