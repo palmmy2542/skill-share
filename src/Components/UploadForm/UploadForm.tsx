@@ -1,4 +1,4 @@
-import { Upload, Button, Input, Form } from "antd";
+import { Upload, Button, Input, Form, message } from "antd";
 
 import { file } from "@babel/types";
 import { useState } from "react";
@@ -7,12 +7,16 @@ import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUs
 import { UploadClip } from "../../interface";
 import DropZone from "../DropZone/DropZone";
 import "./index.css";
+import { useHistory } from "react-router";
 
 const UploadForm = () => {
   const [form] = Form.useForm();
   const [video, setVideo] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const { canAccessService } = useUserAuthenticationContext();
+  const username = localStorage.getItem("skillUsername");
   const { TextArea } = Input;
+  const history = useHistory();
 
   const handleAddVideo = (file: any) => {
     form.setFieldsValue({ video: file });
@@ -20,7 +24,15 @@ const UploadForm = () => {
   };
 
   const onFinish = (values: UploadClip) => {
-    upload({ token: canAccessService(), body: values });
+    message.loading("Uploading . . .");
+    setIsLoading(true);
+    upload({ token: canAccessService(), body: values })
+      .then(() => {
+        message.success("Uploading success");
+        setIsLoading(false);
+        window.location.href = `/${username}`;
+      })
+      .catch((err) => message.error("Found some error. Please try again."));
   };
 
   return (
@@ -58,6 +70,7 @@ const UploadForm = () => {
             htmlType="submit"
             size="large"
             className="upload-button"
+            loading={isLoading}
           >
             Upload clip
           </Button>

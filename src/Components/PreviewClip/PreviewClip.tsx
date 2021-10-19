@@ -62,6 +62,7 @@ const PreviewClip = ({
       }}
     >
       <ReactPlayer
+        light
         url={url}
         muted
         autoPlay={false}

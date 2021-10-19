@@ -193,6 +193,7 @@ const Clip = ({
       </Fader>
 
       <ReactPlayer
+        light
         url={url}
         autoPlay={false}
         playing={isPlay}
