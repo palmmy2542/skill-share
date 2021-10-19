@@ -1,10 +1,8 @@
-import { message } from "antd";
 import axios from "axios";
 import constate from "constate";
 import { useEffect, useState } from "react";
 import { AUTHENTICATION_HOST } from "../../const";
 import { ClipProp, UserAccount } from "../../interface";
-import useClipFeedContext from "../ClipFeed/useClipFeed";
 import useUserAuthenticationContext from "../UserAuthentication/useUserAuthentication";
 
 const useUserData = () => {
@@ -91,7 +89,6 @@ const useUserData = () => {
           Authorization: `${token.trim()}`,
         },
       });
-      console.log("response: ", response);
       if (response.status === 200) {
         return response.data;
       }
@@ -104,7 +101,6 @@ const useUserData = () => {
     getMe()
       .then((res) => {
         if (res && isCancelled) {
-          localStorage.setItem("skillUsername", res.username);
           setUserData({
             username: res.username,
             id: res.id,

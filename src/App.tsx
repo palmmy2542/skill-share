@@ -39,7 +39,7 @@ function App() {
             <Route exact path="/login">
               <Login />
             </Route>
-            <Route exact path="/:userParam">
+            <Route exact path="/:usernameParam">
               <Profile />
             </Route>
           </Switch>

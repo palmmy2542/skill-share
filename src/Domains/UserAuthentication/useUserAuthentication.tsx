@@ -36,6 +36,7 @@ const useUserAuthentication = () => {
           expiry: now.getTime() + TTL,
         };
         localStorage.setItem("skillToken", JSON.stringify(item));
+        localStorage.setItem("skillUsername", username);
         return item.token;
       } else {
         return null;

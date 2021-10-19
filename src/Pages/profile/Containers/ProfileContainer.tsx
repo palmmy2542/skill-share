@@ -1,12 +1,13 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { Button, message } from "antd";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
 import Navbar from "../../../Components/Navbar/Navbar";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
 import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
 import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
-import { ClipProp } from "../../../interface";
+import { ClipProp, UserAccount } from "../../../interface";
 import UserAvatar from "../Components/UserAvatar";
 import UserClipList from "../Components/UserClipList";
 import UserInformation from "../Components/UserInformation";
@@ -14,12 +15,22 @@ import "../index.css";
 
 const ProfileContainer = (props: any) => {
   const [clips, setClips] = useState<ClipProp[]>([]);
+  const { usernameParam } = useParams<{ usernameParam: string }>();
+  const username: string | null = localStorage.getItem("skillUsername");
+  const [userData, setUserData] = useState<UserAccount>({
+    id: "",
+    username: username ?? "USERNAME",
+    fname: "",
+    lname: "",
+    subscribing: 0,
+    subscribers: 0,
+  });
 
-  const { userData, isMe, isSubscribed } = useUserDataContext();
+  const { isMe, isSubscribed, getMe } = useUserDataContext();
   const { getVideoByUserId, getStreamingUrl } = useClipFeedContext();
   const { canAccessService } = useUserAuthenticationContext();
 
-  const { username, id, subscribing, subscribers } = userData;
+  const { subscribing, subscribers } = userData;
 
   const renderButton = () => {
     if (isMe) {
@@ -37,33 +48,59 @@ const ProfileContainer = (props: any) => {
 
   useEffect(() => {
     const token = canAccessService();
-    if (token && id) {
-      getVideoByUserId(token, id).then((data) => {
-        if (data) {
-          const temp: ClipProp[] = data.map((item: any, index: number) => {
-            return {
-              title: item.videoUploaded.title,
-              description: item.videoUploaded.description,
-              url: getStreamingUrl(item.videoUploaded.videoId),
-              name: `TEST ${index}`,
-              isPlay: false,
-              comments: [
-                { name: "Name_1", comment: "Comment_1" },
-                { name: "Name_2", comment: "Comment_2" },
-                { name: "Name_3", comment: "Comment_3" },
-              ],
-            };
+    if (token) {
+      if (username === usernameParam) {
+        console.log(username);
+        console.log(usernameParam);
+        getMe()
+          .then((res) => {
+            if (res) {
+              setUserData({
+                username: res.username,
+                id: res.id,
+                fname: res.fname,
+                lname: res.lname,
+                subscribers: res.subscribers ?? 0,
+                subscribing: res.subscribing ?? 0,
+              });
+              console.log(res.id);
+              return res.id;
+            }
+          })
+          .then((id) => {
+            if (id)
+              getVideoByUserId(token, id).then((data) => {
+                if (data) {
+                  const temp: ClipProp[] = data.map(
+                    (item: any, index: number) => {
+                      return {
+                        title: item.videoUploaded.title,
+                        description: item.videoUploaded.description,
+                        url: getStreamingUrl(item.videoUploaded.videoId),
+                        name: `TEST ${index}`,
+                        isPlay: false,
+                        comments: [
+                          { name: "Name_1", comment: "Comment_1" },
+                          { name: "Name_2", comment: "Comment_2" },
+                          { name: "Name_3", comment: "Comment_3" },
+                        ],
+                      };
+                    }
+                  );
+                  setClips(temp);
+                }
+              });
+          })
+          .catch((err) => {
+            message.error(err.response.data.message);
           });
-          setClips(temp);
-        }
-      });
-      // getRandomVideo(token, 5);
+      }
     }
-  }, [id]);
+  }, []);
 
   return (
     <>
-      <Navbar name={username} />
+      <Navbar name={userData.username} />
       <div id="profile" className="page-layout">
         <UserAvatar>
           <UserOutlined />
@@ -76,7 +113,7 @@ const ProfileContainer = (props: any) => {
         {renderButton()}
         <UserClipList clips={clips} setClips={setClips} />
       </div>
-      <BottomNav username={username} />
+      <BottomNav username={userData.username} />
     </>
   );
 };
