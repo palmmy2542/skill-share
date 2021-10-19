@@ -193,9 +193,8 @@ const Clip = ({
       </Fader>
 
       <ReactPlayer
-        light
         url={url}
-        autoPlay={false}
+        autoPlay={true}
         playing={isPlay}
         onPlay={() => handlePlay()}
         onPause={() => handlePause()}
@@ -206,15 +205,6 @@ const Clip = ({
         className={"clip"}
         loop
       />
-      {/* <ReactHlsPlayer
-        src={url}
-        autoPlay={false}
-        controls={true}
-        width="100%"
-        height="100vh"
-        playerRef={playerRef}
-        className={"clip"}
-      ></ReactHlsPlayer> */}
     </div>
   );
 };
