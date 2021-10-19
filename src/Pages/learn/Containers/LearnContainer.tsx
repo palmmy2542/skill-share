@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Input, Tabs, Divider, Button, Typography, Drawer } from "antd";
 import Searching from "../Components/Searching";
 import "../index.css";
@@ -7,6 +7,8 @@ import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
 import BasicCarousel from "../Components/BasicCarousel";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
 import ClipFeed from "../../feed/Components/ClipFeed";
+import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
+import { ClipProp } from "../../../interface";
 
 const { Search } = Input;
 
@@ -18,7 +20,33 @@ const LearnContainer = () => {
   const {
     userData: { username },
   } = useUserDataContext();
-  const { clips, setClips } = useClipFeedContext();
+  const { canAccessService } = useUserAuthenticationContext();
+  const [clips, setClips] = useState<ClipProp[]>([]);
+  const clipTrending = useMemo(
+    () => clips.slice(0, Math.round(clips.length / 3)),
+    [clips]
+  );
+
+  const clipRecommend = useMemo(
+    () =>
+      clips.slice(
+        Math.round(clips.length / 3),
+        Math.round(clips.length / 3) * 2
+      ),
+    [clips]
+  );
+
+  const clipCooking = useMemo(
+    () => clips.slice(Math.round(clips.length / 3) * 2, clips.length),
+    [clips]
+  );
+
+  console.log(clipTrending);
+
+  const { getAllVideo, getRandomVideo, getVideoByVideoId } =
+    useClipFeedContext();
+
+  const token = canAccessService();
 
   const [visible, setVisible] = useState(false);
 
@@ -47,6 +75,36 @@ const LearnContainer = () => {
       setSearchShow(true);
     }
   };
+
+  useEffect(() => {
+    if (token) {
+      getAllVideo(token).then((data) => {
+        console.log(data);
+        if (data) {
+          const temp: ClipProp[] = data.map(
+            ({ videoUploaded }: { videoUploaded: any }, index: number) => {
+              return {
+                title: videoUploaded.title,
+                description: videoUploaded.description,
+                url: videoUploaded.videoLink,
+                name: `TEST ${index}`,
+                isPlay: false,
+                comments: [
+                  { name: "Name_1", comment: "Comment_1" },
+                  { name: "Name_2", comment: "Comment_2" },
+                  { name: "Name_3", comment: "Comment_3" },
+                ],
+              };
+            }
+          );
+          setClips(temp);
+        }
+      });
+      // getRandomVideo(token, 5);
+    }
+  }, []);
+
+  console.log(clips);
 
   return (
     <div id="search-page">
@@ -83,7 +141,7 @@ const LearnContainer = () => {
         <div style={{ textAlign: "left" }}>
           <Typography.Title level={3}>Trending</Typography.Title>
           <BasicCarousel
-            itemList={clips}
+            itemList={clipTrending}
             handleOpen={handleOpen}
             handleClickSlide={handleClickSlide}
             handleSetIsDrag={handleSetIsDrag}
@@ -91,7 +149,7 @@ const LearnContainer = () => {
           />
           <Typography.Title level={3}>Recommend</Typography.Title>
           <BasicCarousel
-            itemList={clips}
+            itemList={clipRecommend}
             handleOpen={handleOpen}
             handleClickSlide={handleClickSlide}
             handleSetIsDrag={handleSetIsDrag}
@@ -99,7 +157,7 @@ const LearnContainer = () => {
           />
           <Typography.Title level={3}>Cooking</Typography.Title>
           <BasicCarousel
-            itemList={clips}
+            itemList={clipCooking}
             handleOpen={handleOpen}
             handleClickSlide={handleClickSlide}
             handleSetIsDrag={handleSetIsDrag}

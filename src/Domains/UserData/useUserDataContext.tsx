@@ -123,7 +123,6 @@ const useUserData = () => {
     };
   }, []);
 
-  console.log(userData);
   return {
     userData,
     clips,

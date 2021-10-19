@@ -1,5 +1,9 @@
+import { message } from "antd";
+import axios from "axios";
 import constate from "constate";
 import { useState } from "react";
+import { AUTHENTICATION_HOST } from "../../const";
+import { ClipProp } from "../../interface";
 
 const useClipFeed = () => {
   const [clips, setClips] = useState([
@@ -103,9 +107,76 @@ const useClipFeed = () => {
     },
   ]);
 
+  const getAllVideo = async (token: string | undefined): Promise<any> => {
+    if (token) {
+      return axios({
+        method: "GET",
+        url: `${AUTHENTICATION_HOST}/videos`,
+        headers: {
+          Authorization: `${token.trim()}`,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            console.log("All video: ", response.data);
+            return response.data;
+          }
+        })
+        .catch((err) => message.error(err.response.data.message));
+    }
+    return null;
+  };
+
+  const getRandomVideo = async (
+    token: string | undefined,
+    number: number
+  ): Promise<any> => {
+    if (token && number) {
+      return axios({
+        method: "GET",
+        url: `${AUTHENTICATION_HOST}/videos/random/${number}`,
+        headers: {
+          Authorization: `${token.trim()}`,
+        },
+      }).then((response) => {
+        if (response.status === 200) {
+          console.log("Random video: ", response.data);
+          return response.data;
+        }
+      });
+    }
+    return null;
+  };
+
+  const getVideoByVideoId = async (
+    token: string | undefined,
+    videoId: string
+  ): Promise<Array<ClipProp> | null> => {
+    if (token && videoId) {
+      return axios({
+        method: "GET",
+        url: `${AUTHENTICATION_HOST}/videos/${videoId}`,
+        headers: {
+          Authorization: `${token.trim()}`,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            console.log("video by ", `${videoId}:`, response.data);
+            return response.data;
+          }
+        })
+        .catch((err) => message.error(err.response.data.message));
+    }
+    return null;
+  };
+
   return {
     clips,
     setClips,
+    getAllVideo,
+    getRandomVideo,
+    getVideoByVideoId,
   };
 };
 
