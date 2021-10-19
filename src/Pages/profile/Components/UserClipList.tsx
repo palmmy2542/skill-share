@@ -1,10 +1,9 @@
+import { Col, Drawer, Row, Tabs } from "antd";
 import React, { useState } from "react";
-import { Row, Col, Tabs, Drawer } from "antd";
 import { ImFilm, ImLock } from "react-icons/im";
 import PreviewClip from "../../../Components/PreviewClip";
 import { ClipProp } from "../../../interface";
 import ClipFeed from "../../feed/Components/ClipFeed";
-import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
 
 const { TabPane } = Tabs;
 

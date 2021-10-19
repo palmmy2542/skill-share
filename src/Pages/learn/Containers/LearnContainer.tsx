@@ -1,14 +1,14 @@
+import { Button, Drawer, Input, Typography } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
-import { Input, Tabs, Divider, Button, Typography, Drawer } from "antd";
+import BottomNav from "../../../Components/BottomNav/BottomNav";
+import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
+import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
+import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
+import { ClipProp } from "../../../interface";
+import ClipFeed from "../../feed/Components/ClipFeed";
+import BasicCarousel from "../Components/BasicCarousel";
 import Searching from "../Components/Searching";
 import "../index.css";
-import BottomNav from "../../../Components/BottomNav/BottomNav";
-import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
-import BasicCarousel from "../Components/BasicCarousel";
-import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
-import ClipFeed from "../../feed/Components/ClipFeed";
-import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
-import { ClipProp } from "../../../interface";
 
 const { Search } = Input;
 

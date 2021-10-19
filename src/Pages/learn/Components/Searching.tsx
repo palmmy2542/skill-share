@@ -1,12 +1,9 @@
-import "../index.css";
-import { useState } from "react";
-import { Input, Tabs, Divider } from "antd";
-import SearchUsersTab from "../Components/SearchUsersTab";
-import SearchTagsTab from "../Components/SearchTagsTab";
-import SearchClipsTab from "../Components/SearchClipsTab";
+import { Divider, Input, Tabs } from "antd";
 import { ClipProp } from "../../../interface";
+import SearchClipsTab from "../Components/SearchClipsTab";
+import SearchUsersTab from "../Components/SearchUsersTab";
+import "../index.css";
 
-const { Search } = Input;
 const { TabPane } = Tabs;
 
 function callback(key: any) {

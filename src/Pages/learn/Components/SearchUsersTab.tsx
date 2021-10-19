@@ -1,20 +1,12 @@
-import '../index.css';
-import { Row, Col, Avatar } from "antd";
+import { Avatar, Col, Row } from "antd";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
-import { ClipProp } from "../../../interface";
+import "../index.css";
 
 const SearchUsersTab = ({ searchWord }: { searchWord: string }) => {
-  const { clips, setClips } = useClipFeedContext();
-  const filteredUsers = clips.filter(
-    user => {
-      return (
-        user
-          .name
-          .toLowerCase()
-          .includes(searchWord.toLowerCase())
-      );
-    }
-  );
+  const { clips } = useClipFeedContext();
+  const filteredUsers = clips.filter((user) => {
+    return user.name.toLowerCase().includes(searchWord.toLowerCase());
+  });
   return (
     <div id="search-users">
       {filteredUsers.map((user, index) => (

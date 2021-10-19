@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
-import UserAvatar from "../Components/UserAvatar";
-import UserInformation from "../Components/UserInformation";
 import { Button } from "antd";
-import UserClipList from "../Components/UserClipList";
-import "../index.css";
-import Navbar from "../../../Components/Navbar/Navbar";
-import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
-import { useHistory, useParams } from "react-router";
+import React, { useEffect, useState } from "react";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
+import Navbar from "../../../Components/Navbar/Navbar";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
-import { ClipProp } from "../../../interface";
 import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
+import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
+import { ClipProp } from "../../../interface";
+import UserAvatar from "../Components/UserAvatar";
+import UserClipList from "../Components/UserClipList";
+import UserInformation from "../Components/UserInformation";
+import "../index.css";
 
 const ProfileContainer = (props: any) => {
   const [clips, setClips] = useState<ClipProp[]>([]);
@@ -20,10 +19,7 @@ const ProfileContainer = (props: any) => {
   const { getVideoByUserId, getStreamingUrl } = useClipFeedContext();
   const { canAccessService } = useUserAuthenticationContext();
 
-  const { userParam } = useParams<{ userParam: string }>();
-
-  const { username, id, fname, lname, subscribing, subscribers } = userData;
-  const history = useHistory();
+  const { username, id, subscribing, subscribers } = userData;
 
   const renderButton = () => {
     if (isMe) {

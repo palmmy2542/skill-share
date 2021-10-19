@@ -21,12 +21,11 @@ const showLogoutConfirm = ({
     cancelText: "cancel",
 
     onOk() {
-      console.log(logout);
       logout();
       history.push("/login");
     },
   });
-}; 
+};
 
 export default showLogoutConfirm;
 
