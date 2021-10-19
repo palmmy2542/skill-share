@@ -36,11 +36,15 @@ const SearchClipsTab = ({
           ) => (
             <Col
               xs={12}
+              md={8}
+              lg={6}
+              xl={4}
               style={{
                 display: "flex",
                 justifyContent: "center",
                 height: "250px",
               }}
+              key={index}
             >
               <PreviewClip
                 url={url}
