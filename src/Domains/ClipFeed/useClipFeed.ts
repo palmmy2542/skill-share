@@ -109,7 +109,7 @@ const useClipFeed = () => {
   ]);
 
   const getStreamingUrl = (videoId: string) =>
-    `https://skill-share-streaming-app.herokuapp.com/video/${videoId}/playlist.m3u8`;
+    `https://skill-share-streaming-service-znv5z.ondigitalocean.app/video/${videoId}/playlist.m3u8`;
 
   const getAllVideo = async (token: string | undefined): Promise<any> => {
     if (token) {
