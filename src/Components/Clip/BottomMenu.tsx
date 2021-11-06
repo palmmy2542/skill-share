@@ -4,7 +4,7 @@ import React from "react";
 
 const items = [
   { title: "Edit video", callback: () => {} },
-  { title: "save to playlist", callback: () => {} },
+  { title: "Save to playlist", callback: () => {} },
 ];
 
 const BottomMenu = ({
