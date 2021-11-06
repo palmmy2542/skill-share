@@ -2,6 +2,7 @@ import {
   CloseOutlined,
   LeftCircleOutlined,
   MessageOutlined,
+  MoreOutlined,
   RightCircleOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -9,6 +10,7 @@ import { Avatar, Typography } from "antd";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import Fader from "../Fader/Fader";
+import BottomMenu from "./BottomMenu";
 import "./index.css";
 
 const Clip = ({
@@ -56,6 +58,14 @@ const Clip = ({
   const [isShowControl, setIsShowControl] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isExpandable, setIsExpandable] = useState(true);
+  const [isShow, setIsShow] = useState(false);
+  const handleCloseBottomMenu = () => {
+    setIsShow(false);
+  };
+
+  const handleOpenBottomMenu = () => {
+    setIsShow(true);
+  };
 
   return (
     <div
@@ -149,6 +159,21 @@ const Clip = ({
               />
             )}
           </div>
+          <MoreOutlined
+            style={{
+              position: "absolute",
+              bottom: 250,
+              right: 30,
+              color: "#FFF",
+              fontSize: "40px",
+              zIndex: 100,
+              transform: "rotate(90deg)",
+              borderRadius: "50%",
+              border: "1px solid #FFF",
+            }}
+            onClick={() => handleOpenBottomMenu()}
+          />
+
           <MessageOutlined
             style={{
               position: "absolute",
@@ -205,6 +230,7 @@ const Clip = ({
         className={"clip"}
         loop
       />
+      <BottomMenu visible={isShow} handleClose={handleCloseBottomMenu} />
     </div>
   );
 };

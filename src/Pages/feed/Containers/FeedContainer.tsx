@@ -16,6 +16,13 @@ const FeedContainer = (props: any) => {
   const handleClose = () => {
     setVisible(false);
   };
+  const getDrawerStyle = () => {
+    const style: React.CSSProperties = { position: "absolute" };
+    if (visible) {
+      style.transform = undefined; // set to undefined here
+    }
+    return style;
+  };
 
   return (
     <div>
@@ -27,7 +34,8 @@ const FeedContainer = (props: any) => {
         width={"100%"}
         keyboard
         destroyOnClose
-        className={"ant-drawer-body"}
+        className={"ant-drawer-body ant-drawer"}
+        style={getDrawerStyle()}
       >
         {/* <ClipFeed handleClose={handleClose} /> */}
       </Drawer>
