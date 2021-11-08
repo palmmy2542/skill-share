@@ -2,6 +2,7 @@ import { Button, Drawer, Input, Typography } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
+import usePlaylistContext from "../../../Domains/Playlist/usePlaylist";
 import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
 import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
 import { ClipProp } from "../../../interface";
@@ -20,6 +21,7 @@ const LearnContainer = () => {
   const {
     userData: { username },
   } = useUserDataContext();
+
   const { canAccessService } = useUserAuthenticationContext();
   const [clips, setClips] = useState<ClipProp[]>([]);
   const clipTrending = useMemo(
@@ -40,8 +42,6 @@ const LearnContainer = () => {
     () => clips.slice(Math.round(clips.length / 3) * 2, clips.length),
     [clips]
   );
-
-  console.log(clipTrending);
 
   const { getAllVideo, getRandomVideo, getStreamingUrl } = useClipFeedContext();
 

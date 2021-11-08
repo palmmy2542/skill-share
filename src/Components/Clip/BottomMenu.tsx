@@ -2,18 +2,19 @@ import { MoreOutlined } from "@ant-design/icons";
 import { Drawer, List } from "antd";
 import React from "react";
 
-const items = [
-  { title: "Edit video", callback: () => {} },
-  { title: "Save to playlist", callback: () => {} },
-];
-
 const BottomMenu = ({
   visible,
   handleClose,
+  handleOpenPlayList,
 }: {
   visible: boolean;
   handleClose: () => void;
+  handleOpenPlayList: () => void;
 }) => {
+  const items = [
+    { title: "Edit video", callback: () => {} },
+    { title: "Save to playlist", callback: handleOpenPlayList },
+  ];
   return (
     <Drawer
       placement={"bottom"}
@@ -27,7 +28,10 @@ const BottomMenu = ({
         bordered
         dataSource={items}
         renderItem={(item: any) => (
-          <List.Item style={{ height: "50%" }} onClick={item.callback}>
+          <List.Item
+            style={{ height: "50%", cursor: "pointer" }}
+            onClick={() => item.callback()}
+          >
             {item.title}
           </List.Item>
         )}

@@ -7,7 +7,7 @@
   background: "#000";
 }
 
-.ant-drawer-body > div {
+.ant-drawer-body > div:first-child {
   height: 100%;
 }
 

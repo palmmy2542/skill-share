@@ -9,7 +9,9 @@ import {
 import { Avatar, Typography } from "antd";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
+import usePlaylistContext from "../../Domains/Playlist/usePlaylist";
 import Fader from "../Fader/Fader";
+import PlaylistFeed from "../PlaylistFeed";
 import BottomMenu from "./BottomMenu";
 import "./index.css";
 
@@ -59,12 +61,22 @@ const Clip = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isExpandable, setIsExpandable] = useState(true);
   const [isShow, setIsShow] = useState(false);
+  const [isShowPlaylist, setIsShowPlaylist] = useState(false);
+  const { playlist } = usePlaylistContext();
   const handleCloseBottomMenu = () => {
     setIsShow(false);
   };
 
   const handleOpenBottomMenu = () => {
     setIsShow(true);
+  };
+
+  const handleClosePlayList = () => {
+    setIsShowPlaylist(false);
+  };
+
+  const handleOpenPlayList = () => {
+    setIsShowPlaylist(true);
   };
 
   return (
@@ -216,7 +228,6 @@ const Clip = ({
           </div>
         </div>
       </Fader>
-
       <ReactPlayer
         url={url}
         autoPlay={true}
@@ -230,7 +241,16 @@ const Clip = ({
         className={"clip"}
         loop
       />
-      <BottomMenu visible={isShow} handleClose={handleCloseBottomMenu} />
+      <PlaylistFeed
+        visible={isShowPlaylist}
+        playlist={playlist}
+        handleClose={handleClosePlayList}
+      />
+      <BottomMenu
+        visible={isShow}
+        handleClose={handleCloseBottomMenu}
+        handleOpenPlayList={handleOpenPlayList}
+      />
     </div>
   );
 };
