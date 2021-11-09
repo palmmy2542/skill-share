@@ -21,6 +21,12 @@ const CreatePlaylist = ({
         <Form.Item
           name="title"
           label="Playlist name"
+          rules={[
+            {
+              required: true,
+              message: "Playlist name cannot be blank!",
+            },
+          ]}
           >
           <Input size="large" placeholder="Playlist name here"/>
         </Form.Item>

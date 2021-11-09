@@ -51,6 +51,12 @@ const EditPlaylist = ({
         <Form.Item
           name="title"
           label="Playlist name"
+          rules={[
+            {
+              required: true,
+              message: "Playlist name cannot be blank!",
+            },
+          ]}
           >
           <Input size="large" defaultValue={title} placeholder="Playlist name here"/>
         </Form.Item>

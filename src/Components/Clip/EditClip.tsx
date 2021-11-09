@@ -47,6 +47,12 @@ const EditClip = ({
         <Form.Item
           name="title"
           label="Clip name"
+          rules={[
+            {
+              required: true,
+              message: "Clip name cannot be blank!",
+            },
+          ]}
           >
           <Input size="large" defaultValue={title} placeholder="Clip name here"/>
         </Form.Item>
