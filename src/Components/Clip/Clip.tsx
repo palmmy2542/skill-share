@@ -61,6 +61,7 @@ const Clip = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isExpandable, setIsExpandable] = useState(true);
   const [isShow, setIsShow] = useState(false);
+  const [isShowEditClip, setIsShowEditClip] = useState(false);
   const [isShowPlaylist, setIsShowPlaylist] = useState(false);
   const { playlist } = usePlaylistContext();
   const handleCloseBottomMenu = () => {
@@ -69,6 +70,14 @@ const Clip = ({
 
   const handleOpenBottomMenu = () => {
     setIsShow(true);
+  };
+
+  const handleCloseEditClip = () => {
+    setIsShowEditClip(false);
+  };
+
+  const handleOpenEditClip = () => {
+    setIsShowEditClip(true);
   };
 
   const handleClosePlayList = () => {
@@ -249,6 +258,7 @@ const Clip = ({
       <BottomMenu
         visible={isShow}
         handleClose={handleCloseBottomMenu}
+        handleOpenEditClip={handleOpenEditClip}
         handleOpenPlayList={handleOpenPlayList}
       />
     </div>
