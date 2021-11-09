@@ -2,6 +2,8 @@ import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Button, Col, Drawer, Row, Space, Typography } from "antd";
 import React from "react";
 import Playlist from "./Playlist";
+import CreatePlaylist from "./CreatePlaylist";
+import { useState } from "react";
 
 const PlaylistFeed = ({
   visible,
@@ -12,13 +14,24 @@ const PlaylistFeed = ({
   handleClose: () => void;
   playlist: Array<{ title: string; previewImage: string }>;
 }) => {
+
+  const [isShowCreatePlaylist, setIsShowCreatePlaylist] = useState(false);
+
+  const handleCloseCreatePlayList = () => {
+    setIsShowCreatePlaylist(false);
+  };
+
+  const handleOpenCreatePlayList = () => {
+    setIsShowCreatePlaylist(true);
+  };
+
   return (
     <Drawer
       title={`Save to playlist`}
       headerStyle={{
         boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
       }}
-      placement={"right"}
+      placement={"bottom"}
       closable={true}
       onClose={handleClose}
       visible={visible}
@@ -45,6 +58,7 @@ const PlaylistFeed = ({
             cursor: "pointer",
             backgroundColor: "#D3D3D3",
           }}
+          onClick={() => handleOpenCreatePlayList()}
         >
           <PlusCircleOutlined style={{ width: "20px", height: "20px" }} />
           <Typography>new playlist</Typography>
@@ -75,6 +89,10 @@ const PlaylistFeed = ({
           )
         )}
       </Row>
+      <CreatePlaylist
+        visible={isShowCreatePlaylist}
+        handleClose={handleCloseCreatePlayList}
+      />
     </Drawer>
   );
 };
