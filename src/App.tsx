@@ -4,6 +4,7 @@ import Profile from "./Pages/profile/index";
 import Register from "./Pages/register/index";
 import Login from "./Pages/login/index";
 import Learn from "./Pages/learn/index";
+import Home from "./Pages/home/index";
 
 import "./App.css";
 import { ClipFeedProvider } from "./Domains/ClipFeed/useClipFeed";
@@ -34,6 +35,9 @@ function App() {
               ></Route>
               <Route exact path="/learn">
                 <Learn />
+              </Route>
+              <Route exact path="/test">
+                <Home />
               </Route>
               <Route exact path="/register">
                 <Register />
