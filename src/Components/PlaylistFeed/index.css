@@ -1,0 +1,12 @@
+#create-playlist-form {
+    padding: 2% 12% 2% 12%;
+}
+
+#edit-playlist-form {
+    padding: 2% 12% 2% 12%;
+}
+
+.playlist-form-button {
+    margin-top: 32px;
+    width: 100%;
+}
