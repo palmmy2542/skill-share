@@ -11,6 +11,19 @@
   height: 100%;
 }
 
+#edit-clip-form {
+  padding: 2% 12% 2% 12%;
+}
+
+.ant-input.ant-input-lg {
+  width: 100% !important;
+}
+
+.edit-clip-form-button {
+  margin-top: 32px;
+  width: 100%;
+}
+
 @media only screen and (max-width: 975px) {
   .clip {
     min-height: 100%;
