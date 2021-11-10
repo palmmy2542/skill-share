@@ -1,7 +1,9 @@
 import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Button, Col, Drawer, Row, Space, Typography } from "antd";
-import React from "react";
+import React, { useState } from "react";
+import { usePlaylistContext } from "../../Domains/Playlist/usePlaylist";
 import Playlist from "./Playlist";
+import SaveToPlaylist from "../SaveToPlaylist";
 
 const PlaylistFeed = ({
   visible,
@@ -12,6 +14,14 @@ const PlaylistFeed = ({
   handleClose: () => void;
   playlist: Array<{ title: string; previewImage: string }>;
 }) => {
+  const [isShowSaveToPlaylist, setIsShowSaveToPlaylist] = useState(false);
+  const handleCloseSaveToPlaylist = () => {
+    setIsShowSaveToPlaylist(false);
+  };
+
+  const handleOpenSaveToPlaylist = () => {
+    setIsShowSaveToPlaylist(true);
+  };
   return (
     <Drawer
       title={`Save to playlist`}
@@ -68,13 +78,19 @@ const PlaylistFeed = ({
                 justifyContent: "center",
                 height: "250px",
                 width: "100%",
+                cursor: "pointer",
               }}
+              onClick={() => handleOpenSaveToPlaylist()}
             >
               <Playlist title={title} previewImage={previewImage} key={index} />
             </Col>
           )
         )}
       </Row>
+      <SaveToPlaylist
+        visible={isShowSaveToPlaylist}
+        handleClose={handleCloseSaveToPlaylist}
+      />
     </Drawer>
   );
 };
