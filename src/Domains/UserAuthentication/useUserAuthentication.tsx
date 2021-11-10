@@ -78,10 +78,8 @@ const useUserAuthentication = () => {
   };
 
   const logout = (): void => {
-    if (isUserSignIn()) {
-      localStorage.removeItem("skillToken");
-      localStorage.removeItem("skillUsername");
-    }
+    localStorage.removeItem("skillToken");
+    localStorage.removeItem("skillUsername");
   };
 
   const getAccessToken = (): Token | null => {
