@@ -1,4 +1,4 @@
-import { Upload, Button, Input, Form, message } from "antd";
+import { Upload, Button, Input, Form, message, Row, Switch, Col } from "antd";
 
 import { file } from "@babel/types";
 import { useState } from "react";
@@ -25,6 +25,7 @@ const UploadForm = () => {
 
   const onFinish = (values: UploadClip) => {
     message.loading("Uploading . . .");
+    console.log("values", values);
     setIsLoading(true);
     upload({ token: canAccessService(), body: values })
       .then(() => {
@@ -36,47 +37,55 @@ const UploadForm = () => {
   };
 
   return (
-    <div className="upload-layout">
-      <Form
-        form={form}
-        layout="vertical"
-        className="upload-form"
-        onFinish={onFinish}
+    <Form
+      form={form}
+      layout="vertical"
+      className="upload-form"
+      onFinish={onFinish}
+    >
+      <Form.Item
+        name="video"
+        rules={[{ required: true, message: "Please upload your clip" }]}
       >
-        <Form.Item
-          name="video"
-          rules={[{ required: true, message: "Please upload your clip" }]}
-          style={{ width: "100%" }}
+        <DropZone handleAddVideo={handleAddVideo} file={video} />
+      </Form.Item>
+      <Form.Item
+        name="title"
+        label="Clip name"
+        rules={[{ required: true, message: "Please select title clip" }]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="description"
+        label="Description"
+        rules={[{ required: true, message: "Please describe your clip" }]}
+      >
+        <TextArea rows={3} />
+      </Form.Item>
+      <Form.Item
+        name="permission"
+        initialValue="public"
+        valuePropName="checked"
+      >
+        <Switch
+          checkedChildren="public"
+          unCheckedChildren="private"
+          defaultChecked
+        />
+      </Form.Item>
+      <Form.Item>
+        <Button
+          type="primary"
+          htmlType="submit"
+          size="large"
+          className="upload-button"
+          loading={isLoading}
         >
-          <DropZone handleAddVideo={handleAddVideo} file={video} />
-        </Form.Item>
-        <Form.Item
-          name="title"
-          label="Clip name"
-          rules={[{ required: true, message: "Please select title clip" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="description"
-          label="Description"
-          rules={[{ required: true, message: "Please describe your clip" }]}
-        >
-          <TextArea rows={3} />
-        </Form.Item>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            size="large"
-            className="upload-button"
-            loading={isLoading}
-          >
-            Upload clip
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+          Upload clip
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 

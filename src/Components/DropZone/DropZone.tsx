@@ -68,7 +68,13 @@ const DropZone = ({
             }}
           />
         ) : (
-          <ReactPlayer url={file?.[0].preview} controls style={img} playing />
+          <ReactPlayer
+            url={file?.[0].preview}
+            controls
+            style={img}
+            playing
+            width={"100%"}
+          />
         )}
       </div>
     </div>

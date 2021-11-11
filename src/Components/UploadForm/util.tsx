@@ -13,7 +13,6 @@ const formAxios = axios.create({
         Object.entries(data).map(([key, value]) => {
           if (Array.isArray(value)) {
             const arrayKey = `${key}`;
-            console.log(arrayKey);
             value.forEach((video) => {
               if (video) form.append(arrayKey, video);
             });
