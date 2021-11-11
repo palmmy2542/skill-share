@@ -20,12 +20,13 @@ const ViewPlaylist = ({
    handleSetIsDrag,
    isDrag,*/
 {
-  state: string;
+  state: string | null;
   playlist: {
     title: string;
     previewImage: string;
     description: string;
-    tags: Array<string>;
+    numberOfVideo: number;
+    videoOwner: string;
   };
   visible: boolean;
   clips: ClipProp[];
@@ -60,6 +61,9 @@ const ViewPlaylist = ({
       }
       case STATE.EDIT: {
         return "Edit playlist";
+      }
+      default: {
+        return "Playlist";
       }
     }
   };
@@ -109,7 +113,7 @@ const ViewPlaylist = ({
         headerStyle={{
           boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
         }}
-        placement={"bottom"}
+        placement={"right"}
         onClose={handleClose}
         visible={visible}
         height="100%"
@@ -117,7 +121,7 @@ const ViewPlaylist = ({
         className={"save-to-playlist-drawer"}
       >
         <div className={"drawer-wrapper"}>
-          <Row align="middle" gutter={[8, 8]}>
+          <Row align="middle" gutter={[8, 8]} style={{ paddingTop: "16px" }}>
             <Col className="gutter-row setsize" span={12} xs={8}>
               <Playlist
                 title={playlist.title}
@@ -125,12 +129,10 @@ const ViewPlaylist = ({
               />
             </Col>
             <Col className="gutter-row" flex="auto" span={12} xs={16}>
-              <Typography>
-                <Typography.Title level={3}>{playlist.title}</Typography.Title>
-                <Typography.Paragraph>
-                  {playlist.description}
-                </Typography.Paragraph>
-              </Typography>
+              <Typography.Title level={4}>{playlist.title}</Typography.Title>
+              <Typography.Paragraph>
+                {playlist.description}
+              </Typography.Paragraph>
             </Col>
           </Row>
           <Row justify="center">{renderButton()}</Row>
@@ -187,7 +189,6 @@ const ViewPlaylist = ({
         title={playlist.title}
         previewImage={playlist.previewImage}
         description={playlist.description}
-        tags={playlist.tags}
         handleClose={handleCloseEditPlaylist}
       />
     </>

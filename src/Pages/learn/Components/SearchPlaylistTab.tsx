@@ -8,6 +8,7 @@ const SearchPlaylistTab = ({
   handleClickSlide,
   handleSetIsDrag,
   isDrag,
+  handleSelectPlaylist,
 }: {
   playlist: Array<{
     title: string;
@@ -21,6 +22,13 @@ const SearchPlaylistTab = ({
   handleClickSlide: (index: number) => void;
   handleSetIsDrag: (state: boolean) => void;
   isDrag: boolean;
+  handleSelectPlaylist: (
+    title: string,
+    description: string,
+    previewImage: string,
+    numberOfVideo: number,
+    videoOwner: string
+  ) => void;
 }) => {
   const filteredPlaylist = playlist.filter((item) => {
     return (
@@ -29,7 +37,6 @@ const SearchPlaylistTab = ({
     );
   });
 
-  const handleClickPlaylist = () => {};
   return (
     <>
       {filteredPlaylist.map(
@@ -37,7 +44,15 @@ const SearchPlaylistTab = ({
           <Row
             style={{ textAlign: "left", cursor: "pointer" }}
             gutter={[8, 8]}
-            onClick={handleClickPlaylist}
+            onClick={() =>
+              handleSelectPlaylist(
+                title,
+                description,
+                previewImage,
+                numberOfVideo,
+                videoOwner
+              )
+            }
           >
             <Col xs={12}>
               <img src={previewImage} className={"preview-playlist-image"} />

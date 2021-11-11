@@ -1,6 +1,7 @@
 import { Button, Drawer, Input, Typography } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
+import ViewPlaylist from "../../../Components/PlaylistFeed/ViewPlaylist";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
 import usePlaylistContext from "../../../Domains/Playlist/usePlaylist";
 import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
@@ -14,6 +15,7 @@ import "../index.css";
 const { Search } = Input;
 
 const LearnContainer = () => {
+  const [isShowPlaylist, setIsShowPlaylist] = useState(false);
   const [searchField, setSearchField] = useState("");
   const [searchShow, setSearchShow] = useState(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -21,6 +23,14 @@ const LearnContainer = () => {
   const {
     userData: { username },
   } = useUserDataContext();
+  const { playlist } = usePlaylistContext();
+  const [selectedPlaylist, setSelectedPlaylist] = useState({
+    title: "PLAYLIST_TITLE",
+    description: "PLAY_DESCRIPTION",
+    previewImage: "",
+    numberOfVideo: 0,
+    videoOwner: "VIDEO_OWNER",
+  });
 
   const { canAccessService } = useUserAuthenticationContext();
   const [clips, setClips] = useState<ClipProp[]>([]);
@@ -57,12 +67,33 @@ const LearnContainer = () => {
     setVisible(true);
   };
 
+  const handleClosePlaylist = () => {
+    setIsShowPlaylist(false);
+  };
+
   const handleSetIsDrag = (state: boolean) => {
     setIsDrag(state);
   };
 
   const handleClickSlide = (index: number) => {
     setCurrentIndex(index);
+  };
+
+  const handleSelectPlaylist = (
+    title: string,
+    description: string,
+    previewImage: string,
+    numberOfVideo: number,
+    videoOwner: string
+  ) => {
+    setIsShowPlaylist(true);
+    setSelectedPlaylist({
+      title,
+      description,
+      previewImage,
+      numberOfVideo,
+      videoOwner,
+    });
   };
 
   const onSearch = (e: any) => {
@@ -78,7 +109,6 @@ const LearnContainer = () => {
   useEffect(() => {
     if (token) {
       getAllVideo(token).then((data) => {
-        console.log(data);
         if (data) {
           const temp: ClipProp[] = data.map(
             ({ videoUploaded }: { videoUploaded: any }, index: number) => {
@@ -103,8 +133,6 @@ const LearnContainer = () => {
     }
   }, []);
 
-  console.log(clips);
-
   return (
     <div id="search-page">
       <Search
@@ -113,19 +141,7 @@ const LearnContainer = () => {
         value={searchField ?? ""}
         onChange={onSearch}
         onFocus={() => setSearchShow(true)}
-        addonAfter={
-          searchShow && (
-            <Button
-              type="text"
-              onClick={() => {
-                setSearchField("");
-                setSearchShow(false);
-              }}
-            >
-              Cancel
-            </Button>
-          )
-        }
+        style={{ width: "90%" }}
       />
       {searchShow ? (
         <Searching
@@ -135,6 +151,8 @@ const LearnContainer = () => {
           handleClickSlide={handleClickSlide}
           handleSetIsDrag={handleSetIsDrag}
           isDrag={isDrag}
+          playlist={playlist}
+          handleSelectPlaylist={handleSelectPlaylist}
         />
       ) : (
         <div style={{ textAlign: "left" }}>
@@ -182,6 +200,13 @@ const LearnContainer = () => {
           setClips={setClips}
         />
       </Drawer>
+      <ViewPlaylist
+        state={null}
+        playlist={selectedPlaylist}
+        visible={isShowPlaylist}
+        clips={[]}
+        handleClose={handleClosePlaylist}
+      />
     </div>
   );
 };
