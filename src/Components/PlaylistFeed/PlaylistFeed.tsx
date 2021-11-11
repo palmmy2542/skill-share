@@ -21,6 +21,14 @@ const PlaylistFeed = ({
   const [openCreateDrawer, setOpenCreateDrawer] = useState(false);
   const [playlistTitle, setplaylistTitle] = useState("playlist title");
   const [playlistPreviewImage, setplaylistPreviewImage] = useState("preview");
+  const [selectedPlaylist, setSelectedPlaylist] = useState({
+    title: "PLAYLIST_TITLE",
+    description: "PLAY_DESCRIPTION",
+    previewImage: "",
+    numberOfVideo: 0,
+    videoOwner: "VIDEO_OWNER",
+  });
+
   const [isShowSave, setIsShowSave] = useState(false);
 
   const [isShowCreatePlaylist, setIsShowCreatePlaylist] = useState(false);
@@ -114,15 +122,8 @@ const PlaylistFeed = ({
         handleClose={handleCloseCreatePlayList}
       />
       <ViewPlaylist
-        state={STATE.EDIT}
-        playlist={{
-          title: "playlistTitle",
-          previewImage:
-            "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a dignissim nunc. Donec aliquet fringilla quam ut porta. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras et tortor viverra, luctus ex et, maximus lectus. ",
-          tags: ["#lorem", "#ipsum"],
-        }}
+        state={STATE.SAVE}
+        playlist={selectedPlaylist}
         visible={isShowSave}
         clips={[]}
         handleClose={handleCloseSaveToPlaylist}

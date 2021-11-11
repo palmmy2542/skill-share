@@ -1,8 +1,8 @@
 #search-page {
   padding-top: 32px;
   padding-bottom: 64px;
-  padding-left: 12px;
-  padding-right: 12px;
+  /* padding-left: 12px;
+  padding-right: 12px; */
 }
 
 .ant-input {
@@ -11,6 +11,12 @@
 
 .ant-input-affix-wrapper {
   background-color: #EEEEEE !important;
+  display: flex;
+  justify-content: space-between;
+
+}
+.ant-input-affix-wrapper::before {
+  display: none;
 }
 
 .ant-btn.ant-btn-icon-only.ant-input-search-button {
@@ -42,4 +48,9 @@
 
 div > h3 {
   padding-left: 6px;
+}
+
+.preview-playlist-image {
+  width: 100%;
+  height: 100%;
 }
