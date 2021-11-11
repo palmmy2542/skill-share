@@ -13,6 +13,7 @@ import usePlaylistContext from "../../Domains/Playlist/usePlaylist";
 import Fader from "../Fader/Fader";
 import PlaylistFeed from "../PlaylistFeed";
 import BottomMenu from "./BottomMenu";
+import EditClip from "./EditClip";
 import "./index.css";
 
 const Clip = ({
@@ -25,7 +26,7 @@ const Clip = ({
   isPlay,
   title,
   description,
-  tags,
+  permission,
   isFirst,
   isLast,
   handleOpenVideoComment,
@@ -46,7 +47,7 @@ const Clip = ({
   isPlay: boolean;
   title: string;
   description: string;
-  tags: Array<string>;
+  permission: string;
   isFirst: boolean;
   isLast: boolean;
   handleOpenVideoComment: () => void;
@@ -90,7 +91,6 @@ const Clip = ({
     setIsShowPlaylist(true);
   };
 
-  console.log("previewImage", previewImage);
   return (
     <div
       id={"@" + name + "." + index.toString()}
@@ -253,6 +253,13 @@ const Clip = ({
         ref={playerRef}
         className={"clip"}
         loop
+      />
+      <EditClip
+        visible={isShowEditClip}
+        title={title}
+        description={description}
+        permission={permission}
+        handleClose={handleCloseEditClip}
       />
       <PlaylistFeed
         visible={isShowPlaylist}

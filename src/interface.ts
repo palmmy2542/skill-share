@@ -11,6 +11,7 @@ export interface ClipProp {
   title: string;
   description: string;
   previewImage: string;
+  permission: string;
   tags?: Array<string>;
   name?: string;
   url: string;

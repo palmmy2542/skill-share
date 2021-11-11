@@ -6,16 +6,15 @@ const EditClip = ({
   visible,
   title,
   description,
-  tags,
-  handleClose
+  permission,
+  handleClose,
 }: {
   visible: boolean;
   title: string;
   description: string;
-  tags: Array<string>;
+  permission: string;
   handleClose: () => void;
 }) => {
-
   const [popUpVisible, setPopUpVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
 
@@ -53,20 +52,21 @@ const EditClip = ({
               message: "Clip name cannot be blank!",
             },
           ]}
-          >
-          <Input size="large" defaultValue={title} placeholder="Clip name here"/>
+        >
+          <Input
+            size="large"
+            defaultValue={title}
+            placeholder="Clip name here"
+          />
         </Form.Item>
-        <Form.Item
-          name="description"
-          label="Description"
-          >
-          <Input.TextArea size="large" defaultValue={description} placeholder="Description here" autoSize={true}/>
-        </Form.Item>
-        <Form.Item
-          name="tags"
-          label="Tag(s)"
-          >
-          <Input size="large" defaultValue={"#"+tags[0]} placeholder="Tags here"/>
+        <Form.Item name="description" label="Description">
+          <Input.TextArea
+            size="large"
+            defaultValue={description}
+            placeholder="Description here"
+            autoSize={true}
+            rows={2}
+          />
         </Form.Item>
         <Row>
           <Col>
@@ -77,13 +77,20 @@ const EditClip = ({
               visible={popUpVisible}
               onConfirm={handleOk}
               okButtonProps={{ loading: confirmLoading }}
-              onCancel={handleCancel}>
-              <Button danger onClick={showPopconfirm}>Delete clip</Button>
+              onCancel={handleCancel}
+            >
+              <Button danger onClick={showPopconfirm}>
+                Delete clip
+              </Button>
             </Popconfirm>
           </Col>
           <Col flex="auto"></Col>
           <Col>
-            <Switch checkedChildren="Public" unCheckedChildren="Private" defaultChecked/>
+            <Switch
+              checkedChildren="Public"
+              unCheckedChildren="Private"
+              defaultChecked
+            />
           </Col>
         </Row>
         <Button
@@ -96,7 +103,7 @@ const EditClip = ({
         </Button>
       </Form>
     </Drawer>
-    );
-  };
-  
+  );
+};
+
   export default EditClip;

@@ -78,7 +78,7 @@ const ClipFeed = ({
       >
         {clips.map(
           (
-            { name, url, isPlay, title, description, tags, previewImage },
+            { name, url, isPlay, title, description, previewImage, permission },
             index
           ) => (
             <Clip
@@ -94,7 +94,7 @@ const ClipFeed = ({
               isPlay={isPlay}
               title={title}
               description={description}
-              tags={tags}
+              permission={permission}
               handleOpenVideoComment={handleOpenVideoComment}
               handleNext={handleNext}
               handleBack={handleBack}

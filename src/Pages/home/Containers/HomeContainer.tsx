@@ -10,12 +10,13 @@ const HomeContainer = (props: any) => {
   const title = "Clip 1";
   const description = "This clip is for testing";
   const tags = ["clip", "testing", "se3"];
+  const permission = "public";
 
   const [isShow, setIsShow] = useState(true);
   const [isShowEditClip, setIsShowEditClip] = useState(false);
   const [isShowPlaylist, setIsShowPlaylist] = useState(false);
   const { playlist } = usePlaylistContext();
-  
+
   const handleCloseBottomMenu = () => {
     setIsShow(false);
   };
@@ -47,7 +48,7 @@ const HomeContainer = (props: any) => {
         visible={isShowEditClip}
         title={title}
         description={description}
-        tags={tags}
+        permission={permission}
         handleClose={handleCloseEditClip}
       />
       <PlaylistFeed
