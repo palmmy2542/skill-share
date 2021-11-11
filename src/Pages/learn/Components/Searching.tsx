@@ -1,8 +1,10 @@
 import { Divider, Input, Tabs } from "antd";
+import usePlaylistContext from "../../../Domains/Playlist/usePlaylist";
 import { ClipProp } from "../../../interface";
 import SearchClipsTab from "../Components/SearchClipsTab";
 import SearchUsersTab from "../Components/SearchUsersTab";
 import "../index.css";
+import SearchPlaylistTab from "./SearchPlaylistTab";
 
 const { TabPane } = Tabs;
 
@@ -25,6 +27,8 @@ const Searching = ({
   handleSetIsDrag: (state: boolean) => void;
   isDrag: boolean;
 }) => {
+  const { playlist } = usePlaylistContext();
+
   const searchList = (tab: string) => {
     switch (tab) {
       case "Users":
@@ -42,6 +46,17 @@ const Searching = ({
             isDrag={isDrag}
           />
         );
+      case "PLAYLIST":
+        return (
+          <SearchPlaylistTab
+            searchWord={searchField}
+            playlist={playlist}
+            handleOpen={handleOpen}
+            handleClickSlide={handleClickSlide}
+            handleSetIsDrag={handleSetIsDrag}
+            isDrag={isDrag}
+          />
+        );
     }
   };
 
@@ -52,11 +67,11 @@ const Searching = ({
         <TabPane tab="Users" key="1">
           {searchList("Users")}
         </TabPane>
-        {/* <TabPane disabled tab="Tags" key="2">
-          {searchList("Tags")}
-        </TabPane> */}
         <TabPane tab="Clips" key="3">
           {searchList("Clips")}
+        </TabPane>
+        <TabPane tab="Playlists" key="2">
+          {searchList("PLAYLIST")}
         </TabPane>
       </Tabs>
     </div>

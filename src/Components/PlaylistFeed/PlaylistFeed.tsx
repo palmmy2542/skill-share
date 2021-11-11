@@ -107,7 +107,7 @@ const PlaylistFeed = ({
         handleClose={handleCloseCreatePlayList}
       />
       <ViewPlaylist
-        state={STATE.EDIT}
+        state={STATE.SAVE}
         playlist={{
           title: "playlistTitle",
           previewImage:
