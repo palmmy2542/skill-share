@@ -1,3 +1,3 @@
-import Playlist from "./PlaylistFeed";
+import PlaylistFeed from "./PlaylistFeed";
 
-export default Playlist;
+export default PlaylistFeed;
