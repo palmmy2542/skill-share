@@ -7,7 +7,7 @@
   background: "#000";
 }
 
-.ant-drawer-body > div:first-child {
+.list-menu {
   height: 100%;
 }
 

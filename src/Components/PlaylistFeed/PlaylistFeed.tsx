@@ -1,10 +1,10 @@
-import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
-import { Button, Col, Drawer, Row, Space, Typography } from "antd";
+import { PlusCircleOutlined } from "@ant-design/icons";
+import { Col, Drawer, Row, Typography } from "antd";
 import React, { useState } from "react";
-import Playlist from "./Playlist";
 import CreatePlaylist from "./CreatePlaylist";
+import Playlist from "./Playlist";
+import { STATE } from "./utils";
 import ViewPlaylist from "./ViewPlaylist";
-import { usePlaylistContext } from "../../Domains/Playlist/usePlaylist";
 
 const PlaylistFeed = ({
   visible,
@@ -29,12 +29,12 @@ const PlaylistFeed = ({
   };
   const handleCloseSaveToPlaylist = () => {
     setIsShowSave(false);
-  }
+  };
   const handleOpenSaveToPlaylist = () => {
- //   setplaylistTitle(title);
-  //  setplaylistPreviewImage(previewImage);
+    //   setplaylistTitle(title);
+    //  setplaylistPreviewImage(previewImage);
     setIsShowSave(true);
-  }
+  };
 
   return (
     <Drawer
@@ -69,7 +69,8 @@ const PlaylistFeed = ({
             cursor: "pointer",
             backgroundColor: "#D3D3D3",
           }}
-          onClick={() => handleOpenCreatePlayList()}          >
+          onClick={() => handleOpenCreatePlayList()}
+        >
           <PlusCircleOutlined style={{ width: "20px", height: "20px" }} />
           <Typography>new playlist</Typography>
         </Col>
@@ -97,7 +98,6 @@ const PlaylistFeed = ({
               onClick={handleOpenSaveToPlaylist}
             >
               <Playlist title={title} previewImage={previewImage} key={index} />
-
             </Col>
           )
         )}
@@ -106,14 +106,16 @@ const PlaylistFeed = ({
         visible={isShowCreatePlaylist}
         handleClose={handleCloseCreatePlayList}
       />
-      <ViewPlaylist 
-        state="Save"
+      <ViewPlaylist
+        state={STATE.EDIT}
         playlist={{
-        title: "playlistTitle" ,
-        previewImage: "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" ,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a dignissim nunc. Donec aliquet fringilla quam ut porta. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras et tortor viverra, luctus ex et, maximus lectus. ",
-        tags: ["#lorem", "#ipsum"]
-      }}
+          title: "playlistTitle",
+          previewImage:
+            "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a dignissim nunc. Donec aliquet fringilla quam ut porta. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras et tortor viverra, luctus ex et, maximus lectus. ",
+          tags: ["#lorem", "#ipsum"],
+        }}
         visible={isShowSave}
         clips={[]}
         handleClose={handleCloseSaveToPlaylist}
