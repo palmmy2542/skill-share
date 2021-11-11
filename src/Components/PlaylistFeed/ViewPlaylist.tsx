@@ -7,26 +7,26 @@ import EditPlaylist from "./EditPlaylist";
 import { ClipProp } from "../../interface";
 import { useState } from "react";
 import "./index.css";
+import { STATE } from "./utils";
 
 const ViewPlaylist = ({
   state,
   playlist,
   visible,
   clips,
-  handleClose
-  /* 
+  handleClose,
+}: /*
    handleClickSlide,
    handleSetIsDrag,
    isDrag,*/
-}: {
-
+{
   state: string;
   playlist: {
     title: string;
     previewImage: string;
     description: string;
     tags: Array<string>;
-  }
+  };
   visible: boolean;
   clips: ClipProp[];
   handleClose: () => void;
@@ -35,7 +35,6 @@ const ViewPlaylist = ({
   handleSetIsDrag: (state: boolean) => void;
   isDrag: boolean;*/
 }) => {
-
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isDrag, setIsDrag] = useState<boolean>(false);
   const [isOpenEditPlaylist, setIsOpenEditPlaylist] = useState<boolean>(false);
@@ -53,216 +52,146 @@ const ViewPlaylist = ({
   const handleCloseEditPlaylist = () => {
     setIsOpenEditPlaylist(false);
   };
-  let PlaylistDrawer, SubmitButton;
-  if (state == "Save") {
-    return (
-      <Drawer
-        title={`Save to playlist`}
-        headerStyle={{
-          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
-        }}
-        placement={"bottom"}
-        onClose={handleClose}
-        visible={visible}
-        height="100%"
-        width="100%"
-      >
-        <Row 
-        justify="space-around"
-        align="middle"
-        gutter={[8, 8]}
-        >
-          <Col
-            className="gutter-row setsize"
-            span={12}
-            xs={8}
-          >
-            <Playlist  title={playlist.title} previewImage={playlist.previewImage} />
-          </Col>
-          <Col
-            className="gutter-row"
-            flex="auto"
-            span={12}
-            xs={10}
-          >
-            <Typography>
-              <Typography.Title level={3}>{playlist.title}</Typography.Title>
-              <Typography.Paragraph>{playlist.description}</Typography.Paragraph>
-              <Typography.Title level={5}>{playlist.tags}</Typography.Title>
-              <Typography.Paragraph></Typography.Paragraph>
-            </Typography>
-          </Col>
-        </Row>
-        <Row
-          justify="center"
-        >
+
+  const renderTitle = () => {
+    switch (state) {
+      case STATE.SAVE: {
+        return "Save to playlist";
+      }
+      case STATE.EDIT: {
+        return "Edit playlist";
+      }
+    }
+  };
+
+  const renderButton = () => {
+    switch (state) {
+      case STATE.SAVE: {
+        return (
           <Button
             htmlType="submit"
             size="large"
             id="edit-playlist-form-button"
-            style={{ whiteSpace: "normal", height: 'auto', marginBottom: '10px' }}
-            >
-            Save clip to playlist
-          </Button>
-        </Row>
-        <Row gutter={[8, 8]}>
-          <Col
-            xs={8}
-            md={4}
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "250px",
-              width: "100%",
-              cursor: "pointer",
-              backgroundColor: "#D3D3D3",
+              whiteSpace: "normal",
+              height: "auto",
+              marginBottom: "10px",
             }}
           >
-
-          </Col>
-          {clips.map(
-            (
-              { name, url, isPlay, title, description, tags }: ClipProp,
-              index: number
-            ) => (
-              <Col
-                xs={12}
-                md={8}
-                lg={6}
-                xl={4}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  height: "250px",
-                }}
-                key={index}
-              >
-                <PreviewClip
-                  url={url}
-                  isPlay={isPlay}
-                  index={index}
-                  key={index}
-                  handleClickSlide={handleClickSlide}
-                  handleSetIsDrag={handleSetIsDrag}
-                  isDrag={isDrag}
-                  handleOpen={function (): void {
-                  }}
-                />
-              </Col>
-            )
-          )}
-        </Row>
-      </Drawer>
-    );
-  }
-  else {
-    return (
-      <Drawer
-        title={`Playlist`}
-        headerStyle={{
-          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
-        }}
-        placement={"bottom"}
-        onClose={handleClose}
-        visible={visible}
-        height="100%"
-        width="100%"
-      >
-        <Row justify="space-around"
-        >
-          <Col
-            className="gutter-row setsize"
-            span={10}
-          >
-            <Playlist title={playlist.title} previewImage={playlist.previewImage} />
-          </Col>
-          <Col
-            className="gutter-row"
-            span={10}
-          >
-            <Typography>
-              <Typography.Title level={3}>{playlist.title}</Typography.Title>
-              <Typography.Paragraph>{playlist.description}</Typography.Paragraph>
-              <Typography.Title level={5}>{playlist.tags}</Typography.Title>
-              <Typography.Paragraph></Typography.Paragraph>
-            </Typography>
-          </Col>
-        </Row>
-        <Row
-          justify="center"
-        >
+            {renderTitle()}
+          </Button>
+        );
+      }
+      case STATE.EDIT: {
+        return (
           <Button
             htmlType="submit"
             size="large"
             id="edit-playlist-form-button"
-            style={{ whiteSpace: "normal", height: 'auto', marginBottom: '10px' }}
-            onClick={handleOpenEditPlaylist}>
+            style={{
+              whiteSpace: "normal",
+              height: "auto",
+              marginBottom: "10px",
+            }}
+            onClick={handleOpenEditPlaylist}
+          >
             Edit
           </Button>
-        </Row>
-        <Row gutter={[8, 8]}>
-          <Col
-            xs={8}
-            md={4}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "250px",
-              width: "100%",
-              cursor: "pointer",
-              backgroundColor: "#D3D3D3",
-            }}
-          >
+        );
+      }
+    }
+  };
 
-          </Col>
-          {clips.map(
-            (
-              { name, url, isPlay, title, description, tags }: ClipProp,
-              index: number
-            ) => (
-              <Col
-                xs={12}
-                md={8}
-                lg={6}
-                xl={4}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  height: "250px",
-                }}
-                key={index}
-              >
-                <PreviewClip
-                  url={url}
-                  isPlay={isPlay}
-                  index={index}
-                  key={index}
-                  handleClickSlide={handleClickSlide}
-                  handleSetIsDrag={handleSetIsDrag}
-                  isDrag={isDrag}
-                  handleOpen={function (): void {
+  return (
+    <>
+      <Drawer
+        title={renderTitle()}
+        headerStyle={{
+          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
+        }}
+        placement={"bottom"}
+        onClose={handleClose}
+        visible={visible}
+        height="100%"
+        width="100%"
+        className={"save-to-playlist-drawer"}
+      >
+        <div className={"drawer-wrapper"}>
+          <Row align="middle" gutter={[8, 8]}>
+            <Col className="gutter-row setsize" span={12} xs={8}>
+              <Playlist
+                title={playlist.title}
+                previewImage={playlist.previewImage}
+              />
+            </Col>
+            <Col className="gutter-row" flex="auto" span={12} xs={16}>
+              <Typography>
+                <Typography.Title level={3}>{playlist.title}</Typography.Title>
+                <Typography.Paragraph>
+                  {playlist.description}
+                </Typography.Paragraph>
+              </Typography>
+            </Col>
+          </Row>
+          <Row justify="center">{renderButton()}</Row>
+          <Row gutter={[8, 8]}>
+            <Col
+              xs={8}
+              md={4}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "250px",
+                width: "100%",
+                cursor: "pointer",
+                backgroundColor: "#D3D3D3",
+              }}
+            ></Col>
+            {clips.map(
+              (
+                { name, url, isPlay, title, description, tags }: ClipProp,
+                index: number
+              ) => (
+                <Col
+                  xs={12}
+                  md={8}
+                  lg={6}
+                  xl={4}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    height: "250px",
                   }}
-                />
-              </Col>
-            )
-          )}
-        </Row>
-        <EditPlaylist
-          visible={isOpenEditPlaylist}
-          title={playlist.title}
-          previewImage={playlist.previewImage}
-          description={playlist.description}
-          tags={playlist.tags}
-          handleClose={handleCloseEditPlaylist} />
+                  key={index}
+                >
+                  <PreviewClip
+                    url={url}
+                    isPlay={isPlay}
+                    index={index}
+                    key={index}
+                    handleClickSlide={handleClickSlide}
+                    handleSetIsDrag={handleSetIsDrag}
+                    isDrag={isDrag}
+                    handleOpen={function (): void {}}
+                  />
+                </Col>
+              )
+            )}
+          </Row>
+        </div>
       </Drawer>
-    );
-  }
-  // return (
-  //  { PlaylistDrawer }
+      <EditPlaylist
+        visible={isOpenEditPlaylist}
+        title={playlist.title}
+        previewImage={playlist.previewImage}
+        description={playlist.description}
+        tags={playlist.tags}
+        handleClose={handleCloseEditPlaylist}
+      />
+    </>
+  );
 };
 
 export default ViewPlaylist;

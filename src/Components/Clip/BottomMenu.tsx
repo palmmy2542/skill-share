@@ -25,10 +25,12 @@ const BottomMenu = ({
       visible={visible}
       key={"bottom"}
       height="15%"
+      className={"bottom-menu"}
     >
       <List
         bordered
         dataSource={items}
+        className={"list-menu"}
         renderItem={(item: any) => (
           <List.Item
             style={{ height: "50%", cursor: "pointer" }}

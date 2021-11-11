@@ -26,7 +26,7 @@ function App() {
               <Route exact path="/error">
                 <Error />
               </Route>
-              <Route
+              {/* <Route
                 exact
                 path="/"
                 render={() => {
@@ -36,7 +36,7 @@ function App() {
                     return <Redirect to={`/login`} />;
                   }
                 }}
-              ></Route>
+              ></Route> */}
               <Route exact path="/learn">
                 <Learn />
               </Route>
@@ -52,6 +52,17 @@ function App() {
               <Route exact path="/:usernameParam">
                 <Profile />
               </Route>
+              <Route
+                exact
+                path="/"
+                render={() => {
+                  if (canAccessService()) {
+                    return <Redirect to={`/${username}`} />;
+                  } else {
+                    return <Redirect to={`/login`} />;
+                  }
+                }}
+              ></Route>
             </Switch>
           </PlayListProvider>
         </ClipFeedProvider>
