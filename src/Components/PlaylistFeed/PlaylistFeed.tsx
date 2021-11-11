@@ -3,7 +3,7 @@ import { Button, Col, Drawer, Row, Space, Typography } from "antd";
 import React, { useState } from "react";
 import Playlist from "./Playlist";
 import CreatePlaylist from "./CreatePlaylist";
-import SaveToPlaylist from "./SaveToPlaylist";
+import ViewPlaylist from "./ViewPlaylist";
 
 const PlaylistFeed = ({
   visible,
@@ -104,7 +104,9 @@ const PlaylistFeed = ({
         visible={isShowCreatePlaylist}
         handleClose={handleCloseCreatePlayList}
       />
-      <SaveToPlaylist playlist={{
+      <ViewPlaylist 
+        state="Save"
+        playlist={{
         title: "playlistTitle" ,
         previewImage: "playlistPreviewImage" ,
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a dignissim nunc. Donec aliquet fringilla quam ut porta. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras et tortor viverra, luctus ex et, maximus lectus. ",
