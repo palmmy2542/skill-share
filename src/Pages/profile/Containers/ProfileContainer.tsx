@@ -129,17 +129,6 @@ const ProfileContainer = (props: any) => {
     }
   }, []);
 
-  // start-----แปะไว้ก่อน-----
-  const [isShowSaveToPlaylist, setIsShowSaveToPlaylist] = useState(false);
-  const handleCloseSaveToPlaylist = () => {
-    setIsShowSaveToPlaylist(false);
-  };
-
-  const handleOpenSaveToPlaylist = () => {
-    setIsShowSaveToPlaylist(true);
-  };
-  // end-----แปะไว้ก่อน------
-
   return (
     <>
       <Navbar name={userData.username} />
@@ -152,15 +141,6 @@ const ProfileContainer = (props: any) => {
           subscribers={subscribers}
           clips={clips}
         />
-        {/* start-----แปะไว้ก่อน----- */}
-        {/* <div onClick={handleOpenSaveToPlaylist} style={{ cursor: "pointer" }}>
-          Save to playlist (แปะไว้ก่อน)
-        </div>
-        <SaveToPlaylist
-          visible={isShowSaveToPlaylist}
-          handleClose={handleCloseSaveToPlaylist}
-        /> */}
-        {/* end-----แปะไว้ก่อน------ */}
         {renderButton()}
         <UserClipList
           clips={clips}
