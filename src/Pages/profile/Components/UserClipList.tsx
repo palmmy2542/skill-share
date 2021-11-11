@@ -4,6 +4,7 @@ import { ImFilm, ImLock } from "react-icons/im";
 import PreviewClip from "../../../Components/PreviewClip";
 import { ClipProp, AllPlaylist } from "../../../interface";
 import ClipFeed from "../../feed/Components/ClipFeed";
+import PlayListIcon from "../../../Assets/playlist.png";
 
 const { TabPane } = Tabs;
 
@@ -50,7 +51,7 @@ const UserClipList = ({
         <TabPane
           tab={
             <span>
-              <ImFilm />
+              <ImFilm style={{ width: "32px", height: "32px" }} />
             </span>
           }
           key="1"
@@ -89,7 +90,10 @@ const UserClipList = ({
         <TabPane
           tab={
             <span>
-              <ImLock />
+              <img
+                src={PlayListIcon}
+                style={{ width: "32px", height: "32px" }}
+              />
             </span>
           }
           key="2"
