@@ -18,6 +18,7 @@ import "./index.css";
 const Clip = ({
   isFade,
   name,
+  previewImage,
   url,
   height = undefined,
   index,
@@ -38,6 +39,7 @@ const Clip = ({
 }: {
   isFade: boolean;
   name?: string | undefined;
+  previewImage: string;
   url: string;
   height?: string | undefined;
   index: number;
@@ -239,6 +241,7 @@ const Clip = ({
       </Fader>
       <ReactPlayer
         url={url}
+        light={previewImage}
         autoPlay={true}
         playing={isPlay}
         onPlay={() => handlePlay()}

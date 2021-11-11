@@ -10,6 +10,7 @@ export interface UserAccount {
 export interface ClipProp {
   title: string;
   description: string;
+  previewImage?: string;
   tags?: Array<string>;
   name?: string;
   url: string;

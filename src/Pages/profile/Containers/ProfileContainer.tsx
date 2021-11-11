@@ -31,7 +31,8 @@ const ProfileContainer = (props: any) => {
   });
 
   const { isMe, isSubscribed, getMe, playlist } = useUserDataContext();
-  const { getVideoByUserId, getStreamingUrl } = useClipFeedContext();
+  const { getVideoByUserId, getStreamingUrl, getPreviewImageUrl } =
+    useClipFeedContext();
   const { canAccessService } = useUserAuthenticationContext();
   const [isShowPlaylist, setIsShowPlaylist] = useState(false);
 
@@ -65,7 +66,7 @@ const ProfileContainer = (props: any) => {
 
   const renderButton = () => {
     if (isMe) {
-      return <Button size={"middle"}>Edit profile</Button>;
+      return;
     } else if (isSubscribed) {
       return <Button size={"middle"}>Un subscribe</Button>;
     } else if (!isSubscribed) {
@@ -108,6 +109,9 @@ const ProfileContainer = (props: any) => {
                         title: item.videoUploaded.title,
                         description: item.videoUploaded.description,
                         url: getStreamingUrl(item.videoUploaded.videoId),
+                        previewImage: getPreviewImageUrl(
+                          item.videoUploaded.videoId
+                        ),
                         name: `TEST ${index}`,
                         isPlay: false,
                         comments: [

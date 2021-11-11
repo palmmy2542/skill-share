@@ -76,30 +76,36 @@ const ClipFeed = ({
         beforeChange={(from, to) => handleChange(from, to)}
         initialSlide={currentIndex}
       >
-        {clips.map(({ name, url, isPlay, title, description, tags }, index) => (
-          <Clip
-            isFade={isFade}
-            name={name}
-            url={url}
-            height={"100vh"}
-            key={index + name}
-            isFirst={index === 0}
-            isLast={index === clips.length - 1}
-            index={index}
-            isPlay={isPlay}
-            title={title}
-            description={description}
-            tags={tags}
-            handleOpenVideoComment={handleOpenVideoComment}
-            handleNext={handleNext}
-            handleBack={handleBack}
-            handleFaderToggle={handleFaderToggle}
-            setIsFade={setIsFade}
-            handlePlay={handlePlay}
-            handlePause={handlePause}
-            handleClose={handleClose}
-          />
-        ))}
+        {clips.map(
+          (
+            { name, url, isPlay, title, description, tags, previewImage },
+            index
+          ) => (
+            <Clip
+              isFade={isFade}
+              previewImage={previewImage}
+              name={name}
+              url={url}
+              height={"100vh"}
+              key={index + name}
+              isFirst={index === 0}
+              isLast={index === clips.length - 1}
+              index={index}
+              isPlay={isPlay}
+              title={title}
+              description={description}
+              tags={tags}
+              handleOpenVideoComment={handleOpenVideoComment}
+              handleNext={handleNext}
+              handleBack={handleBack}
+              handleFaderToggle={handleFaderToggle}
+              setIsFade={setIsFade}
+              handlePlay={handlePlay}
+              handlePause={handlePause}
+              handleClose={handleClose}
+            />
+          )
+        )}
       </Carousel>
     </div>
   );

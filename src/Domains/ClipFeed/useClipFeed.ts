@@ -111,6 +111,9 @@ const useClipFeed = () => {
   const getStreamingUrl = (videoId: string) =>
     `https://skill-share-streaming-service-znv5z.ondigitalocean.app/video/${videoId}/playlist.m3u8`;
 
+  const getPreviewImageUrl = (videoId: string) =>
+    `https://skill-share-streaming-service-znv5z.ondigitalocean.app/video/${videoId}/poster.jpg`;
+
   const getAllVideo = async (token: string | undefined): Promise<any> => {
     if (token) {
       return axios({
@@ -182,6 +185,7 @@ const useClipFeed = () => {
     getRandomVideo,
     getVideoByUserId,
     getStreamingUrl,
+    getPreviewImageUrl,
   };
 };
 
