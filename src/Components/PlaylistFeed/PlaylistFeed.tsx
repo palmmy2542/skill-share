@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Playlist from "./Playlist";
 import CreatePlaylist from "./CreatePlaylist";
 import ViewPlaylist from "./ViewPlaylist";
+import { usePlaylistContext } from "../../Domains/Playlist/usePlaylist";
 
 const PlaylistFeed = ({
   visible,
@@ -91,6 +92,7 @@ const PlaylistFeed = ({
                 justifyContent: "center",
                 height: "250px",
                 width: "100%",
+                cursor: "pointer",
               }}
               onClick={handleOpenSaveToPlaylist}
             >
@@ -108,7 +110,7 @@ const PlaylistFeed = ({
         state="Save"
         playlist={{
         title: "playlistTitle" ,
-        previewImage: "playlistPreviewImage" ,
+        previewImage: "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" ,
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a dignissim nunc. Donec aliquet fringilla quam ut porta. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras et tortor viverra, luctus ex et, maximus lectus. ",
         tags: ["#lorem", "#ipsum"]
       }}

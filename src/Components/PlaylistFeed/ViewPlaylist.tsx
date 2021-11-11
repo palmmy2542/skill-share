@@ -67,17 +67,23 @@ const ViewPlaylist = ({
         height="100%"
         width="100%"
       >
-        <Row justify="space-around"
+        <Row 
+        justify="space-around"
+        align="middle"
+        gutter={[8, 8]}
         >
           <Col
             className="gutter-row setsize"
-            span={10}
+            span={12}
+            xs={8}
           >
-            <Playlist title={playlist.title} previewImage={playlist.previewImage} />
+            <Playlist  title={playlist.title} previewImage={playlist.previewImage} />
           </Col>
           <Col
             className="gutter-row"
-            span={10}
+            flex="auto"
+            span={12}
+            xs={10}
           >
             <Typography>
               <Typography.Title level={3}>{playlist.title}</Typography.Title>

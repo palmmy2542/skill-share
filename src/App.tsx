@@ -11,17 +11,21 @@ import { ClipFeedProvider } from "./Domains/ClipFeed/useClipFeed";
 import useUserAuthenticationContext from "./Domains/UserAuthentication/useUserAuthentication";
 import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
 import { PlayListProvider } from "./Domains/Playlist/usePlaylist";
+import Error from "./Pages/error";
 
 function App() {
   const { canAccessService } = useUserAuthenticationContext();
   const username = localStorage.getItem("skillUsername");
-
+  console.log("test", canAccessService());
   return (
     <div className="App">
       <UserDataProvider>
         <ClipFeedProvider>
           <PlayListProvider>
             <Switch>
+              <Route exact path="/error">
+                <Error />
+              </Route>
               <Route
                 exact
                 path="/"
