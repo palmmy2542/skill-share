@@ -22,3 +22,11 @@ export interface UploadClip {
   description: string;
   video: Array<any>;
 }
+
+export interface AllPlaylist {
+  title: string;
+  description: string;
+  previewImage: string;
+  numberOfVideo: number;
+  videoOwner: string;
+}

@@ -2,7 +2,7 @@ import { Col, Drawer, Row, Tabs } from "antd";
 import React, { useState } from "react";
 import { ImFilm, ImLock } from "react-icons/im";
 import PreviewClip from "../../../Components/PreviewClip";
-import { ClipProp } from "../../../interface";
+import { ClipProp, AllPlaylist } from "../../../interface";
 import ClipFeed from "../../feed/Components/ClipFeed";
 
 const { TabPane } = Tabs;
@@ -10,9 +10,19 @@ const { TabPane } = Tabs;
 const UserClipList = ({
   clips,
   setClips,
+  playlist,
+  handleSelectPlaylist,
 }: {
   clips: ClipProp[];
   setClips: React.Dispatch<React.SetStateAction<any>>;
+  playlist: AllPlaylist[];
+  handleSelectPlaylist: (
+    title: string,
+    description: string,
+    previewImage: string,
+    numberOfVideo: number,
+    videoOwner: string
+  ) => void;
 }) => {
   const [visible, setVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -33,9 +43,10 @@ const UserClipList = ({
   const handleClickSlide = (index: number) => {
     setCurrentIndex(index);
   };
+
   return (
     <>
-      <Tabs defaultActiveKey="1" centered tabPosition={"bottom"}>
+      <Tabs defaultActiveKey="1" centered tabPosition={"top"}>
         <TabPane
           tab={
             <span>
@@ -43,7 +54,38 @@ const UserClipList = ({
             </span>
           }
           key="1"
-        />
+        >
+          <Row gutter={[8, 8]}>
+            {clips.map(
+              (
+                { name, url, isPlay, title, description, tags }: ClipProp,
+                index: number
+              ) => (
+                <Col
+                  xs={8}
+                  md={8}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    height: "250px",
+                  }}
+                  key={index}
+                >
+                  <PreviewClip
+                    url={url}
+                    isPlay={false}
+                    index={index}
+                    key={index}
+                    handleClickSlide={handleClickSlide}
+                    handleSetIsDrag={handleSetIsDrag}
+                    isDrag={isDrag}
+                    handleOpen={handleOpen}
+                  />
+                </Col>
+              )
+            )}
+          </Row>
+        </TabPane>
         <TabPane
           tab={
             <span>
@@ -51,38 +93,49 @@ const UserClipList = ({
             </span>
           }
           key="2"
-        />
+        >
+          <Row gutter={[8, 8]}>
+            {playlist.map(
+              (
+                {
+                  title,
+                  description,
+                  numberOfVideo,
+                  videoOwner,
+                  previewImage,
+                }: AllPlaylist,
+                index: number
+              ) => (
+                <Col
+                  xs={8}
+                  md={4}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    height: "250px",
+                  }}
+                  key={index}
+                  onClick={() =>
+                    handleSelectPlaylist(
+                      title,
+                      description,
+                      previewImage,
+                      numberOfVideo,
+                      videoOwner
+                    )
+                  }
+                >
+                  <img
+                    src={previewImage}
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                </Col>
+              )
+            )}
+          </Row>
+        </TabPane>
       </Tabs>
-      <Row gutter={[8, 8]}>
-        {clips.map(
-          (
-            { name, url, isPlay, title, description, tags }: ClipProp,
-            index: number
-          ) => (
-            <Col
-              xs={8}
-              md={8}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                height: "250px",
-              }}
-              key={index}
-            >
-              <PreviewClip
-                url={url}
-                isPlay={false}
-                index={index}
-                key={index}
-                handleClickSlide={handleClickSlide}
-                handleSetIsDrag={handleSetIsDrag}
-                isDrag={isDrag}
-                handleOpen={handleOpen}
-              />
-            </Col>
-          )
-        )}
-      </Row>
+
       <Drawer
         placement={"right"}
         visible={visible}

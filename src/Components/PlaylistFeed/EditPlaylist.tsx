@@ -81,7 +81,7 @@ const EditPlaylist = ({
           />
         </Form.Item>
         <Row>
-          <Col>
+          <Col xs={12}>
             <Popconfirm
               title="Are you sure？"
               okText="Delete"
@@ -91,7 +91,7 @@ const EditPlaylist = ({
               okButtonProps={{ loading: confirmLoading }}
               onCancel={handleCancel}
             >
-              <Button danger onClick={showPopconfirm}>
+              <Button danger onClick={showPopconfirm} style={{ width: "100%" }}>
                 Delete playlist
               </Button>
             </Popconfirm>
@@ -108,8 +108,8 @@ const EditPlaylist = ({
         <Button
           type="primary"
           htmlType="submit"
-          size="large"
           className="edit-playlist-form-button"
+          style={{ width: "100%" }}
         >
           Update
         </Button>

@@ -2,10 +2,10 @@
 import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Button, Col, Drawer, Row, Space, Typography } from "antd";
 import React, { useState } from "react";
+import { STATE } from "../../utils";
 import PlaylistForm from "../PlaylistForm";
 import CreatePlaylist from "./CreatePlaylist";
 import Playlist from "./Playlist";
-import { STATE } from "./utils";
 import ViewPlaylist from "./ViewPlaylist";
 
 const PlaylistFeed = ({
@@ -17,10 +17,6 @@ const PlaylistFeed = ({
   handleClose: () => void;
   playlist: Array<{ title: string; previewImage: string }>;
 }) => {
-
-  const [openCreateDrawer, setOpenCreateDrawer] = useState(false);
-  const [playlistTitle, setplaylistTitle] = useState("playlist title");
-  const [playlistPreviewImage, setplaylistPreviewImage] = useState("preview");
   const [selectedPlaylist, setSelectedPlaylist] = useState({
     title: "PLAYLIST_TITLE",
     description: "PLAY_DESCRIPTION",
@@ -43,16 +39,11 @@ const PlaylistFeed = ({
     setIsShowSave(false);
   };
   const handleOpenSaveToPlaylist = () => {
-    //   setplaylistTitle(title);
-    //  setplaylistPreviewImage(previewImage);
     setIsShowSave(true);
   };
 
   const handleOpenCreatePlaylist = () => {
-    setOpenCreateDrawer(true);
-  };
-  const handleCloseCreatePlaylist = () => {
-    setOpenCreateDrawer(false);
+    setIsShowCreatePlaylist(true);
   };
 
   return (
@@ -121,10 +112,10 @@ const PlaylistFeed = ({
           )
         )}
       </Row>
-      <PlaylistForm
+      {/* <PlaylistForm
         visible={openCreateDrawer}
         handleClose={handleCloseCreatePlaylist}
-      />
+      /> */}
       <CreatePlaylist
         visible={isShowCreatePlaylist}
         handleClose={handleCloseCreatePlayList}

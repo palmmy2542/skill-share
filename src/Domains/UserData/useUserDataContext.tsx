@@ -17,6 +17,54 @@ const useUserData = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isMe, setIsMe] = useState<boolean>(true);
   const [isSubscribed, setIsScribed] = useState(false);
+  const [playlist, setPlaylist] = useState([
+    {
+      title: "Play list 1",
+      description:
+        "In sunt enim qui duis. Ut esse fugiat fugiat proident voluptate aliqua fugiat incididunt mollit est commodo. Eiusmod incididunt nulla Lorem Lorem dolore aute irure enim id. Do ullamco Lorem proident sunt amet dolore minim.",
+      previewImage:
+        "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      numberOfVideo: 10,
+      videoOwner: "Usename",
+    },
+    {
+      title: "Play list 2",
+      description:
+        "Sint elit cillum qui enim do commodo enim ullamco Lorem. In quis aute commodo laboris culpa labore elit exercitation ea nulla sint elit eiusmod. Minim aliqua sint tempor velit pariatur elit sunt exercitation. Laboris esse esse id reprehenderit.",
+      previewImage:
+        "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      numberOfVideo: 10,
+      videoOwner: "Usename",
+    },
+    {
+      title: "Play list 3",
+      description:
+        "Cillum et elit occaecat fugiat. Minim commodo reprehenderit adipisicing do officia. Non mollit anim deserunt excepteur anim. Magna in est officia consectetur.",
+      previewImage:
+        "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      numberOfVideo: 10,
+      videoOwner: "Usename",
+    },
+    {
+      title: "Play list 4",
+      description:
+        "Consequat fugiat et magna incididunt nisi nostrud. Voluptate elit et reprehenderit reprehenderit incididunt adipisicing sint excepteur velit. Velit velit dolor nisi exercitation elit nulla aliqua id.",
+      previewImage:
+        "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      numberOfVideo: 10,
+      videoOwner: "Usename",
+    },
+    {
+      title: "Play list 5",
+      description:
+        "Et minim duis do voluptate fugiat enim. Id reprehenderit labore duis mollit nostrud cupidatat cillum ad sint pariatur minim labore culpa ad. Mollit voluptate amet anim culpa.",
+      previewImage:
+        "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      numberOfVideo: 10,
+      videoOwner: "Usename",
+    },
+  ]);
+
   const [clips, setClips] = useState<Array<ClipProp>>([
     {
       title: "First Video0 1",
@@ -128,6 +176,7 @@ const useUserData = () => {
     token,
     isMe,
     isSubscribed,
+    playlist,
   };
 };
 

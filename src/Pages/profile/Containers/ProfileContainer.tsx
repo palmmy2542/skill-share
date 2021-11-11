@@ -5,11 +5,13 @@ import { useParams } from "react-router";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
 import Navbar from "../../../Components/Navbar/Navbar";
 import Playlist from "../../../Components/PlaylistFeed/PlaylistFeed";
+import ViewPlaylist from "../../../Components/PlaylistFeed/ViewPlaylist";
 import SaveToPlaylist from "../../../Components/SaveToPlaylist";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
 import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
 import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
 import { ClipProp, UserAccount } from "../../../interface";
+import { STATE } from "../../../utils";
 import UserAvatar from "../Components/UserAvatar";
 import UserClipList from "../Components/UserClipList";
 import UserInformation from "../Components/UserInformation";
@@ -28,9 +30,36 @@ const ProfileContainer = (props: any) => {
     subscribers: 0,
   });
 
-  const { isMe, isSubscribed, getMe } = useUserDataContext();
+  const { isMe, isSubscribed, getMe, playlist } = useUserDataContext();
   const { getVideoByUserId, getStreamingUrl } = useClipFeedContext();
   const { canAccessService } = useUserAuthenticationContext();
+  const [isShowPlaylist, setIsShowPlaylist] = useState(false);
+
+  const [selectedPlaylist, setSelectedPlaylist] = useState({
+    title: "PLAYLIST_TITLE",
+    description: "PLAY_DESCRIPTION",
+    previewImage: "",
+    numberOfVideo: 0,
+    videoOwner: "VIDEO_OWNER",
+  });
+
+  const handleClosePlaylist = () => setIsShowPlaylist(false);
+  const handleSelectPlaylist = (
+    title: string,
+    description: string,
+    previewImage: string,
+    numberOfVideo: number,
+    videoOwner: string
+  ) => {
+    setIsShowPlaylist(true);
+    setSelectedPlaylist({
+      title,
+      description,
+      previewImage,
+      numberOfVideo,
+      videoOwner,
+    });
+  };
 
   const { subscribing, subscribers } = userData;
 
@@ -124,16 +153,28 @@ const ProfileContainer = (props: any) => {
           clips={clips}
         />
         {/* start-----แปะไว้ก่อน----- */}
-        <div onClick={handleOpenSaveToPlaylist} style={{ cursor: "pointer" }}>
+        {/* <div onClick={handleOpenSaveToPlaylist} style={{ cursor: "pointer" }}>
           Save to playlist (แปะไว้ก่อน)
         </div>
         <SaveToPlaylist
           visible={isShowSaveToPlaylist}
           handleClose={handleCloseSaveToPlaylist}
-        />
+        /> */}
         {/* end-----แปะไว้ก่อน------ */}
         {renderButton()}
-        <UserClipList clips={clips} setClips={setClips} />
+        <UserClipList
+          clips={clips}
+          setClips={setClips}
+          playlist={playlist}
+          handleSelectPlaylist={handleSelectPlaylist}
+        />
+        <ViewPlaylist
+          state={STATE.EDIT}
+          playlist={selectedPlaylist}
+          visible={isShowPlaylist}
+          clips={[]}
+          handleClose={handleClosePlaylist}
+        />
       </div>
       <BottomNav username={userData.username} />
     </>

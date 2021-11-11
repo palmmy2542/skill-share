@@ -99,7 +99,7 @@ const ViewPlaylist = ({
             }}
             onClick={handleOpenEditPlaylist}
           >
-            Edit
+            Edit playlist
           </Button>
         );
       }

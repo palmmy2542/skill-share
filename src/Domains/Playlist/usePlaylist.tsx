@@ -222,8 +222,6 @@ const usePlaylist = () => {
     return null;
   };
 
-  console.log("playlist", playlist);
-
   return {
     playlist,
     videoInPlaylist,
