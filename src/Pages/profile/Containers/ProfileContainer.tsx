@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
 import Navbar from "../../../Components/Navbar/Navbar";
 import Playlist from "../../../Components/PlaylistFeed/PlaylistFeed";
+import SaveToPlaylist from "../../../Components/SaveToPlaylist";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
 import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
 import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
@@ -99,6 +100,17 @@ const ProfileContainer = (props: any) => {
     }
   }, []);
 
+  // start-----แปะไว้ก่อน-----
+  const [isShowSaveToPlaylist, setIsShowSaveToPlaylist] = useState(false);
+  const handleCloseSaveToPlaylist = () => {
+    setIsShowSaveToPlaylist(false);
+  };
+
+  const handleOpenSaveToPlaylist = () => {
+    setIsShowSaveToPlaylist(true);
+  };
+  // end-----แปะไว้ก่อน------
+
   return (
     <>
       <Navbar name={userData.username} />
@@ -111,6 +123,15 @@ const ProfileContainer = (props: any) => {
           subscribers={subscribers}
           clips={clips}
         />
+        {/* start-----แปะไว้ก่อน----- */}
+        <div onClick={handleOpenSaveToPlaylist} style={{ cursor: "pointer" }}>
+          Save to playlist (แปะไว้ก่อน)
+        </div>
+        <SaveToPlaylist
+          visible={isShowSaveToPlaylist}
+          handleClose={handleCloseSaveToPlaylist}
+        />
+        {/* end-----แปะไว้ก่อน------ */}
         {renderButton()}
         <UserClipList clips={clips} setClips={setClips} />
       </div>

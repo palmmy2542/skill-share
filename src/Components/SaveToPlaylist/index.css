@@ -1,0 +1,26 @@
+.playlist-info {
+  padding-top: 5vh;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  max-height: 35vh;
+}
+
+.playlist-img {
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+
+.save-clip-button {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-bottom: 20px;
+  min-width: max-content;
+}
+
+@media only screen and (min-width: 600px) {
+  .playlist-img {
+    padding-left: 20vw;
+  }
+}

@@ -16,6 +16,19 @@ code {
     monospace;
 }
 
+.drawer-wrapper {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (min-width: 975px) {
+  .drawer-wrapper {
+    width: 975px;
+  }
+}
+
+
 video {
   /* aspect-ratio: 9/16; */
   /* width: 250px;

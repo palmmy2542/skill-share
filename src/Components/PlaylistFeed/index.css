@@ -1,0 +1,42 @@
+.playlist {
+  min-height: 100%;
+  width: 100%;
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+  background: "#000";
+}
+
+.save-to-playlist-drawer {
+  padding: "16px 32px";
+
+}
+
+
+
+
+#create-playlist-form {
+  padding: 2% 12% 2% 12%;
+}
+
+#edit-playlist-form {
+  padding: 2% 12% 2% 12%;
+}
+#edit-playlist-form-button {
+  margin-top: 32px;
+  width: auto;
+}
+#save-to-playlist-form-button {
+  margin-top: 32px;
+  width: auto;
+}
+
+.save-to-playlist-form {
+  margin-top: 32px;
+  width: 100%;
+}
+
+.playlist-form-button {
+  margin-top: 32px;
+  width: auto;
+}
