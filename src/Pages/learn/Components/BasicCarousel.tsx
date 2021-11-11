@@ -53,7 +53,7 @@ const BasicCarousel = ({
   return (
     <Carousel {...settings} draggable={true}>
       {itemList.map(
-        ({ name, url, isPlay, title, description, tags }: ClipProp, index) => (
+        ({ name, url, isPlay, title, description, tags,previewImage }: ClipProp, index) => (
           <div
             style={{
               background: "#000",
@@ -66,6 +66,7 @@ const BasicCarousel = ({
             key={index}
           >
             <PreviewClip
+              previewImage={previewImage}
               url={url}
               isPlay={false}
               index={index}

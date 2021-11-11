@@ -59,7 +59,15 @@ const UserClipList = ({
           <Row gutter={[8, 8]}>
             {clips.map(
               (
-                { name, url, isPlay, title, description, tags }: ClipProp,
+                {
+                  name,
+                  url,
+                  isPlay,
+                  title,
+                  description,
+                  tags,
+                  previewImage,
+                }: ClipProp,
                 index: number
               ) => (
                 <Col
@@ -73,6 +81,7 @@ const UserClipList = ({
                   key={index}
                 >
                   <PreviewClip
+                    previewImage={previewImage}
                     url={url}
                     isPlay={false}
                     index={index}

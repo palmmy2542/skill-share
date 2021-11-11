@@ -7,6 +7,7 @@ const PreviewClip = ({
   name,
   url,
   height = undefined,
+  previewImage,
   index,
   isPlay,
   handleClickSlide,
@@ -17,6 +18,7 @@ const PreviewClip = ({
   name?: string | undefined;
   url: string;
   height?: string | undefined;
+  previewImage: string;
   index: number;
   isPlay?: boolean;
   handleClickSlide?: (index: number) => void;
@@ -62,9 +64,9 @@ const PreviewClip = ({
       }}
     >
       <ReactPlayer
-        light
         url={url}
         muted
+        previewImage={previewImage}
         autoPlay={false}
         playing={isPlaying}
         controls={false}

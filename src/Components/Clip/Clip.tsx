@@ -90,6 +90,7 @@ const Clip = ({
     setIsShowPlaylist(true);
   };
 
+  console.log("previewImage", previewImage);
   return (
     <div
       id={"@" + name + "." + index.toString()}

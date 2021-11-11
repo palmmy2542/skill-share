@@ -31,7 +31,15 @@ const SearchClipsTab = ({
       <Row gutter={[12, 18]} style={{ padding: "0% 5%" }}>
         {filteredClips.map(
           (
-            { name, url, isPlay, title, description, tags }: ClipProp,
+            {
+              name,
+              url,
+              isPlay,
+              title,
+              description,
+              tags,
+              previewImage,
+            }: ClipProp,
             index: number
           ) => (
             <Col
@@ -47,6 +55,7 @@ const SearchClipsTab = ({
               key={index}
             >
               <PreviewClip
+                previewImage={previewImage}
                 url={url}
                 isPlay={false}
                 index={index}
