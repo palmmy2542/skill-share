@@ -48,6 +48,13 @@ const PlaylistFeed = ({
     setIsShowSave(true);
   };
 
+  const handleOpenCreatePlaylist = () => {
+    setOpenCreateDrawer(true);
+  };
+  const handleCloseCreatePlaylist = () => {
+    setOpenCreateDrawer(false);
+  };
+
   return (
     <Drawer
       title={`Save to playlist`}
@@ -117,6 +124,7 @@ const PlaylistFeed = ({
       <PlaylistForm
         visible={openCreateDrawer}
         handleClose={handleCloseCreatePlaylist}
+      />
       <CreatePlaylist
         visible={isShowCreatePlaylist}
         handleClose={handleCloseCreatePlayList}
