@@ -1,9 +1,10 @@
 import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Button, Col, Drawer, Row, Space, Typography } from "antd";
 import React, { useState } from "react";
-import { usePlaylistContext } from "../../Domains/Playlist/usePlaylist";
 import Playlist from "./Playlist";
-import SaveToPlaylist from "../SaveToPlaylist";
+import CreatePlaylist from "./CreatePlaylist";
+import ViewPlaylist from "./ViewPlaylist";
+import { usePlaylistContext } from "../../Domains/Playlist/usePlaylist";
 
 const PlaylistFeed = ({
   visible,
@@ -14,14 +15,27 @@ const PlaylistFeed = ({
   handleClose: () => void;
   playlist: Array<{ title: string; previewImage: string }>;
 }) => {
-  const [isShowSaveToPlaylist, setIsShowSaveToPlaylist] = useState(false);
-  const handleCloseSaveToPlaylist = () => {
-    setIsShowSaveToPlaylist(false);
-  };
+  const [playlistTitle, setplaylistTitle] = useState("playlist title");
+  const [playlistPreviewImage, setplaylistPreviewImage] = useState("preview");
+  const [isShowSave, setIsShowSave] = useState(false);
 
-  const handleOpenSaveToPlaylist = () => {
-    setIsShowSaveToPlaylist(true);
+  const [isShowCreatePlaylist, setIsShowCreatePlaylist] = useState(false);
+
+  const handleCloseCreatePlayList = () => {
+    setIsShowCreatePlaylist(false);
   };
+  const handleOpenCreatePlayList = () => {
+    setIsShowCreatePlaylist(true);
+  };
+  const handleCloseSaveToPlaylist = () => {
+    setIsShowSave(false);
+  }
+  const handleOpenSaveToPlaylist = () => {
+ //   setplaylistTitle(title);
+  //  setplaylistPreviewImage(previewImage);
+    setIsShowSave(true);
+  }
+
   return (
     <Drawer
       title={`Save to playlist`}
@@ -55,7 +69,7 @@ const PlaylistFeed = ({
             cursor: "pointer",
             backgroundColor: "#D3D3D3",
           }}
-        >
+          onClick={() => handleOpenCreatePlayList()}          >
           <PlusCircleOutlined style={{ width: "20px", height: "20px" }} />
           <Typography>new playlist</Typography>
         </Col>
@@ -80,15 +94,28 @@ const PlaylistFeed = ({
                 width: "100%",
                 cursor: "pointer",
               }}
-              onClick={() => handleOpenSaveToPlaylist()}
+              onClick={handleOpenSaveToPlaylist}
             >
               <Playlist title={title} previewImage={previewImage} key={index} />
+
             </Col>
           )
         )}
       </Row>
-      <SaveToPlaylist
-        visible={isShowSaveToPlaylist}
+      <CreatePlaylist
+        visible={isShowCreatePlaylist}
+        handleClose={handleCloseCreatePlayList}
+      />
+      <ViewPlaylist 
+        state="Save"
+        playlist={{
+        title: "playlistTitle" ,
+        previewImage: "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" ,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a dignissim nunc. Donec aliquet fringilla quam ut porta. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras et tortor viverra, luctus ex et, maximus lectus. ",
+        tags: ["#lorem", "#ipsum"]
+      }}
+        visible={isShowSave}
+        clips={[]}
         handleClose={handleCloseSaveToPlaylist}
       />
     </Drawer>

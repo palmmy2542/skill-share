@@ -5,14 +5,16 @@ import React from "react";
 const BottomMenu = ({
   visible,
   handleClose,
+  handleOpenEditClip,
   handleOpenPlayList,
 }: {
   visible: boolean;
   handleClose: () => void;
+  handleOpenEditClip: () => void;
   handleOpenPlayList: () => void;
 }) => {
   const items = [
-    { title: "Edit video", callback: () => {} },
+    { title: "Edit clip", callback: handleOpenEditClip },
     { title: "Save to playlist", callback: handleOpenPlayList },
   ];
   return (
