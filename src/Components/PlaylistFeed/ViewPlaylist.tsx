@@ -94,7 +94,7 @@ const ViewPlaylist = ({
         id: playlist.id,
         title: playlist.title,
         description: playlist.description,
-        permission: playlist.permission,
+        permission: playlist.permission === "public",
         videoList: temp,
       });
     }
@@ -104,6 +104,9 @@ const ViewPlaylist = ({
     switch (state) {
       case STATE.SAVE: {
         return saveToPlaylist;
+      }
+      case STATE.EDIT: {
+        return handleOpenEditPlaylist;
       }
     }
   };
@@ -138,7 +141,7 @@ const ViewPlaylist = ({
               height: "auto",
               marginBottom: "10px",
             }}
-            onClick={handleOpenEditPlaylist}
+            onClick={renderOnClickFunction()}
           >
             Edit playlist
           </Button>
@@ -148,7 +151,6 @@ const ViewPlaylist = ({
   };
 
   useEffect(() => {
-    console.log("videoList", videoList);
     getAllVideoInPlaylist({ token: canAccessService(), videoList })?.then(
       (data) => {
         if (data && data?.[0]) {
@@ -262,9 +264,13 @@ const ViewPlaylist = ({
       <EditPlaylist
         visible={isOpenEditPlaylist}
         title={playlist.title}
-        previewImage={""}
+        previewImage={getPlaylistPreviewImage(videoList?.[0])}
         description={playlist.description}
         handleClose={handleCloseEditPlaylist}
+        permission={playlist.permission}
+        videoList={playlist.videoList}
+        userId={userId}
+        videoId={playlist.id}
       />
       {allVideo && (
         <Drawer

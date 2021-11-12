@@ -25,13 +25,21 @@ const EditPlaylist = ({
   title,
   previewImage,
   description,
+  permission,
   handleClose,
+  videoList,
+  userId,
+  videoId,
 }: {
   visible: boolean;
   title: string;
   previewImage: string;
   description: string;
+  permission: string;
   handleClose: () => void;
+  videoList: string[];
+  userId: string | null;
+  videoId: string;
 }) => {
   const [popUpVisible, setPopUpVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -53,13 +61,34 @@ const EditPlaylist = ({
   const handleCancel = () => {
     setPopUpVisible(false);
   };
+  // const showConfirmDelete = () => {
+  //   confirm({
+  //     title: "Do you want to delete this video?",
+  //     icon: <ExclamationCircleOutlined />,
+  //     onOk() {
+  //       deleteVideo({ token: canAccessService(), videoId: videoId }).then(() =>
+  //         history.push("/")
+  //       );
+  //     },
+  //     onCancel() {
+  //       console.log("Cancel delete video");
+  //     },
+  //   });
+  // };
 
-  const showConfirmSaveToPlaylist = (values: any) => {
+  const showConfirmEditPlaylist = (values: any) => {
     confirm({
       title: "Do you want to save video to this playlist?",
       icon: <ExclamationCircleOutlined />,
       onOk() {
-        editPlaylist({ token: canAccessService(), ...values }).then(() => {
+        // console.log({ ...values }, videoList, userId, videoId:id);
+        editPlaylist({
+          token: canAccessService(),
+          ...values,
+          videoList,
+          userId,
+          id: videoId,
+        }).then(() => {
           message.success("Update success");
           history.push("/");
         });
@@ -78,21 +107,16 @@ const EditPlaylist = ({
       placement={"bottom"}
       height="100%"
     >
-      <Image
-        src={previewImage}
-        preview={false}
-        width={"100%"}
-        height={"100%"}
-      />
-
+      <Image src={previewImage} preview={false} />
       <Form
         id="edit-playlist-form"
         layout="vertical"
-        onFinish={showConfirmSaveToPlaylist}
+        onFinish={showConfirmEditPlaylist}
       >
         <Form.Item
           name="title"
           label="Playlist name"
+          initialValue={title}
           rules={[
             {
               required: true,
@@ -106,18 +130,16 @@ const EditPlaylist = ({
             placeholder="Playlist name here"
           />
         </Form.Item>
-        <Form.Item name="description" label="Description">
+        <Form.Item
+          name="description"
+          label="Description"
+          initialValue={description}
+        >
           <Input.TextArea
             size="large"
             defaultValue={description}
             placeholder="Description here"
             autoSize={true}
-          />
-        </Form.Item>
-        <Form.Item name="tags" label="Tag(s)">
-          <Input
-            size="large"
-            /*defaultValue={"#"+tags[0]}*/ placeholder="Tags here"
           />
         </Form.Item>
         <Row>
@@ -138,11 +160,17 @@ const EditPlaylist = ({
           </Col>
           <Col flex="auto"></Col>
           <Col>
-            <Switch
-              checkedChildren="Public"
-              unCheckedChildren="Private"
-              defaultChecked
-            />
+            <Form.Item
+              name="permission"
+              initialValue={"public" === permission}
+              valuePropName="checked"
+            >
+              <Switch
+                checkedChildren="public"
+                unCheckedChildren="private"
+                defaultChecked
+              />
+            </Form.Item>
           </Col>
         </Row>
         <Button

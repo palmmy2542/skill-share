@@ -1,6 +1,7 @@
 import { message } from "antd";
 import axios from "axios";
 import { PLAYLIST_HOST } from "../../const";
+import { convertPermission } from "../Clip/utils";
 
 const postNewPlaylist = async ({
   token,
@@ -53,7 +54,7 @@ const editPlaylist = async ({
   title: string;
   description: string;
   videoList: string[];
-  permission: string;
+  permission: boolean;
   userId: string;
 }): Promise<any> => {
   if (token) {
@@ -65,7 +66,14 @@ const editPlaylist = async ({
     return axios
       .put(
         `${PLAYLIST_HOST}/playlists/edit`,
-        { id, title, description, videoList, permission, userId },
+        {
+          id,
+          title,
+          description,
+          videoList,
+          permission: convertPermission(permission),
+          userId,
+        },
         config
       )
       .then((response) => {
