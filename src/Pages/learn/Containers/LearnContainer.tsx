@@ -158,30 +158,42 @@ const LearnContainer = () => {
         />
       ) : (
         <div style={{ textAlign: "left" }}>
-          <Typography.Title level={3}>Trending</Typography.Title>
-          <BasicCarousel
-            itemList={clipTrending}
-            handleOpen={handleOpen}
-            handleClickSlide={handleClickSlide}
-            handleSetIsDrag={handleSetIsDrag}
-            isDrag={isDrag}
-          />
-          <Typography.Title level={3}>Recommend</Typography.Title>
-          <BasicCarousel
-            itemList={clipRecommend}
-            handleOpen={handleOpen}
-            handleClickSlide={handleClickSlide}
-            handleSetIsDrag={handleSetIsDrag}
-            isDrag={isDrag}
-          />
-          <Typography.Title level={3}>Cooking</Typography.Title>
-          <BasicCarousel
-            itemList={clipCooking}
-            handleOpen={handleOpen}
-            handleClickSlide={handleClickSlide}
-            handleSetIsDrag={handleSetIsDrag}
-            isDrag={isDrag}
-          />
+          {clipTrending.length > 0 && (
+            <>
+              <Typography.Title level={3}>Trending</Typography.Title>
+              <BasicCarousel
+                itemList={clipTrending}
+                handleOpen={handleOpen}
+                handleClickSlide={handleClickSlide}
+                handleSetIsDrag={handleSetIsDrag}
+                isDrag={isDrag}
+              />
+            </>
+          )}
+          {clipRecommend.length > 0 && (
+            <>
+              <Typography.Title level={3}>Recommend</Typography.Title>
+              <BasicCarousel
+                itemList={clipRecommend}
+                handleOpen={handleOpen}
+                handleClickSlide={handleClickSlide}
+                handleSetIsDrag={handleSetIsDrag}
+                isDrag={isDrag}
+              />
+            </>
+          )}
+          {clipCooking.length > 0 && (
+            <>
+              <Typography.Title level={3}>Cooking</Typography.Title>
+              <BasicCarousel
+                itemList={clipCooking}
+                handleOpen={handleOpen}
+                handleClickSlide={handleClickSlide}
+                handleSetIsDrag={handleSetIsDrag}
+                isDrag={isDrag}
+              />
+            </>
+          )}
         </div>
       )}
       <BottomNav username={username} />
