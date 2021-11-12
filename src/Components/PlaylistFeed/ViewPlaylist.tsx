@@ -1,20 +1,26 @@
 import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Button, Col, Drawer, Row, Divider, Typography } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import Playlist from "./Playlist";
 import PreviewClip from "../PreviewClip/PreviewClip";
 import EditPlaylist from "./EditPlaylist";
 import { AllPlaylist, ClipProp } from "../../interface";
 import { useState } from "react";
 import "./index.css";
-import { STATE } from "../../utils";
+import {
+  getAllVideoInPlaylist,
+  getPlaylistPreviewImage,
+  getStreamingUrl,
+  STATE,
+} from "../../utils";
 import { editPlaylist } from "./utils";
+import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
+import ClipFeed from "../../Pages/feed/Components/ClipFeed";
 
 const ViewPlaylist = ({
   state,
   playlist,
   visible,
-  clips,
   handleClose,
 }: /*
    handleClickSlide,
@@ -24,7 +30,6 @@ const ViewPlaylist = ({
   state: string | null;
   playlist: AllPlaylist;
   visible: boolean;
-  clips: ClipProp[];
   handleClose: () => void;
   /*
   handleClickSlide: (index: number) => void;
@@ -32,14 +37,23 @@ const ViewPlaylist = ({
   isDrag: boolean;*/
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isShowClipFeed, setIsShowClipFeed] = useState(false);
   const [isDrag, setIsDrag] = useState<boolean>(false);
   const [isOpenEditPlaylist, setIsOpenEditPlaylist] = useState<boolean>(false);
+  const { canAccessService } = useUserAuthenticationContext();
+  const { videoList } = playlist;
+  const [allVideo, setAllVideo] = useState<ClipProp[]>();
   const handleSetIsDrag = (state: boolean) => {
     setIsDrag(state);
   };
 
   const handleClickSlide = (index: number) => {
     setCurrentIndex(index);
+    setIsShowClipFeed(true);
+  };
+
+  const handleCloseClipFeed = () => {
+    setIsShowClipFeed(false);
   };
 
   const handleOpenEditPlaylist = () => {
@@ -101,6 +115,38 @@ const ViewPlaylist = ({
     }
   };
 
+  useEffect(() => {
+    console.log("videoList", videoList);
+    getAllVideoInPlaylist({ token: canAccessService(), videoList })?.then(
+      (data) => {
+        if (data && data?.[0]) {
+          const temp: ClipProp[] = data[0].map(
+            ({ videoUploaded }: { videoUploaded: any }, index: number) => {
+              console.log("videoUploaded", videoUploaded);
+              return {
+                videoId: videoUploaded.videoId,
+                title: videoUploaded.title,
+                description: videoUploaded.description,
+                permission: videoUploaded.permission,
+                url: getStreamingUrl(videoUploaded.videoId),
+                name: `TEST ${index}`,
+                isPlay: false,
+                comments: [
+                  { name: "Name_1", comment: "Comment_1" },
+                  { name: "Name_2", comment: "Comment_2" },
+                  { name: "Name_3", comment: "Comment_3" },
+                ],
+              };
+            }
+          );
+          setAllVideo(temp);
+        }
+      }
+    );
+  }, [playlist]);
+
+  console.log("allVideo", allVideo);
+
   return (
     <>
       <Drawer
@@ -118,7 +164,10 @@ const ViewPlaylist = ({
         <div className={"drawer-wrapper"}>
           <Row align="middle" gutter={[8, 8]} style={{ paddingTop: "16px" }}>
             <Col className="gutter-row setsize" span={12} xs={8}>
-              <Playlist title={playlist.title} previewImage={""} />
+              <Playlist
+                title={playlist.title}
+                previewImage={getPlaylistPreviewImage(videoList?.[0])}
+              />
             </Col>
             <Col className="gutter-row" flex="auto" span={12} xs={16}>
               <Typography.Title level={4}>{playlist.title}</Typography.Title>
@@ -129,58 +178,53 @@ const ViewPlaylist = ({
           </Row>
           <Row justify="center">{renderButton()}</Row>
           <Row gutter={[8, 8]}>
-            <Col
-              xs={8}
-              md={4}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "250px",
-                width: "100%",
-                cursor: "pointer",
-                backgroundColor: "#D3D3D3",
-              }}
-            ></Col>
-            {clips.map(
-              (
-                {
-                  name,
-                  url,
-                  isPlay,
-                  title,
-                  description,
-                  previewImage,
-                }: ClipProp,
-                index: number
-              ) => (
-                <Col
-                  xs={12}
-                  md={8}
-                  lg={6}
-                  xl={4}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    height: "250px",
-                  }}
-                  key={index}
-                >
-                  <PreviewClip
-                    previewImage={previewImage}
-                    url={url}
-                    isPlay={isPlay}
-                    index={index}
+            {allVideo &&
+              allVideo.map(
+                (
+                  {
+                    name,
+                    url,
+                    isPlay,
+                    title,
+                    description,
+                    permission,
+                    videoId,
+                  }: any,
+                  index: number
+                ) => (
+                  <Col
+                    xs={12}
+                    md={8}
+                    lg={6}
+                    xl={4}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      height: "250px",
+                    }}
                     key={index}
-                    handleClickSlide={handleClickSlide}
-                    handleSetIsDrag={handleSetIsDrag}
-                    isDrag={isDrag}
-                    handleOpen={function (): void {}}
-                  />
-                </Col>
-              )
-            )}
+                  >
+                    <img
+                      src={getPlaylistPreviewImage(videoId)}
+                      width="100%"
+                      height="100%"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleClickSlide(index)}
+                    />
+                    <PreviewClip
+                      previewImage={getPlaylistPreviewImage(videoId)}
+                      url={url}
+                      isPlay={isPlay}
+                      index={index}
+                      key={index}
+                      handleClickSlide={handleClickSlide}
+                      handleSetIsDrag={handleSetIsDrag}
+                      isDrag={isDrag}
+                      handleOpen={function (): void {}}
+                    />
+                  </Col>
+                )
+              )}
           </Row>
         </div>
       </Drawer>
@@ -191,6 +235,25 @@ const ViewPlaylist = ({
         description={playlist.description}
         handleClose={handleCloseEditPlaylist}
       />
+      {allVideo && (
+        <Drawer
+          placement={"right"}
+          visible={isShowClipFeed}
+          closable={false}
+          width={"100%"}
+          keyboard
+          destroyOnClose
+          className={"ant-drawer-body"}
+        >
+          <ClipFeed
+            handleClose={handleCloseClipFeed}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            clips={allVideo}
+            setClips={setAllVideo}
+          />
+        </Drawer>
+      )}
     </>
   );
 };

@@ -23,16 +23,11 @@ const LearnContainer = () => {
   const {
     userData: { username },
   } = useUserDataContext();
-  const { playlist, getAllPlaylist } = usePlaylistContext();
+  const { getAllPlaylist } = usePlaylistContext();
 
-  const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>({
-    title: "PLAYLIST_TITLE",
-    description: "PLAY_DESCRIPTION",
-    id: "",
-    permission: "",
-    userId: "",
-    videoList: [""],
-  });
+  const [playlist, setPlaylist] = useState<AllPlaylist[]>();
+
+  const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>();
 
   const { canAccessService } = useUserAuthenticationContext();
   const [clips, setClips] = useState<ClipProp[]>([]);
@@ -90,6 +85,7 @@ const LearnContainer = () => {
     userId,
   }: AllPlaylist) => {
     setIsShowPlaylist(true);
+    console.log(title, description, id, permission, videoList, userId);
     setSelectedPlaylist({
       title,
       description,
@@ -133,7 +129,11 @@ const LearnContainer = () => {
           setClips(temp);
         }
       });
-      getAllPlaylist(token).then((data) => console.log("data", data));
+      getAllPlaylist(token).then((data) => {
+        if (data) {
+          setPlaylist([...data]);
+        }
+      });
       // getRandomVideo(token, 5);
     }
   }, []);
@@ -148,7 +148,7 @@ const LearnContainer = () => {
         onFocus={() => setSearchShow(true)}
         style={{ width: "90%" }}
       />
-      {searchShow ? (
+      {searchShow && playlist ? (
         <Searching
           searchField={searchField}
           clips={clips}
@@ -217,13 +217,14 @@ const LearnContainer = () => {
           setClips={setClips}
         />
       </Drawer>
-      <ViewPlaylist
-        state={null}
-        playlist={selectedPlaylist}
-        visible={isShowPlaylist}
-        clips={[]}
-        handleClose={handleClosePlaylist}
-      />
+      {selectedPlaylist && (
+        <ViewPlaylist
+          state={null}
+          playlist={selectedPlaylist}
+          visible={isShowPlaylist}
+          handleClose={handleClosePlaylist}
+        />
+      )}
     </div>
   );
 };

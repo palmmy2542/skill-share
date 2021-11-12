@@ -38,6 +38,8 @@ const PreviewClip = ({
     setIsPlaying(false);
   }
 
+  console.log(previewImage);
+
   return (
     <div
       id={"@" + name + "." + index.toString()}

@@ -20,14 +20,7 @@ const PlaylistFeed = ({
   handleClose: () => void;
   playlist: AllPlaylist[];
 }) => {
-  const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>({
-    id: "PLAYLIST_ID",
-    title: "PLAYLIST_TITLE",
-    description: "PLAYLIST_DESCRIPTION",
-    permission: "public",
-    userId: "USER_ID",
-    videoList: [""],
-  });
+  const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>();
 
   const [isShowSave, setIsShowSave] = useState(false);
 
@@ -154,13 +147,14 @@ const PlaylistFeed = ({
         visible={isShowCreatePlaylist}
         handleClose={handleCloseCreatePlayList}
       />
-      <ViewPlaylist
-        state={STATE.SAVE}
-        playlist={selectedPlaylist}
-        visible={isShowSave}
-        clips={[]}
-        handleClose={handleCloseSaveToPlaylist}
-      />
+      {selectedPlaylist && (
+        <ViewPlaylist
+          state={STATE.SAVE}
+          playlist={selectedPlaylist}
+          visible={isShowSave}
+          handleClose={handleCloseSaveToPlaylist}
+        />
+      )}
     </Drawer>
   );
 };

@@ -1,6 +1,7 @@
 import { Col, Row, Typography } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { AllPlaylist } from "../../../interface";
+import { getPlaylistPreviewImage } from "../../../utils";
 
 const SearchPlaylistTab = ({
   playlist,
@@ -32,7 +33,6 @@ const SearchPlaylistTab = ({
       item.description.toLowerCase().includes(searchWord.toLowerCase())
     );
   });
-
   return (
     <>
       {filteredPlaylist.map(
@@ -52,7 +52,10 @@ const SearchPlaylistTab = ({
             }
           >
             <Col xs={12}>
-              <img src={""} className={"preview-playlist-image"} />
+              <img
+                src={getPlaylistPreviewImage(videoList?.[0])}
+                className={"preview-playlist-image"}
+              />
             </Col>
             <Col xs={12}>
               <Typography.Title level={5}>{title}</Typography.Title>

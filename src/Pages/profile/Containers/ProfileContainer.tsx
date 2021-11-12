@@ -36,14 +36,7 @@ const ProfileContainer = (props: any) => {
   const { canAccessService } = useUserAuthenticationContext();
   const [isShowPlaylist, setIsShowPlaylist] = useState(false);
 
-  const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>({
-    title: "PLAYLIST_TITLE",
-    description: "PLAY_DESCRIPTION",
-    id: "",
-    permission: "",
-    userId: "",
-    videoList: [""],
-  });
+  const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>();
 
   const handleClosePlaylist = () => setIsShowPlaylist(false);
   const handleSelectPlaylist = ({
@@ -157,13 +150,14 @@ const ProfileContainer = (props: any) => {
           playlist={playlist}
           handleSelectPlaylist={handleSelectPlaylist}
         />
-        <ViewPlaylist
-          state={STATE.EDIT}
-          playlist={selectedPlaylist}
-          visible={isShowPlaylist}
-          clips={[]}
-          handleClose={handleClosePlaylist}
-        />
+        {selectedPlaylist && (
+          <ViewPlaylist
+            state={STATE.EDIT}
+            playlist={selectedPlaylist}
+            visible={isShowPlaylist}
+            handleClose={handleClosePlaylist}
+          />
+        )}
       </div>
       <BottomNav username={userData.username} />
     </>
