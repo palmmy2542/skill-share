@@ -123,8 +123,8 @@ const UserClipList = ({
                   index: number
                 ) => (
                   <Col
-                    xs={8}
-                    md={4}
+                    xs={12}
+                    md={8}
                     style={{
                       display: "flex",
                       justifyContent: "center",
