@@ -91,7 +91,7 @@ const deletePlaylist = async ({
   id,
   userId,
 }: {
-  token: string | undefined;
+  token: string | null;
   id: string;
   userId: string;
 }): Promise<any> => {
@@ -103,7 +103,7 @@ const deletePlaylist = async ({
     };
     return axios
       .delete(
-        `${PLAYLIST_HOST}/playlists/delete?id=${id}&?userId=${userId}`,
+        `${PLAYLIST_HOST}/playlists/delete?id=${id}&userId=${userId}`,
         config
       )
       .then((response) => {

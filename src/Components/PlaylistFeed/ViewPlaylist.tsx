@@ -154,24 +154,30 @@ const ViewPlaylist = ({
     getAllVideoInPlaylist({ token: canAccessService(), videoList })?.then(
       (data) => {
         if (data && data?.[0]) {
+          console.log("data", data);
           const temp: ClipProp[] = data.map((video: any, index: number) => {
-            const { videoUploaded } = video[0];
-            return {
-              videoId: videoUploaded.videoId,
-              title: videoUploaded.title,
-              description: videoUploaded.description,
-              permission: videoUploaded.permission,
-              url: getStreamingUrl(videoUploaded.videoId),
-              name: `TEST ${index}`,
-              isPlay: false,
-              comments: [
-                { name: "Name_1", comment: "Comment_1" },
-                { name: "Name_2", comment: "Comment_2" },
-                { name: "Name_3", comment: "Comment_3" },
-              ],
-            };
+            console.log(video);
+            if (video.length > 0) {
+              const { videoUploaded } = video[0];
+              return {
+                videoId: videoUploaded.videoId,
+                title: videoUploaded.title,
+                description: videoUploaded.description,
+                permission: videoUploaded.permission,
+                url: getStreamingUrl(videoUploaded.videoId),
+                name: `TEST ${index}`,
+                isPlay: false,
+                comments: [
+                  { name: "Name_1", comment: "Comment_1" },
+                  { name: "Name_2", comment: "Comment_2" },
+                  { name: "Name_3", comment: "Comment_3" },
+                ],
+              };
+            }
           });
-          setAllVideo(temp);
+          const temp2 = temp.filter((item) => item !== undefined);
+          console.log("temp", temp2);
+          if (temp2) setAllVideo(temp2);
         }
       }
     );
@@ -185,7 +191,7 @@ const ViewPlaylist = ({
       <Drawer
         title={renderTitle()}
         headerStyle={{
-          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
+          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
         }}
         placement={"right"}
         onClose={handleClose}
@@ -212,6 +218,7 @@ const ViewPlaylist = ({
           <Row justify="center">{renderButton()}</Row>
           <Row gutter={[8, 8]}>
             {allVideo &&
+              allVideo.length > 0 &&
               allVideo.map(
                 (
                   {
@@ -270,7 +277,7 @@ const ViewPlaylist = ({
         permission={playlist.permission}
         videoList={playlist.videoList}
         userId={userId}
-        videoId={playlist.id}
+        playlistId={playlist.id}
       />
       {allVideo && (
         <Drawer

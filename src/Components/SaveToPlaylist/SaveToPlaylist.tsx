@@ -35,7 +35,7 @@ const SaveToPlayList = ({
     <Drawer
       title={`Save to playlist`}
       headerStyle={{
-        boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;",
+        boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
       }}
       placement={"bottom"}
       closable={true}

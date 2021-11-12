@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
 import "./index.css";
-import { editPlaylist } from "./utils";
+import { deletePlaylist, editPlaylist } from "./utils";
 
 const { confirm } = Modal;
 
@@ -29,7 +29,7 @@ const EditPlaylist = ({
   handleClose,
   videoList,
   userId,
-  videoId,
+  playlistId,
 }: {
   visible: boolean;
   title: string;
@@ -39,7 +39,7 @@ const EditPlaylist = ({
   handleClose: () => void;
   videoList: string[];
   userId: string | null;
-  videoId: string;
+  playlistId: string;
 }) => {
   const [popUpVisible, setPopUpVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -61,33 +61,36 @@ const EditPlaylist = ({
   const handleCancel = () => {
     setPopUpVisible(false);
   };
-  // const showConfirmDelete = () => {
-  //   confirm({
-  //     title: "Do you want to delete this video?",
-  //     icon: <ExclamationCircleOutlined />,
-  //     onOk() {
-  //       deleteVideo({ token: canAccessService(), videoId: videoId }).then(() =>
-  //         history.push("/")
-  //       );
-  //     },
-  //     onCancel() {
-  //       console.log("Cancel delete video");
-  //     },
-  //   });
-  // };
+  const showConfirmDelete = () => {
+    if (userId)
+      confirm({
+        title: "Do you want to delete this video?",
+        icon: <ExclamationCircleOutlined />,
+        onOk() {
+          deletePlaylist({
+            token: canAccessService(),
+            id: playlistId,
+            userId: userId,
+          }).then(() => history.push("/"));
+        },
+        onCancel() {
+          console.log("Cancel delete video");
+        },
+      });
+  };
 
   const showConfirmEditPlaylist = (values: any) => {
     confirm({
       title: "Do you want to save video to this playlist?",
       icon: <ExclamationCircleOutlined />,
       onOk() {
-        // console.log({ ...values }, videoList, userId, videoId:id);
+        // console.log({ ...values }, videoList, userId, playlistId:id);
         editPlaylist({
           token: canAccessService(),
           ...values,
           videoList,
           userId,
-          id: videoId,
+          id: playlistId,
         }).then(() => {
           message.success("Update success");
           history.push("/");
@@ -144,19 +147,13 @@ const EditPlaylist = ({
         </Form.Item>
         <Row>
           <Col xs={12}>
-            <Popconfirm
-              title="Are you sure？"
-              okText="Delete"
-              cancelText="Cancel"
-              visible={popUpVisible}
-              onConfirm={handleOk}
-              okButtonProps={{ loading: confirmLoading }}
-              onCancel={handleCancel}
+            <Button
+              danger
+              onClick={showConfirmDelete}
+              style={{ width: "100%" }}
             >
-              <Button danger onClick={showPopconfirm} style={{ width: "100%" }}>
-                Delete playlist
-              </Button>
-            </Popconfirm>
+              Delete playlist
+            </Button>
           </Col>
           <Col flex="auto"></Col>
           <Col>
