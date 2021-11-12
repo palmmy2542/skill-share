@@ -30,7 +30,6 @@ const postNewPlaylist = async ({
         config
       )
       .then((response) => {
-        console.log("response", response);
         if (response.status === 200 || response.status === 201) {
           return response.data;
         }
@@ -49,11 +48,11 @@ const editPlaylist = async ({
   permission,
   userId,
 }: {
-  token: string | undefined;
+  token: string;
   id: string;
   title: string;
   description: string;
-  videoList: string;
+  videoList: string[];
   permission: string;
   userId: string;
 }): Promise<any> => {
@@ -64,7 +63,7 @@ const editPlaylist = async ({
       },
     };
     return axios
-      .post(
+      .put(
         `${PLAYLIST_HOST}/playlists/edit`,
         { id, title, description, videoList, permission, userId },
         config

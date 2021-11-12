@@ -21,6 +21,7 @@ const ViewPlaylist = ({
   state,
   playlist,
   visible,
+  videoId,
   handleClose,
 }: /*
    handleClickSlide,
@@ -29,6 +30,7 @@ const ViewPlaylist = ({
 {
   state: string | null;
   playlist: AllPlaylist;
+  videoId?: string;
   visible: boolean;
   handleClose: () => void;
   /*
@@ -41,6 +43,8 @@ const ViewPlaylist = ({
   const [isDrag, setIsDrag] = useState<boolean>(false);
   const [isOpenEditPlaylist, setIsOpenEditPlaylist] = useState<boolean>(false);
   const { canAccessService } = useUserAuthenticationContext();
+  const token = canAccessService();
+  const userId = localStorage.getItem("skillUserId");
   const { videoList } = playlist;
   const [allVideo, setAllVideo] = useState<ClipProp[]>();
   const handleSetIsDrag = (state: boolean) => {
@@ -77,6 +81,33 @@ const ViewPlaylist = ({
     }
   };
 
+  const saveToPlaylist = () => {
+    console.log("userId", userId);
+    console.log("videoId", videoId);
+    if (token && userId && videoId) {
+      const temp = playlist.videoList;
+      playlist.videoList.push(videoId);
+      console.log("temp", temp);
+      editPlaylist({
+        token,
+        userId,
+        id: playlist.id,
+        title: playlist.title,
+        description: playlist.description,
+        permission: playlist.permission,
+        videoList: temp,
+      });
+    }
+  };
+
+  const renderOnClickFunction = () => {
+    switch (state) {
+      case STATE.SAVE: {
+        return saveToPlaylist;
+      }
+    }
+  };
+
   const renderButton = () => {
     switch (state) {
       case STATE.SAVE: {
@@ -90,6 +121,7 @@ const ViewPlaylist = ({
               height: "auto",
               marginBottom: "10px",
             }}
+            onClick={renderOnClickFunction()}
           >
             {renderTitle()}
           </Button>
@@ -120,25 +152,23 @@ const ViewPlaylist = ({
     getAllVideoInPlaylist({ token: canAccessService(), videoList })?.then(
       (data) => {
         if (data && data?.[0]) {
-          const temp: ClipProp[] = data[0].map(
-            ({ videoUploaded }: { videoUploaded: any }, index: number) => {
-              console.log("videoUploaded", videoUploaded);
-              return {
-                videoId: videoUploaded.videoId,
-                title: videoUploaded.title,
-                description: videoUploaded.description,
-                permission: videoUploaded.permission,
-                url: getStreamingUrl(videoUploaded.videoId),
-                name: `TEST ${index}`,
-                isPlay: false,
-                comments: [
-                  { name: "Name_1", comment: "Comment_1" },
-                  { name: "Name_2", comment: "Comment_2" },
-                  { name: "Name_3", comment: "Comment_3" },
-                ],
-              };
-            }
-          );
+          const temp: ClipProp[] = data.map((video: any, index: number) => {
+            const { videoUploaded } = video[0];
+            return {
+              videoId: videoUploaded.videoId,
+              title: videoUploaded.title,
+              description: videoUploaded.description,
+              permission: videoUploaded.permission,
+              url: getStreamingUrl(videoUploaded.videoId),
+              name: `TEST ${index}`,
+              isPlay: false,
+              comments: [
+                { name: "Name_1", comment: "Comment_1" },
+                { name: "Name_2", comment: "Comment_2" },
+                { name: "Name_3", comment: "Comment_3" },
+              ],
+            };
+          });
           setAllVideo(temp);
         }
       }
@@ -146,6 +176,7 @@ const ViewPlaylist = ({
   }, [playlist]);
 
   console.log("allVideo", allVideo);
+  console.log("playlist", playlist);
 
   return (
     <>

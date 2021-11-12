@@ -73,14 +73,12 @@ const PlaylistFeed = ({
     if (userId && token) {
       getPlaylistByUserId(token, userId).then((data) => {
         if (data) {
-          // console.log("playlist by user", data);
+          console.log("playlist by user", data);
           setPlaylist([...data]);
         }
       });
     }
   }, []);
-
-  console.log("Playlist: ", playlist);
   return (
     <Drawer
       title={`Save to playlist`}
@@ -122,14 +120,7 @@ const PlaylistFeed = ({
         {playlist &&
           playlist.map(
             (
-              {
-                title,
-                description,
-                permission,
-                userId,
-                id,
-                videoList,
-              }: AllPlaylist,
+              { title, description, permission, id, videoList }: AllPlaylist,
               index
             ) => (
               <Col
@@ -143,14 +134,15 @@ const PlaylistFeed = ({
                   cursor: "pointer",
                 }}
                 onClick={() => {
-                  handleSelectPlaylist({
-                    title,
-                    description,
-                    videoList,
-                    id,
-                    userId,
-                    permission,
-                  });
+                  if (userId)
+                    handleSelectPlaylist({
+                      title,
+                      description,
+                      videoList,
+                      id,
+                      userId,
+                      permission,
+                    });
                 }}
               >
                 <Playlist
@@ -178,6 +170,7 @@ const PlaylistFeed = ({
           state={STATE.SAVE}
           playlist={selectedPlaylist}
           visible={isShowSave}
+          videoId={currentVideoId}
           handleClose={handleCloseSaveToPlaylist}
         />
       )}

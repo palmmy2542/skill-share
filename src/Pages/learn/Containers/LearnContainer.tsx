@@ -7,6 +7,7 @@ import usePlaylistContext from "../../../Domains/Playlist/usePlaylist";
 import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
 import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
 import { AllPlaylist, ClipProp } from "../../../interface";
+import { STATE } from "../../../utils";
 import ClipFeed from "../../feed/Components/ClipFeed";
 import BasicCarousel from "../Components/BasicCarousel";
 import Searching from "../Components/Searching";
@@ -85,7 +86,6 @@ const LearnContainer = () => {
     userId,
   }: AllPlaylist) => {
     setIsShowPlaylist(true);
-    console.log(title, description, id, permission, videoList, userId);
     setSelectedPlaylist({
       title,
       description,
@@ -113,6 +113,7 @@ const LearnContainer = () => {
           const temp: ClipProp[] = data.map(
             ({ videoUploaded }: { videoUploaded: any }, index: number) => {
               return {
+                videoId: videoUploaded.videoId,
                 title: videoUploaded.title,
                 description: videoUploaded.description,
                 url: getStreamingUrl(videoUploaded.videoId),
@@ -137,6 +138,8 @@ const LearnContainer = () => {
       // getRandomVideo(token, 5);
     }
   }, []);
+
+  console.log("clips ----- >", clips);
 
   return (
     <div id="search-page">
@@ -217,14 +220,14 @@ const LearnContainer = () => {
           setClips={setClips}
         />
       </Drawer>
-      {selectedPlaylist && (
+      {/* {selectedPlaylist && (
         <ViewPlaylist
-          state={null}
+          state={STATE.SAVE}
           playlist={selectedPlaylist}
           visible={isShowPlaylist}
           handleClose={handleClosePlaylist}
         />
-      )}
+      )} */}
     </div>
   );
 };

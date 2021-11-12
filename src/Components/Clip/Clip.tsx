@@ -93,6 +93,8 @@ const Clip = ({
     setIsShowPlaylist(true);
   };
 
+  console.log("videoId", videoId);
+
   return (
     <div
       id={"@" + name + "." + index.toString()}
