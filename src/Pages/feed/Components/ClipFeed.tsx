@@ -80,10 +80,20 @@ const ClipFeed = ({
       >
         {clips.map(
           (
-            { name, url, isPlay, title, description, previewImage, permission },
+            {
+              videoId,
+              name,
+              url,
+              isPlay,
+              title,
+              description,
+              previewImage,
+              permission,
+            },
             index
           ) => (
             <Clip
+              videoId={videoId}
               isFade={isFade}
               previewImage={previewImage}
               name={name}

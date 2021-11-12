@@ -56,7 +56,7 @@ export const editVideo = async ({
   description,
   permission,
 }: {
-  token: string | undefined;
+  token: string | null;
   videoId: string;
   title: string;
   description: string;
@@ -88,7 +88,7 @@ export const deleteVideo = async ({
   token,
   videoId,
 }: {
-  token: string | undefined;
+  token: string | null;
   videoId: string;
 }): Promise<any> => {
   if (token) {

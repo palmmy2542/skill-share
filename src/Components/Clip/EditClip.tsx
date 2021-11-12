@@ -1,38 +1,73 @@
-import { Drawer, Form, Input, Button, Switch, Row, Col, Popconfirm } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+  Drawer,
+  Form,
+  Input,
+  Button,
+  Switch,
+  Row,
+  Col,
+  Popconfirm,
+  Modal,
+  message,
+} from "antd";
 import { useState } from "react";
+import { useHistory } from "react-router";
 import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
+import { deleteVideo } from "../UploadForm/util";
 import "./index.css";
-import { updateVideo } from "./utils";
+import { convertPermission, updateVideo } from "./utils";
+
+const { confirm } = Modal;
 
 const EditClip = ({
+  videoId,
   visible,
   title,
   description,
   permission,
   handleClose,
 }: {
+  videoId: string;
   visible: boolean;
   title: string;
   description: string;
   permission: string;
   handleClose: () => void;
 }) => {
-  const [popUpVisible, setPopUpVisible] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
   const { canAccessService } = useUserAuthenticationContext();
-
-  const showPopconfirm = () => {
-    setPopUpVisible(true);
+  const history = useHistory();
+  const showConfirmDelete = () => {
+    confirm({
+      title: "Do you want to delete this video?",
+      icon: <ExclamationCircleOutlined />,
+      onOk() {
+        deleteVideo({ token: canAccessService(), videoId: videoId }).then(() =>
+          history.push("/")
+        );
+      },
+      onCancel() {
+        console.log("Cancel delete video");
+      },
+    });
   };
 
-  const handleOk = (values: any) => {
-    setConfirmLoading(true);
-    console.log("values", values);
-    updateVideo({ token: canAccessService(), ...values });
-  };
-
-  const handleCancel = () => {
-    setPopUpVisible(false);
+  const showConfirmEdit = (values: any) => {
+    confirm({
+      title: "Do you want to edit this video?",
+      icon: <ExclamationCircleOutlined />,
+      onOk() {
+        updateVideo({ token: canAccessService(), videoId, ...values }).then(
+          () => {
+            message.success("Update success");
+            history.push("/");
+          }
+        );
+      },
+      onCancel() {
+        console.log("Cancel update video");
+      },
+    });
   };
 
   return (
@@ -42,11 +77,13 @@ const EditClip = ({
       visible={visible}
       placement={"bottom"}
       height="100%"
+      destroyOnClose
     >
-      <Form id="edit-clip-form" layout="vertical" onFinish={handleOk}>
+      <Form id="edit-clip-form" layout="vertical" onFinish={showConfirmEdit}>
         <Form.Item
           name="title"
           label="Clip name"
+          initialValue={title}
           rules={[
             {
               required: true,
@@ -60,7 +97,11 @@ const EditClip = ({
             placeholder="Clip name here"
           />
         </Form.Item>
-        <Form.Item name="description" label="Description">
+        <Form.Item
+          name="description"
+          initialValue={description}
+          label="Description"
+        >
           <Input.TextArea
             size="large"
             defaultValue={description}
@@ -71,7 +112,7 @@ const EditClip = ({
         </Form.Item>
         <Row>
           <Col>
-            <Button danger onClick={showPopconfirm}>
+            <Button danger onClick={showConfirmDelete}>
               Delete clip
             </Button>
           </Col>
@@ -79,7 +120,7 @@ const EditClip = ({
           <Col>
             <Form.Item
               name="permission"
-              initialValue={permission}
+              initialValue={"public" === permission}
               valuePropName="checked"
             >
               <Switch
@@ -103,4 +144,4 @@ const EditClip = ({
   );
 };
 
-  export default EditClip;
+export default EditClip;

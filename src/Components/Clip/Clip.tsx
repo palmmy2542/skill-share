@@ -17,6 +17,7 @@ import EditClip from "./EditClip";
 import "./index.css";
 
 const Clip = ({
+  videoId,
   isFade,
   name,
   previewImage,
@@ -38,6 +39,7 @@ const Clip = ({
   handlePause,
   handleClose,
 }: {
+  videoId: string;
   isFade: boolean;
   name?: string | undefined;
   previewImage: string;
@@ -255,6 +257,7 @@ const Clip = ({
         loop
       />
       <EditClip
+        videoId={videoId}
         visible={isShowEditClip}
         title={title}
         description={description}

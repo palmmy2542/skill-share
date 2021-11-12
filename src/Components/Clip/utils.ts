@@ -2,6 +2,9 @@ import { message } from "antd";
 import axios from "axios";
 import { AUTHENTICATION_HOST } from "../../const";
 
+export const convertPermission = (permission: boolean) =>
+  permission ? "public" : "private";
+
 export const updateVideo = ({
   token,
   videoId,
@@ -13,7 +16,7 @@ export const updateVideo = ({
   videoId: string;
   title: string;
   description: string;
-  permission: string;
+  permission: boolean;
 }) => {
   let config = {
     headers: {
@@ -21,7 +24,7 @@ export const updateVideo = ({
     },
   };
 
-  console.log(token, videoId, title, description, permission);
+  console.log(videoId, title, description, permission);
   return axios
     .put(
       `${AUTHENTICATION_HOST}/videos/video/edit`,
@@ -29,7 +32,7 @@ export const updateVideo = ({
         videoId,
         title,
         description,
-        permission,
+        permission: convertPermission(permission),
       },
       config
     )

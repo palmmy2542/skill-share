@@ -44,13 +44,13 @@ const HomeContainer = (props: any) => {
   return (
     <div id="home">
       <h1>Home page</h1>
-      <EditClip
+      {/* <EditClip
         visible={isShowEditClip}
         title={title}
         description={description}
         permission={permission}
         handleClose={handleCloseEditClip}
-      />
+      /> */}
       <PlaylistFeed
         visible={isShowPlaylist}
         playlist={playlist}
