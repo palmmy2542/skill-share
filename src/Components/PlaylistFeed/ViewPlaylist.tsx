@@ -153,7 +153,14 @@ const ViewPlaylist = ({
             ></Col>
             {clips.map(
               (
-                { name, url, isPlay, title, description, tags,previewImage }: ClipProp,
+                {
+                  name,
+                  url,
+                  isPlay,
+                  title,
+                  description,
+                  previewImage,
+                }: ClipProp,
                 index: number
               ) => (
                 <Col
@@ -170,7 +177,6 @@ const ViewPlaylist = ({
                 >
                   <PreviewClip
                     previewImage={previewImage}
-
                     url={url}
                     isPlay={isPlay}
                     index={index}

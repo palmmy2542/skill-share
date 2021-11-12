@@ -12,7 +12,6 @@ export interface ClipProp {
   description: string;
   previewImage: string;
   permission: string;
-  tags?: Array<string>;
   name?: string;
   url: string;
   isPlay: boolean;
@@ -22,6 +21,7 @@ export interface ClipProp {
 export interface UploadClip {
   title: string;
   description: string;
+  permission: string;
   video: Array<any>;
 }
 

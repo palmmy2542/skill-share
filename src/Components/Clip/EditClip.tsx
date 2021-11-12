@@ -1,6 +1,8 @@
 import { Drawer, Form, Input, Button, Switch, Row, Col, Popconfirm } from "antd";
 import { useState } from "react";
+import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
 import "./index.css";
+import { updateVideo } from "./utils";
 
 const EditClip = ({
   visible,
@@ -17,17 +19,16 @@ const EditClip = ({
 }) => {
   const [popUpVisible, setPopUpVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const { canAccessService } = useUserAuthenticationContext();
 
   const showPopconfirm = () => {
     setPopUpVisible(true);
   };
 
-  const handleOk = () => {
+  const handleOk = (values: any) => {
     setConfirmLoading(true);
-    setTimeout(() => {
-      setPopUpVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
+    console.log("values", values);
+    updateVideo({ token: canAccessService(), ...values });
   };
 
   const handleCancel = () => {
@@ -42,7 +43,7 @@ const EditClip = ({
       placement={"bottom"}
       height="100%"
     >
-      <Form id="edit-clip-form" layout="vertical">
+      <Form id="edit-clip-form" layout="vertical" onFinish={handleOk}>
         <Form.Item
           name="title"
           label="Clip name"
@@ -70,27 +71,23 @@ const EditClip = ({
         </Form.Item>
         <Row>
           <Col>
-            <Popconfirm
-              title="Are you sure？"
-              okText="Delete"
-              cancelText="Cancel"
-              visible={popUpVisible}
-              onConfirm={handleOk}
-              okButtonProps={{ loading: confirmLoading }}
-              onCancel={handleCancel}
-            >
-              <Button danger onClick={showPopconfirm}>
-                Delete clip
-              </Button>
-            </Popconfirm>
+            <Button danger onClick={showPopconfirm}>
+              Delete clip
+            </Button>
           </Col>
           <Col flex="auto"></Col>
           <Col>
-            <Switch
-              checkedChildren="Public"
-              unCheckedChildren="Private"
-              defaultChecked
-            />
+            <Form.Item
+              name="permission"
+              initialValue={permission}
+              valuePropName="checked"
+            >
+              <Switch
+                checkedChildren="public"
+                unCheckedChildren="private"
+                defaultChecked
+              />
+            </Form.Item>
           </Col>
         </Row>
         <Button

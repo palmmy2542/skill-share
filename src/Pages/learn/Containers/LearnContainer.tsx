@@ -23,7 +23,8 @@ const LearnContainer = () => {
   const {
     userData: { username },
   } = useUserDataContext();
-  const { playlist } = usePlaylistContext();
+  const { playlist, getAllPlaylist } = usePlaylistContext();
+
   const [selectedPlaylist, setSelectedPlaylist] = useState({
     title: "PLAYLIST_TITLE",
     description: "PLAY_DESCRIPTION",
@@ -129,6 +130,7 @@ const LearnContainer = () => {
           setClips(temp);
         }
       });
+      getAllPlaylist(token);
       // getRandomVideo(token, 5);
     }
   }, []);

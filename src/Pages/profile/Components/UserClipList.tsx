@@ -65,7 +65,6 @@ const UserClipList = ({
                   isPlay,
                   title,
                   description,
-                  tags,
                   previewImage,
                 }: ClipProp,
                 index: number

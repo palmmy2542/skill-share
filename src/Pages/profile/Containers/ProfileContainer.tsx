@@ -106,6 +106,7 @@ const ProfileContainer = (props: any) => {
                   const temp: ClipProp[] = data.map(
                     (item: any, index: number) => {
                       return {
+                        videoId: item.videoUploaded.videoId,
                         title: item.videoUploaded.title,
                         description: item.videoUploaded.description,
                         url: getStreamingUrl(item.videoUploaded.videoId),
