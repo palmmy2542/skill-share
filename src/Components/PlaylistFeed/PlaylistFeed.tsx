@@ -9,10 +9,12 @@ import Playlist from "./Playlist";
 import ViewPlaylist from "./ViewPlaylist";
 
 const PlaylistFeed = ({
+  currentVideoId,
   visible,
   handleClose,
   playlist,
 }: {
+  currentVideoId: string;
   visible: boolean;
   handleClose: () => void;
   playlist: Array<{ title: string; previewImage: string }>;
@@ -117,6 +119,7 @@ const PlaylistFeed = ({
         handleClose={handleCloseCreatePlaylist}
       /> */}
       <CreatePlaylist
+        videoId={currentVideoId}
         visible={isShowCreatePlaylist}
         handleClose={handleCloseCreatePlayList}
       />

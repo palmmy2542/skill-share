@@ -1,14 +1,50 @@
-import { Drawer, Form, Input, Button, Switch, Row, Col, Popconfirm } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+  Drawer,
+  Form,
+  Input,
+  Button,
+  Switch,
+  Row,
+  Col,
+  Popconfirm,
+  Modal,
+} from "antd";
 import { useState } from "react";
+import { useHistory } from "react-router";
+import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
 import "./index.css";
+import { postNewPlaylist } from "./utils";
+
+const { confirm } = Modal;
 
 const CreatePlaylist = ({
   visible,
-  handleClose
+  handleClose,
+  videoId,
 }: {
   visible: boolean;
   handleClose: () => void;
+  videoId: string;
 }) => {
+  const { canAccessService } = useUserAuthenticationContext();
+  const history = useHistory();
+  const showConfirmCreatePlaylist = (values: any) => {
+    confirm({
+      title: "Do you want to create playlist?",
+      icon: <ExclamationCircleOutlined />,
+      onOk() {
+        postNewPlaylist({
+          token: canAccessService(),
+          videoId: videoId,
+          ...values,
+        }).then(() => history.push("/"));
+      },
+      onCancel() {
+        console.log("Cancel create playlist");
+      },
+    });
+  };
   return (
     <Drawer
       title="Create Playlist"
@@ -17,7 +53,11 @@ const CreatePlaylist = ({
       placement={"bottom"}
       height="100%"
     >
-      <Form id="create-playlist-form" layout="vertical">
+      <Form
+        id="create-playlist-form"
+        layout="vertical"
+        onFinish={showConfirmCreatePlaylist}
+      >
         <Form.Item
           name="title"
           label="Playlist name"
@@ -27,25 +67,24 @@ const CreatePlaylist = ({
               message: "Playlist name cannot be blank!",
             },
           ]}
-          >
-          <Input size="large" placeholder="Playlist name here"/>
+        >
+          <Input size="large" placeholder="Playlist name here" />
         </Form.Item>
-        <Form.Item
-          name="description"
-          label="Description"
-          >
-          <Input.TextArea size="large" placeholder="Description here" autoSize={true}/>
-        </Form.Item>
-        <Form.Item
-          name="tags"
-          label="Tag(s)"
-          >
-          <Input size="large" placeholder="Tags here"/>
+        <Form.Item name="description" label="Description">
+          <Input.TextArea
+            size="large"
+            placeholder="Description here"
+            autoSize={true}
+          />
         </Form.Item>
         <Row>
           <Col flex="auto"></Col>
           <Col>
-            <Switch checkedChildren="Public" unCheckedChildren="Private" defaultChecked/>
+            <Switch
+              checkedChildren="Public"
+              unCheckedChildren="Private"
+              defaultChecked
+            />
           </Col>
         </Row>
         <Button
@@ -58,7 +97,7 @@ const CreatePlaylist = ({
         </Button>
       </Form>
     </Drawer>
-    );
-  };
-  
-  export default CreatePlaylist;
+  );
+};
+
+export default CreatePlaylist;

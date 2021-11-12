@@ -10,7 +10,7 @@ const postNewPlaylist = async ({
   permission,
   userId,
 }: {
-  token: string | undefined;
+  token: string | null;
   title: string;
   description: string;
   videoList: string;
@@ -30,6 +30,7 @@ const postNewPlaylist = async ({
         config
       )
       .then((response) => {
+        console.log("response", response);
         if (response.status === 200) {
           return response.data;
         }

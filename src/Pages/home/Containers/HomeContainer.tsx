@@ -51,7 +51,7 @@ const HomeContainer = (props: any) => {
         permission={permission}
         handleClose={handleCloseEditClip}
       /> */}
-      <PlaylistFeed
+      {/* <PlaylistFeed
         visible={isShowPlaylist}
         playlist={playlist}
         handleClose={handleClosePlayList}
@@ -61,7 +61,7 @@ const HomeContainer = (props: any) => {
         handleClose={handleCloseBottomMenu}
         handleOpenEditClip={handleOpenEditClip}
         handleOpenPlayList={handleOpenPlayList}
-      />
+      /> */}
     </div>
   );
 };

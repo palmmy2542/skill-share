@@ -265,6 +265,7 @@ const Clip = ({
         handleClose={handleCloseEditClip}
       />
       <PlaylistFeed
+        currentVideoId={videoId}
         visible={isShowPlaylist}
         playlist={playlist}
         handleClose={handleClosePlayList}
