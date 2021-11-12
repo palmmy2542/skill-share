@@ -155,7 +155,7 @@ const usePlaylist = () => {
     if (token && id) {
       return axios({
         method: "GET",
-        url: `${GAYEWAY_HOST}/playlists?creatorId=${id}`,
+        url: `${GAYEWAY_HOST}/playlists/playlist?creatorId=${id}`,
         headers: {
           Authorization: `${token.trim()}`,
         },
@@ -174,7 +174,7 @@ const usePlaylist = () => {
     if (token) {
       return axios({
         method: "GET",
-        url: `${GAYEWAY_HOST}/playlists`,
+        url: `${GAYEWAY_HOST}/playlists/playlist`,
         headers: {
           Authorization: `${token.trim()}`,
         },

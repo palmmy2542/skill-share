@@ -36,7 +36,7 @@ const SearchPlaylistTab = ({
   return (
     <>
       {filteredPlaylist.map(
-        ({ title, description, videoList, userId, permission, id }) => (
+        ({ title, description, videoList, creatorId, permission, id }) => (
           <Row
             style={{ textAlign: "left", cursor: "pointer" }}
             gutter={[8, 8]}
@@ -45,7 +45,7 @@ const SearchPlaylistTab = ({
                 title,
                 description,
                 videoList,
-                userId,
+                userId: creatorId,
                 permission,
                 id,
               })

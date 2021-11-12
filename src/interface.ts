@@ -31,6 +31,7 @@ export interface AllPlaylist {
   description: string;
   videoList: string[];
   permission: string;
-  userId: string;
+  userId: string | undefined;
+  creatorId?: string;
 }
 

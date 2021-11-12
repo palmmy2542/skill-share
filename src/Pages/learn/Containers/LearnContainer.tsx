@@ -24,6 +24,7 @@ const LearnContainer = () => {
   const {
     userData: { username },
   } = useUserDataContext();
+  const userId = localStorage.getItem("skillUserId");
   const { getAllPlaylist } = usePlaylistContext();
 
   const [playlist, setPlaylist] = useState<AllPlaylist[]>();
@@ -85,6 +86,7 @@ const LearnContainer = () => {
     videoList,
     userId,
   }: AllPlaylist) => {
+    console.log("userId", userId);
     setIsShowPlaylist(true);
     setSelectedPlaylist({
       title,
@@ -135,7 +137,6 @@ const LearnContainer = () => {
           setPlaylist([...data]);
         }
       });
-      // getRandomVideo(token, 5);
     }
   }, []);
 
@@ -218,14 +219,14 @@ const LearnContainer = () => {
           setClips={setClips}
         />
       </Drawer>
-      {/* {selectedPlaylist && (
+      {selectedPlaylist && (
         <ViewPlaylist
-          state={STATE.SAVE}
+          state={selectedPlaylist.userId === userId ? STATE.EDIT : null}
           playlist={selectedPlaylist}
           visible={isShowPlaylist}
           handleClose={handleClosePlaylist}
         />
-      )} */}
+      )}
     </div>
   );
 };

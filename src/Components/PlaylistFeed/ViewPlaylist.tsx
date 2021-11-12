@@ -16,6 +16,7 @@ import {
 import { editPlaylist } from "./utils";
 import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
 import ClipFeed from "../../Pages/feed/Components/ClipFeed";
+import { useHistory } from "react-router";
 
 const ViewPlaylist = ({
   state,
@@ -45,6 +46,7 @@ const ViewPlaylist = ({
   const { canAccessService } = useUserAuthenticationContext();
   const token = canAccessService();
   const userId = localStorage.getItem("skillUserId");
+  const history = useHistory();
   const { videoList } = playlist;
   const [allVideo, setAllVideo] = useState<ClipProp[]>();
   const handleSetIsDrag = (state: boolean) => {
@@ -93,7 +95,7 @@ const ViewPlaylist = ({
         description: playlist.description,
         permission: playlist.permission === "public",
         videoList: temp,
-      });
+      }).then(() => history.push("/"));
     }
   };
 
