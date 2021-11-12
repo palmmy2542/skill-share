@@ -1,3 +1,4 @@
+import { message } from "antd";
 import axios from "axios";
 import { AUTHENTICATION_HOST } from "../../const";
 import { UploadClip } from "../../interface";
@@ -46,4 +47,67 @@ export const upload = async ({
     { ...body },
     { headers }
   );
+};
+
+export const editVideo = async ({
+  token,
+  videoId,
+  title,
+  description,
+  permission,
+}: {
+  token: string | undefined;
+  videoId: string;
+  title: string;
+  description: string;
+  permission: string;
+}): Promise<any> => {
+  if (token) {
+    const config = {
+      headers: {
+        Authorization: `${token.trim()}`,
+      },
+    };
+    return axios
+      .post(
+        `${AUTHENTICATION_HOST}/videos/video/edit`,
+        { videoId, title, description, permission },
+        config
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          return response.data;
+        }
+      })
+      .catch((err) => message.error(err.response.data.message));
+  }
+  return null;
+};
+
+export const deleteVideo = async ({
+  token,
+  videoId,
+}: {
+  token: string | undefined;
+  videoId: string;
+}): Promise<any> => {
+  if (token) {
+    const config = {
+      headers: {
+        Authorization: `${token.trim()}`,
+      },
+    };
+    return axios
+      .delete(
+        `${AUTHENTICATION_HOST}/videos/video/delete?videoId=${videoId}`,
+        config
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          return response.data;
+        }
+      })
+      .catch((err) => message.error(err.response.data.message));
+  }
+  return null;
 };
