@@ -4,6 +4,7 @@ import { ImFilm } from "react-icons/im";
 import PlayListIcon from "../../../Assets/playlist.png";
 import PreviewClip from "../../../Components/PreviewClip";
 import { AllPlaylist, ClipProp } from "../../../interface";
+import { getPreviewImageUrl } from "../../../utils";
 import ClipFeed from "../../feed/Components/ClipFeed";
 
 const { TabPane } = Tabs;
@@ -16,7 +17,7 @@ const UserClipList = ({
 }: {
   clips: ClipProp[];
   setClips: React.Dispatch<React.SetStateAction<any>>;
-  playlist: AllPlaylist[];
+  playlist: AllPlaylist[] | undefined;
   handleSelectPlaylist: ({
     title,
     description,
@@ -108,42 +109,47 @@ const UserClipList = ({
           key="2"
         >
           <Row gutter={[8, 8]}>
-            {playlist.map(
-              (
-                {
-                  title,
-                  description,
-                  id,
-                  permission,
-                  userId,
-                  videoList,
-                }: AllPlaylist,
-                index: number
-              ) => (
-                <Col
-                  xs={8}
-                  md={4}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    height: "250px",
-                  }}
-                  key={index}
-                  onClick={() =>
-                    handleSelectPlaylist({
-                      title,
-                      description,
-                      id,
-                      permission,
-                      userId,
-                      videoList,
-                    })
-                  }
-                >
-                  <img src={""} style={{ width: "100%", height: "100%" }} />
-                </Col>
-              )
-            )}
+            {playlist &&
+              playlist.map(
+                (
+                  {
+                    title,
+                    description,
+                    id,
+                    permission,
+                    userId,
+                    videoList,
+                  }: AllPlaylist,
+                  index: number
+                ) => (
+                  <Col
+                    xs={8}
+                    md={4}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      height: "250px",
+                      cursor: "pointer",
+                    }}
+                    key={index}
+                    onClick={() =>
+                      handleSelectPlaylist({
+                        title,
+                        description,
+                        id,
+                        permission,
+                        userId,
+                        videoList,
+                      })
+                    }
+                  >
+                    <img
+                      src={getPreviewImageUrl(videoList?.[0])}
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </Col>
+                )
+              )}
           </Row>
         </TabPane>
       </Tabs>

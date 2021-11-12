@@ -151,18 +151,17 @@ const usePlaylist = () => {
   const getPlaylistByUserId = async (
     token: string | undefined,
     id: string
-  ): Promise<Array<ClipProp> | null> => {
+  ): Promise<Array<AllPlaylist> | null> => {
     if (token && id) {
       return axios({
         method: "GET",
-        url: `${AUTHENTICATION_HOST}/playlists?creator=${id}`,
+        url: `${PLAYLIST_HOST}/playlists?creatorId=${id}`,
         headers: {
           Authorization: `${token.trim()}`,
         },
       })
         .then((response) => {
           if (response.status === 200) {
-            // console.log("video by ", `${id}:`, response.data);
             return response.data;
           }
         })

@@ -23,6 +23,7 @@ export const getStreamingUrl = (videoId: string) =>
 export const getPreviewImageUrl = (videoId: string) =>
   `https://skill-share-streaming-service-znv5z.ondigitalocean.app/video/${videoId}/poster.jpg`;
 
+
 export const getAllVideoInPlaylist = ({
   token,
   videoList,

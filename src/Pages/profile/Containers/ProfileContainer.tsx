@@ -30,11 +30,13 @@ const ProfileContainer = (props: any) => {
   });
 
   const { isMe, isSubscribed, getMe } = useUserDataContext();
-  const { playlist } = usePlaylistContext();
+  // const { playlist } = usePlaylistContext();
   const { getVideoByUserId, getStreamingUrl, getPreviewImageUrl } =
     useClipFeedContext();
   const { canAccessService } = useUserAuthenticationContext();
+  const { getPlaylistByUserId } = usePlaylistContext();
   const [isShowPlaylist, setIsShowPlaylist] = useState(false);
+  const [playlist, setPlaylist] = useState<AllPlaylist[]>();
 
   const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>();
 
@@ -78,8 +80,6 @@ const ProfileContainer = (props: any) => {
     const token = canAccessService();
     if (token) {
       if (username === usernameParam) {
-        console.log(username);
-        console.log(usernameParam);
         getMe()
           .then((res) => {
             if (res) {
@@ -123,6 +123,12 @@ const ProfileContainer = (props: any) => {
                   setClips(temp);
                 }
               });
+            getPlaylistByUserId(token, id).then((data) => {
+              if (data) {
+                // console.log("playlist by user", data);
+                setPlaylist([...data]);
+              }
+            });
           })
           .catch((err) => {
             message.error(err.response.data.message);
@@ -130,6 +136,8 @@ const ProfileContainer = (props: any) => {
       }
     }
   }, []);
+
+  console.log("playlist by user", playlist);
 
   return (
     <>
