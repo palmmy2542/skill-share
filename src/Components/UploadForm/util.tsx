@@ -21,7 +21,6 @@ const formAxios = axios.create({
             form.append(key, value);
           }
         });
-        console.log(form.get("video"));
         return form;
       }
     },

@@ -92,7 +92,6 @@ const ProfileContainer = (props: any) => {
                 subscribing: res.subscribing ?? 0,
               });
               localStorage.setItem("skillUserId", res.id);
-              console.log(res.id);
               return res.id;
             }
           })
@@ -137,8 +136,6 @@ const ProfileContainer = (props: any) => {
       }
     }
   }, []);
-
-  console.log("playlist by user", playlist);
 
   return (
     <>

@@ -24,7 +24,6 @@ export const updateVideo = ({
     },
   };
 
-  console.log(videoId, title, description, permission);
   return axios
     .put(
       `${AUTHENTICATION_HOST}/videos/video/edit`,
@@ -38,7 +37,6 @@ export const updateVideo = ({
     )
     .then((response) => {
       if (response.status === 200) {
-        console.log("video: ", response.data);
         return response.data;
       }
     })

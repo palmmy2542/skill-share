@@ -61,8 +61,6 @@ const ClipFeed = ({
     setIsFade(!isFade);
   };
 
-  console.log("clips", clips);
-
   return (
     <div style={{ overflow: "hidden" }}>
       <CommentSection

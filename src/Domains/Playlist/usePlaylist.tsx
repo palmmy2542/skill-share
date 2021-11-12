@@ -180,7 +180,6 @@ const usePlaylist = () => {
         },
       })
         .then((response) => {
-          console.log("All video: ", response.data);
           if (response.status === 200) {
             return response.data;
           }

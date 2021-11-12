@@ -82,12 +82,9 @@ const ViewPlaylist = ({
   };
 
   const saveToPlaylist = () => {
-    console.log("userId", userId);
-    console.log("videoId", videoId);
     if (token && userId && videoId) {
       const temp = playlist.videoList;
       playlist.videoList.push(videoId);
-      console.log("temp", temp);
       editPlaylist({
         token,
         userId,
@@ -154,9 +151,7 @@ const ViewPlaylist = ({
     getAllVideoInPlaylist({ token: canAccessService(), videoList })?.then(
       (data) => {
         if (data && data?.[0]) {
-          console.log("data", data);
           const temp: ClipProp[] = data.map((video: any, index: number) => {
-            console.log(video);
             if (video.length > 0) {
               const { videoUploaded } = video[0];
               return {
@@ -176,15 +171,11 @@ const ViewPlaylist = ({
             }
           });
           const temp2 = temp.filter((item) => item !== undefined);
-          console.log("temp", temp2);
           if (temp2) setAllVideo(temp2);
         }
       }
     );
   }, [playlist]);
-
-  console.log("allVideo", allVideo);
-  console.log("playlist", playlist);
 
   return (
     <>

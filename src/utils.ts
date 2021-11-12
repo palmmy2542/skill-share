@@ -42,7 +42,6 @@ export const getAllVideoInPlaylist = ({
         .get(`${AUTHENTICATION_HOST}/videos/video?videoId=${id}`, config)
         .then((response) => {
           if (response.status === 200) {
-            console.log(response);
             return response.data;
           }
         })

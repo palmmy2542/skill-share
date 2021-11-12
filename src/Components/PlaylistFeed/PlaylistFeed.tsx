@@ -73,7 +73,6 @@ const PlaylistFeed = ({
     if (userId && token) {
       getPlaylistByUserId(token, userId).then((data) => {
         if (data) {
-          console.log("playlist by user", data);
           setPlaylist([...data]);
         }
       });

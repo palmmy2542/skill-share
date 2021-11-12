@@ -84,7 +84,6 @@ const EditPlaylist = ({
       title: "Do you want to save video to this playlist?",
       icon: <ExclamationCircleOutlined />,
       onOk() {
-        // console.log({ ...values }, videoList, userId, playlistId:id);
         editPlaylist({
           token: canAccessService(),
           ...values,

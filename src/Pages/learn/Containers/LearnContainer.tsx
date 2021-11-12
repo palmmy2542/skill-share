@@ -139,8 +139,6 @@ const LearnContainer = () => {
     }
   }, []);
 
-  console.log("clips ----- >", clips);
-
   return (
     <div id="search-page">
       <Search

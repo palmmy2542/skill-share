@@ -16,7 +16,6 @@ import Error from "./Pages/error";
 function App() {
   const { canAccessService } = useUserAuthenticationContext();
   const username = localStorage.getItem("skillUsername");
-  console.log("test", canAccessService());
   return (
     <div className="App">
       <UserDataProvider>

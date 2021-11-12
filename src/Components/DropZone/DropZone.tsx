@@ -37,7 +37,6 @@ const DropZone = ({
           preview: URL.createObjectURL(file),
         })
       );
-      console.log(acceptedFiles);
       handleAddVideo(acceptedFiles);
     },
   });
