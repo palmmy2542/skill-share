@@ -1,6 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
-import { AUTHENTICATION_HOST } from "./const";
+import { GAYEWAY_HOST } from "./const";
 
 export type Token = {
   token: string;
@@ -23,7 +23,6 @@ export const getStreamingUrl = (videoId: string) =>
 export const getPreviewImageUrl = (videoId: string) =>
   `https://skill-share-streaming-service-znv5z.ondigitalocean.app/video/${videoId}/poster.jpg`;
 
-
 export const getAllVideoInPlaylist = ({
   token,
   videoList,
@@ -39,7 +38,7 @@ export const getAllVideoInPlaylist = ({
     };
     const requestArr = videoList.map(async (id) => {
       return axios
-        .get(`${AUTHENTICATION_HOST}/videos/video?videoId=${id}`, config)
+        .get(`${GAYEWAY_HOST}/videos/video?videoId=${id}`, config)
         .then((response) => {
           if (response.status === 200) {
             return response.data;

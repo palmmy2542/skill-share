@@ -2,7 +2,7 @@ import { message } from "antd";
 import axios, { AxiosResponse } from "axios";
 import constate from "constate";
 import { useState } from "react";
-import { AUTHENTICATION_HOST, TTL } from "../../const";
+import { GAYEWAY_HOST, TTL } from "../../const";
 import { Token } from "../../utils";
 import { InputValue, SignUpInputValue } from "./utils";
 
@@ -20,7 +20,7 @@ const useUserAuthentication = () => {
     try {
       const response: AxiosResponse = await axios({
         method: "POST",
-        url: `${AUTHENTICATION_HOST}/account/signin`,
+        url: `${GAYEWAY_HOST}/account/signin`,
         data: {
           username: username,
           password: password,
@@ -55,7 +55,7 @@ const useUserAuthentication = () => {
     email,
     tel,
   }: SignUpInputValue): Promise<any> => {
-    const response = await axios.post(`${AUTHENTICATION_HOST}/account/signup`, {
+    const response = await axios.post(`${GAYEWAY_HOST}/account/signup`, {
       username,
       password,
       fname,

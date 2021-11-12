@@ -1,6 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
-import { PLAYLIST_HOST } from "../../const";
+import { GAYEWAY_HOST } from "../../const";
 import { convertPermission } from "../Clip/utils";
 
 const postNewPlaylist = async ({
@@ -26,7 +26,7 @@ const postNewPlaylist = async ({
     };
     return axios
       .post(
-        `${PLAYLIST_HOST}/playlists/playlist`,
+        `${GAYEWAY_HOST}/playlists/playlist`,
         { title, description, videoList, permission, userId },
         config
       )
@@ -65,7 +65,7 @@ const editPlaylist = async ({
     };
     return axios
       .put(
-        `${PLAYLIST_HOST}/playlists/edit`,
+        `${GAYEWAY_HOST}/playlists/edit`,
         {
           id,
           title,
@@ -103,7 +103,7 @@ const deletePlaylist = async ({
     };
     return axios
       .delete(
-        `${PLAYLIST_HOST}/playlists/delete?id=${id}&userId=${userId}`,
+        `${GAYEWAY_HOST}/playlists/delete?id=${id}&userId=${userId}`,
         config
       )
       .then((response) => {

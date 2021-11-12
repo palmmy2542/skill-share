@@ -2,9 +2,8 @@ import { message } from "antd";
 import axios from "axios";
 import constate from "constate";
 import { useState } from "react";
-import { AUTHENTICATION_HOST } from "../../const";
+import { GAYEWAY_HOST } from "../../const";
 import { ClipProp } from "../../interface";
-
 
 const useClipFeed = () => {
   const [clips, setClips] = useState([
@@ -111,7 +110,7 @@ const useClipFeed = () => {
     if (token) {
       return axios({
         method: "GET",
-        url: `${AUTHENTICATION_HOST}/videos`,
+        url: `${GAYEWAY_HOST}/videos`,
         headers: {
           Authorization: `${token.trim()}`,
         },
@@ -134,7 +133,7 @@ const useClipFeed = () => {
     if (token && number) {
       return axios({
         method: "GET",
-        url: `${AUTHENTICATION_HOST}/videos/random/${number}`,
+        url: `${GAYEWAY_HOST}/videos/random/${number}`,
         headers: {
           Authorization: `${token.trim()}`,
         },
@@ -155,7 +154,7 @@ const useClipFeed = () => {
     if (token && id) {
       return axios({
         method: "GET",
-        url: `${AUTHENTICATION_HOST}/videos/video?userId=${id}`,
+        url: `${GAYEWAY_HOST}/videos/video?userId=${id}`,
         headers: {
           Authorization: `${token.trim()}`,
         },

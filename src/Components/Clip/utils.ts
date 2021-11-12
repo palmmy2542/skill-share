@@ -1,6 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
-import { AUTHENTICATION_HOST } from "../../const";
+import { GAYEWAY_HOST } from "../../const";
 
 export const convertPermission = (permission: boolean) =>
   permission ? "public" : "private";
@@ -26,7 +26,7 @@ export const updateVideo = ({
 
   return axios
     .put(
-      `${AUTHENTICATION_HOST}/videos/video/edit`,
+      `${GAYEWAY_HOST}/videos/video/edit`,
       {
         videoId,
         title,

@@ -1,6 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
-import { AUTHENTICATION_HOST } from "../../const";
+import { GAYEWAY_HOST } from "../../const";
 import { UploadClip } from "../../interface";
 
 const formAxios = axios.create({
@@ -42,7 +42,7 @@ export const upload = async ({
   };
 
   return formAxios.post(
-    `${AUTHENTICATION_HOST}/videos/upload`,
+    `${GAYEWAY_HOST}/videos/upload`,
     { ...body },
     { headers }
   );
@@ -69,7 +69,7 @@ export const editVideo = async ({
     };
     return axios
       .post(
-        `${AUTHENTICATION_HOST}/videos/video/edit`,
+        `${GAYEWAY_HOST}/videos/video/edit`,
         { videoId, title, description, permission },
         config
       )
@@ -97,10 +97,7 @@ export const deleteVideo = async ({
       },
     };
     return axios
-      .delete(
-        `${AUTHENTICATION_HOST}/videos/video/delete?videoId=${videoId}`,
-        config
-      )
+      .delete(`${GAYEWAY_HOST}/videos/video/delete?videoId=${videoId}`, config)
       .then((response) => {
         if (response.status === 200) {
           return response.data;

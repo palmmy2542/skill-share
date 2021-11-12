@@ -2,7 +2,7 @@ import { message } from "antd";
 import axios from "axios";
 import constate from "constate";
 import { useState } from "react";
-import { AUTHENTICATION_HOST, PLAYLIST_HOST } from "../../const";
+import { GAYEWAY_HOST } from "../../const";
 import { AllPlaylist, ClipProp } from "../../interface";
 
 const usePlaylist = () => {
@@ -155,7 +155,7 @@ const usePlaylist = () => {
     if (token && id) {
       return axios({
         method: "GET",
-        url: `${PLAYLIST_HOST}/playlists?creatorId=${id}`,
+        url: `${GAYEWAY_HOST}/playlists?creatorId=${id}`,
         headers: {
           Authorization: `${token.trim()}`,
         },
@@ -174,7 +174,7 @@ const usePlaylist = () => {
     if (token) {
       return axios({
         method: "GET",
-        url: `${PLAYLIST_HOST}/playlists`,
+        url: `${GAYEWAY_HOST}/playlists`,
         headers: {
           Authorization: `${token.trim()}`,
         },

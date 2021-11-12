@@ -1,7 +1,7 @@
 import axios from "axios";
 import constate from "constate";
 import { useEffect, useState } from "react";
-import { AUTHENTICATION_HOST } from "../../const";
+import { GAYEWAY_HOST } from "../../const";
 import { AllPlaylist, ClipProp, UserAccount } from "../../interface";
 import useUserAuthenticationContext from "../UserAuthentication/useUserAuthentication";
 
@@ -86,7 +86,7 @@ const useUserData = () => {
     if (token) {
       const response = await axios({
         method: "GET",
-        url: `${AUTHENTICATION_HOST}/account/me`,
+        url: `${GAYEWAY_HOST}/account/me`,
         headers: {
           Authorization: `${token.trim()}`,
         },
