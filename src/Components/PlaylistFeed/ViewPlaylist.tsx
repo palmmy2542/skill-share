@@ -7,7 +7,7 @@ import EditPlaylist from "./EditPlaylist";
 import { ClipProp } from "../../interface";
 import { useState } from "react";
 import "./index.css";
-import { STATE } from "./utils";
+import { STATE } from "../../utils";
 
 const ViewPlaylist = ({
   state,
