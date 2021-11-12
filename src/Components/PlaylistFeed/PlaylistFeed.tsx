@@ -167,6 +167,8 @@ const PlaylistFeed = ({
         handleClose={handleCloseCreatePlaylist}
       /> */}
       <CreatePlaylist
+        token={token}
+        userId={userId}
         videoId={currentVideoId}
         visible={isShowCreatePlaylist}
         handleClose={handleCloseCreatePlayList}

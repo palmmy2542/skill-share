@@ -19,26 +19,31 @@ import { postNewPlaylist } from "./utils";
 const { confirm } = Modal;
 
 const CreatePlaylist = ({
+  token,
+  userId,
   visible,
   handleClose,
   videoId,
 }: {
+  token: string | null;
+  userId: string | null;
   visible: boolean;
   handleClose: () => void;
   videoId: string;
 }) => {
-  const { canAccessService } = useUserAuthenticationContext();
   const history = useHistory();
   const showConfirmCreatePlaylist = (values: any) => {
     confirm({
       title: "Do you want to create playlist?",
       icon: <ExclamationCircleOutlined />,
       onOk() {
-        postNewPlaylist({
-          token: canAccessService(),
-          videoId: videoId,
-          ...values,
-        }).then(() => history.push("/"));
+        if (userId && token)
+          postNewPlaylist({
+            token: token,
+            videoList: [videoId],
+            userId: userId,
+            ...values,
+          }).then(() => history.push("/"));
       },
       onCancel() {
         console.log("Cancel create playlist");
@@ -77,16 +82,17 @@ const CreatePlaylist = ({
             autoSize={true}
           />
         </Form.Item>
-        <Row>
-          <Col flex="auto"></Col>
-          <Col>
-            <Switch
-              checkedChildren="Public"
-              unCheckedChildren="Private"
-              defaultChecked
-            />
-          </Col>
-        </Row>
+        <Form.Item
+          name="permission"
+          initialValue={"public"}
+          valuePropName="checked"
+        >
+          <Switch
+            checkedChildren="public"
+            unCheckedChildren="private"
+            defaultChecked
+          />
+        </Form.Item>
         <Button
           type="primary"
           htmlType="submit"

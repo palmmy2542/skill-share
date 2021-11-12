@@ -31,7 +31,7 @@ const postNewPlaylist = async ({
       )
       .then((response) => {
         console.log("response", response);
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 201) {
           return response.data;
         }
       })
