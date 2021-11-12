@@ -1,26 +1,33 @@
 
 import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Button, Col, Drawer, Row, Space, Typography } from "antd";
-import React, { useState } from "react";
-import { STATE } from "../../utils";
+import React, { useEffect, useState } from "react";
+import { getPreviewImageUrl, STATE } from "../../utils";
 import PlaylistForm from "../PlaylistForm";
 import CreatePlaylist from "./CreatePlaylist";
 import Playlist from "./Playlist";
 import ViewPlaylist from "./ViewPlaylist";
 import { AllPlaylist } from "../../interface";
+import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
+import usePlaylistContext from "../../Domains/Playlist/usePlaylist";
 
 const PlaylistFeed = ({
   currentVideoId,
   visible,
   handleClose,
-  playlist,
-}: {
+}: // playlist,
+{
   currentVideoId: string;
   visible: boolean;
   handleClose: () => void;
-  playlist: AllPlaylist[];
+  // playlist: AllPlaylist[];
 }) => {
   const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>();
+  const userId = localStorage.getItem("skillUserId");
+  const { canAccessService } = useUserAuthenticationContext();
+  const { getPlaylistByUserId } = usePlaylistContext();
+  const token = canAccessService();
+  const [playlist, setPlaylist] = useState<AllPlaylist[]>();
 
   const [isShowSave, setIsShowSave] = useState(false);
 
@@ -62,6 +69,18 @@ const PlaylistFeed = ({
     handleOpenSaveToPlaylist();
   };
 
+  useEffect(() => {
+    if (userId && token) {
+      getPlaylistByUserId(token, userId).then((data) => {
+        if (data) {
+          // console.log("playlist by user", data);
+          setPlaylist([...data]);
+        }
+      });
+    }
+  }, []);
+
+  console.log("Playlist: ", playlist);
   return (
     <Drawer
       title={`Save to playlist`}
@@ -100,43 +119,48 @@ const PlaylistFeed = ({
           <PlusCircleOutlined style={{ width: "20px", height: "20px" }} />
           <Typography>new playlist</Typography>
         </Col>
-        {playlist.map(
-          (
-            {
-              title,
-              description,
-              permission,
-              userId,
-              id,
-              videoList,
-            }: AllPlaylist,
-            index
-          ) => (
-            <Col
-              xs={8}
-              md={4}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                height: "250px",
-                width: "100%",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                handleSelectPlaylist({
-                  title,
-                  description,
-                  videoList,
-                  id,
-                  userId,
-                  permission,
-                });
-              }}
-            >
-              <Playlist title={title} previewImage={""} key={index} />
-            </Col>
-          )
-        )}
+        {playlist &&
+          playlist.map(
+            (
+              {
+                title,
+                description,
+                permission,
+                userId,
+                id,
+                videoList,
+              }: AllPlaylist,
+              index
+            ) => (
+              <Col
+                xs={8}
+                md={4}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  height: "250px",
+                  width: "100%",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  handleSelectPlaylist({
+                    title,
+                    description,
+                    videoList,
+                    id,
+                    userId,
+                    permission,
+                  });
+                }}
+              >
+                <Playlist
+                  title={title}
+                  previewImage={getPreviewImageUrl(videoList?.[0])}
+                  key={index}
+                />
+              </Col>
+            )
+          )}
       </Row>
       {/* <PlaylistForm
         visible={openCreateDrawer}

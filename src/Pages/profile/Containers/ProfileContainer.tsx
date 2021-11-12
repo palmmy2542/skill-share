@@ -91,6 +91,7 @@ const ProfileContainer = (props: any) => {
                 subscribers: res.subscribers ?? 0,
                 subscribing: res.subscribing ?? 0,
               });
+              localStorage.setItem("skillUserId", res.id);
               console.log(res.id);
               return res.id;
             }
