@@ -1,10 +1,10 @@
 import { Col, Drawer, Row, Tabs } from "antd";
 import React, { useState } from "react";
-import { ImFilm, ImLock } from "react-icons/im";
-import PreviewClip from "../../../Components/PreviewClip";
-import { ClipProp, AllPlaylist } from "../../../interface";
-import ClipFeed from "../../feed/Components/ClipFeed";
+import { ImFilm } from "react-icons/im";
 import PlayListIcon from "../../../Assets/playlist.png";
+import PreviewClip from "../../../Components/PreviewClip";
+import { AllPlaylist, ClipProp } from "../../../interface";
+import ClipFeed from "../../feed/Components/ClipFeed";
 
 const { TabPane } = Tabs;
 
@@ -17,13 +17,14 @@ const UserClipList = ({
   clips: ClipProp[];
   setClips: React.Dispatch<React.SetStateAction<any>>;
   playlist: AllPlaylist[];
-  handleSelectPlaylist: (
-    title: string,
-    description: string,
-    previewImage: string,
-    numberOfVideo: number,
-    videoOwner: string
-  ) => void;
+  handleSelectPlaylist: ({
+    title,
+    description,
+    id,
+    permission,
+    videoList,
+    userId,
+  }: AllPlaylist) => void;
 }) => {
   const [visible, setVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -112,9 +113,10 @@ const UserClipList = ({
                 {
                   title,
                   description,
-                  numberOfVideo,
-                  videoOwner,
-                  previewImage,
+                  id,
+                  permission,
+                  userId,
+                  videoList,
                 }: AllPlaylist,
                 index: number
               ) => (
@@ -128,19 +130,17 @@ const UserClipList = ({
                   }}
                   key={index}
                   onClick={() =>
-                    handleSelectPlaylist(
+                    handleSelectPlaylist({
                       title,
                       description,
-                      previewImage,
-                      numberOfVideo,
-                      videoOwner
-                    )
+                      id,
+                      permission,
+                      userId,
+                      videoList,
+                    })
                   }
                 >
-                  <img
-                    src={previewImage}
-                    style={{ width: "100%", height: "100%" }}
-                  />
+                  <img src={""} style={{ width: "100%", height: "100%" }} />
                 </Col>
               )
             )}

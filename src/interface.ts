@@ -26,9 +26,11 @@ export interface UploadClip {
 }
 
 export interface AllPlaylist {
+  id: string;
   title: string;
   description: string;
-  previewImage: string;
-  numberOfVideo: number;
-  videoOwner: string;
+  videoList: string[];
+  permission: string;
+  userId: string;
 }
+

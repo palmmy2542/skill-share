@@ -6,7 +6,7 @@ import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
 import usePlaylistContext from "../../../Domains/Playlist/usePlaylist";
 import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
 import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
-import { ClipProp } from "../../../interface";
+import { AllPlaylist, ClipProp } from "../../../interface";
 import ClipFeed from "../../feed/Components/ClipFeed";
 import BasicCarousel from "../Components/BasicCarousel";
 import Searching from "../Components/Searching";
@@ -25,12 +25,13 @@ const LearnContainer = () => {
   } = useUserDataContext();
   const { playlist, getAllPlaylist } = usePlaylistContext();
 
-  const [selectedPlaylist, setSelectedPlaylist] = useState({
+  const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>({
     title: "PLAYLIST_TITLE",
     description: "PLAY_DESCRIPTION",
-    previewImage: "",
-    numberOfVideo: 0,
-    videoOwner: "VIDEO_OWNER",
+    id: "",
+    permission: "",
+    userId: "",
+    videoList: [""],
   });
 
   const { canAccessService } = useUserAuthenticationContext();
@@ -80,20 +81,22 @@ const LearnContainer = () => {
     setCurrentIndex(index);
   };
 
-  const handleSelectPlaylist = (
-    title: string,
-    description: string,
-    previewImage: string,
-    numberOfVideo: number,
-    videoOwner: string
-  ) => {
+  const handleSelectPlaylist = ({
+    title,
+    description,
+    id,
+    permission,
+    videoList,
+    userId,
+  }: AllPlaylist) => {
     setIsShowPlaylist(true);
     setSelectedPlaylist({
       title,
       description,
-      previewImage,
-      numberOfVideo,
-      videoOwner,
+      id,
+      permission,
+      videoList,
+      userId,
     });
   };
 
@@ -130,7 +133,7 @@ const LearnContainer = () => {
           setClips(temp);
         }
       });
-      getAllPlaylist(token);
+      getAllPlaylist(token).then((data) => console.log("data", data));
       // getRandomVideo(token, 5);
     }
   }, []);

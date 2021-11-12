@@ -7,6 +7,7 @@ import PlaylistForm from "../PlaylistForm";
 import CreatePlaylist from "./CreatePlaylist";
 import Playlist from "./Playlist";
 import ViewPlaylist from "./ViewPlaylist";
+import { AllPlaylist } from "../../interface";
 
 const PlaylistFeed = ({
   currentVideoId,
@@ -17,14 +18,15 @@ const PlaylistFeed = ({
   currentVideoId: string;
   visible: boolean;
   handleClose: () => void;
-  playlist: Array<{ title: string; previewImage: string }>;
+  playlist: AllPlaylist[];
 }) => {
-  const [selectedPlaylist, setSelectedPlaylist] = useState({
+  const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>({
+    id: "PLAYLIST_ID",
     title: "PLAYLIST_TITLE",
-    description: "PLAY_DESCRIPTION",
-    previewImage: "",
-    numberOfVideo: 0,
-    videoOwner: "VIDEO_OWNER",
+    description: "PLAYLIST_DESCRIPTION",
+    permission: "public",
+    userId: "USER_ID",
+    videoList: [""],
   });
 
   const [isShowSave, setIsShowSave] = useState(false);
@@ -46,6 +48,25 @@ const PlaylistFeed = ({
 
   const handleOpenCreatePlaylist = () => {
     setIsShowCreatePlaylist(true);
+  };
+
+  const handleSelectPlaylist = ({
+    id,
+    title,
+    description,
+    videoList,
+    userId,
+    permission,
+  }: AllPlaylist) => {
+    setSelectedPlaylist({
+      title,
+      description,
+      videoList,
+      id,
+      userId,
+      permission,
+    });
+    handleOpenSaveToPlaylist();
   };
 
   return (
@@ -90,11 +111,12 @@ const PlaylistFeed = ({
           (
             {
               title,
-              previewImage,
-            }: {
-              title: string;
-              previewImage: string;
-            },
+              description,
+              permission,
+              userId,
+              id,
+              videoList,
+            }: AllPlaylist,
             index
           ) => (
             <Col
@@ -107,9 +129,18 @@ const PlaylistFeed = ({
                 width: "100%",
                 cursor: "pointer",
               }}
-              onClick={handleOpenSaveToPlaylist}
+              onClick={() => {
+                handleSelectPlaylist({
+                  title,
+                  description,
+                  videoList,
+                  id,
+                  userId,
+                  permission,
+                });
+              }}
             >
-              <Playlist title={title} previewImage={previewImage} key={index} />
+              <Playlist title={title} previewImage={""} key={index} />
             </Col>
           )
         )}

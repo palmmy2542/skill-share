@@ -4,10 +4,11 @@ import React from "react";
 import Playlist from "./Playlist";
 import PreviewClip from "../PreviewClip/PreviewClip";
 import EditPlaylist from "./EditPlaylist";
-import { ClipProp } from "../../interface";
+import { AllPlaylist, ClipProp } from "../../interface";
 import { useState } from "react";
 import "./index.css";
 import { STATE } from "../../utils";
+import { editPlaylist } from "./utils";
 
 const ViewPlaylist = ({
   state,
@@ -21,13 +22,7 @@ const ViewPlaylist = ({
    isDrag,*/
 {
   state: string | null;
-  playlist: {
-    title: string;
-    previewImage: string;
-    description: string;
-    numberOfVideo: number;
-    videoOwner: string;
-  };
+  playlist: AllPlaylist;
   visible: boolean;
   clips: ClipProp[];
   handleClose: () => void;
@@ -123,10 +118,7 @@ const ViewPlaylist = ({
         <div className={"drawer-wrapper"}>
           <Row align="middle" gutter={[8, 8]} style={{ paddingTop: "16px" }}>
             <Col className="gutter-row setsize" span={12} xs={8}>
-              <Playlist
-                title={playlist.title}
-                previewImage={playlist.previewImage}
-              />
+              <Playlist title={playlist.title} previewImage={""} />
             </Col>
             <Col className="gutter-row" flex="auto" span={12} xs={16}>
               <Typography.Title level={4}>{playlist.title}</Typography.Title>
@@ -195,7 +187,7 @@ const ViewPlaylist = ({
       <EditPlaylist
         visible={isOpenEditPlaylist}
         title={playlist.title}
-        previewImage={playlist.previewImage}
+        previewImage={""}
         description={playlist.description}
         handleClose={handleCloseEditPlaylist}
       />

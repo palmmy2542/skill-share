@@ -1,9 +1,7 @@
-import "../index.css";
-import { Row, Col, Avatar } from "antd";
-import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
+import { Col, Row } from "antd";
 import PreviewClip from "../../../Components/PreviewClip";
 import { ClipProp } from "../../../interface";
-import BasicCarousel from "./BasicCarousel";
+import "../index.css";
 
 const SearchClipsTab = ({
   searchWord,

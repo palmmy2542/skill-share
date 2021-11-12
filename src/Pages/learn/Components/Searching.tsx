@@ -1,6 +1,5 @@
 import { Divider, Tabs } from "antd";
-import usePlaylistContext from "../../../Domains/Playlist/usePlaylist";
-import { ClipProp } from "../../../interface";
+import { AllPlaylist, ClipProp } from "../../../interface";
 import SearchClipsTab from "../Components/SearchClipsTab";
 import SearchUsersTab from "../Components/SearchUsersTab";
 import "../index.css";
@@ -34,20 +33,15 @@ const Searching = ({
   handleClickSlide: (index: number) => void;
   handleSetIsDrag: (state: boolean) => void;
   isDrag: boolean;
-  playlist: Array<{
-    title: string;
-    description: string;
-    previewImage: string;
-    numberOfVideo: number;
-    videoOwner: string;
-  }>;
-  handleSelectPlaylist: (
-    title: string,
-    description: string,
-    previewImage: string,
-    numberOfVideo: number,
-    videoOwner: string
-  ) => void;
+  playlist: AllPlaylist[];
+  handleSelectPlaylist: ({
+    title,
+    description,
+    id,
+    permission,
+    videoList,
+    userId,
+  }: AllPlaylist) => void;
 }) => {
   const searchList = (tab: string) => {
     switch (tab) {

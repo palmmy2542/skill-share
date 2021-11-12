@@ -1,6 +1,24 @@
-import { Drawer, Form, Input, Button, Switch, Row, Col, Popconfirm, Image } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+  Drawer,
+  Form,
+  Input,
+  Button,
+  Switch,
+  Row,
+  Col,
+  Popconfirm,
+  Image,
+  Modal,
+  message,
+} from "antd";
 import { useState } from "react";
+import { useHistory } from "react-router";
+import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
 import "./index.css";
+import { editPlaylist } from "./utils";
+
+const { confirm } = Modal;
 
 const EditPlaylist = ({
   visible,
@@ -17,6 +35,8 @@ const EditPlaylist = ({
 }) => {
   const [popUpVisible, setPopUpVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const history = useHistory();
+  const { canAccessService } = useUserAuthenticationContext();
 
   const showPopconfirm = () => {
     setPopUpVisible(true);
@@ -34,6 +54,22 @@ const EditPlaylist = ({
     setPopUpVisible(false);
   };
 
+  const showConfirmSaveToPlaylist = (values: any) => {
+    confirm({
+      title: "Do you want to save video to this playlist?",
+      icon: <ExclamationCircleOutlined />,
+      onOk() {
+        editPlaylist({ token: canAccessService(), ...values }).then(() => {
+          message.success("Update success");
+          history.push("/");
+        });
+      },
+      onCancel() {
+        console.log("Cancel save video to playlist");
+      },
+    });
+  };
+
   return (
     <Drawer
       title="Edit Playlist"
@@ -49,7 +85,11 @@ const EditPlaylist = ({
         height={"100%"}
       />
 
-      <Form id="edit-playlist-form" layout="vertical">
+      <Form
+        id="edit-playlist-form"
+        layout="vertical"
+        onFinish={showConfirmSaveToPlaylist}
+      >
         <Form.Item
           name="title"
           label="Playlist name"
@@ -118,4 +158,4 @@ const EditPlaylist = ({
   );
 };
 
-  export default EditPlaylist;
+export default EditPlaylist;
