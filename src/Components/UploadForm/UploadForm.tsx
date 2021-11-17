@@ -37,55 +37,52 @@ const UploadForm = () => {
   };
 
   return (
-    <Form
-      form={form}
-      layout="vertical"
-      className="upload-form"
-      onFinish={onFinish}
-    >
-      <Form.Item
-        name="video"
-        rules={[{ required: true, message: "Please upload your clip" }]}
-      >
-        <DropZone handleAddVideo={handleAddVideo} file={video} />
-      </Form.Item>
-      <Form.Item
-        name="title"
-        label="Clip name"
-        rules={[{ required: true, message: "Please select title clip" }]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        name="description"
-        label="Description"
-        rules={[{ required: true, message: "Please describe your clip" }]}
-      >
-        <TextArea rows={3} />
-      </Form.Item>
-      <Form.Item
-        name="permission"
-        initialValue="public"
-        valuePropName="checked"
-      >
-        <Switch
-          checkedChildren="public"
-          unCheckedChildren="private"
-          defaultChecked
-        />
-      </Form.Item>
-      <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          size="large"
-          className="upload-button"
-          loading={isLoading}
+    <div style={{ padding: "48px" }}>
+      <Form form={form} layout="vertical" onFinish={onFinish}>
+        <Form.Item
+          name="video"
+          rules={[{ required: true, message: "Please upload your clip" }]}
         >
-          Upload clip
-        </Button>
-      </Form.Item>
-    </Form>
+          <DropZone handleAddVideo={handleAddVideo} file={video} />
+        </Form.Item>
+        <Form.Item
+          name="title"
+          label="Clip name"
+          rules={[{ required: true, message: "Please select title clip" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="description"
+          label="Description"
+          rules={[{ required: true, message: "Please describe your clip" }]}
+        >
+          <TextArea rows={3} />
+        </Form.Item>
+        <Form.Item
+          name="permission"
+          initialValue="public"
+          valuePropName="checked"
+        >
+          <Switch
+            checkedChildren="public"
+            unCheckedChildren="private"
+            defaultChecked
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            size="large"
+            className="upload-button"
+            loading={isLoading}
+          >
+            Upload clip
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 

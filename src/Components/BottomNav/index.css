@@ -31,6 +31,10 @@
   font-size: 32px;
 }
 
+.upload-drawer-form {
+  padding: 48px;
+}
+
 @media only screen and (max-width: 975px) {
   .bottom-nav {
     height: 48px;
