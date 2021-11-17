@@ -48,14 +48,18 @@ const ViewPlaylist = ({
   const userId = localStorage.getItem("skillUserId");
   const history = useHistory();
   const { videoList } = playlist;
-  const [allVideo, setAllVideo] = useState<ClipProp[]>();
+  const [allVideo, setAllVideo] = useState<ClipProp[]>([]);
   const handleSetIsDrag = (state: boolean) => {
     setIsDrag(state);
   };
 
   const handleClickSlide = (index: number) => {
+    const temp = allVideo.slice();
+    temp.forEach((item) => (item.isPlay = false));
+    temp[index].isPlay = true;
     setCurrentIndex(index);
     setIsShowClipFeed(true);
+    setAllVideo(temp);
   };
 
   const handleCloseClipFeed = () => {
@@ -237,13 +241,6 @@ const ViewPlaylist = ({
                     }}
                     key={index}
                   >
-                    <img
-                      src={getPlaylistPreviewImage(videoId)}
-                      width="100%"
-                      height="100%"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => handleClickSlide(index)}
-                    />
                     <PreviewClip
                       previewImage={getPlaylistPreviewImage(videoId)}
                       url={url}
