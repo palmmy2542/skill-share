@@ -5,7 +5,7 @@ import PlayListIcon from "../../../Assets/playlist.png";
 import PreviewClip from "../../../Components/PreviewClip";
 import { AllPlaylist, ClipProp } from "../../../interface";
 import { getPreviewImageUrl } from "../../../utils";
-import ClipFeed from "../../feed/Components/ClipFeed";
+import ClipFeed from "../../../Components/ClipFeed/index";
 
 const { TabPane } = Tabs;
 

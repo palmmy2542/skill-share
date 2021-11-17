@@ -1,10 +1,10 @@
 import { RightOutlined } from "@ant-design/icons";
 import { Drawer, List, Avatar, Form, Input, Affix, Button } from "antd";
 import React from "react";
-import Comment from "../Components/Comment";
-import "../index.css";
+import Comment from "./Comment";
+import "./index.css";
 
-const CommentSection = ({
+const CommentDrawer = ({
   visible,
   setVisible,
   comments,
@@ -56,4 +56,4 @@ const CommentSection = ({
   );
 };
 
-export default CommentSection;
+export default CommentDrawer;

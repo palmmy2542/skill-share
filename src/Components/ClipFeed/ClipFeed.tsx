@@ -1,9 +1,9 @@
 import { Carousel } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
 import React, { useEffect, useRef, useState } from "react";
-import Clip from "../../../Components/Clip";
-import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
-import CommentSection from "../Containers/CommentSection";
+import Clip from "../Clip";
+import useClipFeedContext from "../../Domains/ClipFeed/useClipFeed";
+import { CommentDrawer } from "../Comment/index";
 
 const ClipFeed = ({
   handleClose,
@@ -63,7 +63,7 @@ const ClipFeed = ({
 
   return (
     <div style={{ overflow: "hidden" }}>
-      <CommentSection
+      <CommentDrawer
         visible={visible}
         setVisible={setVisible}
         comments={clips[currentIndex].comments}

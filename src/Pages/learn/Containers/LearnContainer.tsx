@@ -8,7 +8,7 @@ import useUserAuthenticationContext from "../../../Domains/UserAuthentication/us
 import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
 import { AllPlaylist, ClipProp } from "../../../interface";
 import { STATE } from "../../../utils";
-import ClipFeed from "../../feed/Components/ClipFeed";
+import ClipFeed from "../../../Components/ClipFeed/index";
 import BasicCarousel from "../Components/BasicCarousel";
 import Searching from "../Components/Searching";
 import "../index.css";

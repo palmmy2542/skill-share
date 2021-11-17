@@ -15,7 +15,7 @@ import {
 } from "../../utils";
 import { editPlaylist } from "./utils";
 import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
-import ClipFeed from "../../Pages/feed/Components/ClipFeed";
+import ClipFeed from "../ClipFeed/index";
 import { useHistory } from "react-router";
 
 const ViewPlaylist = ({
