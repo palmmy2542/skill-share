@@ -1,4 +1,4 @@
-import { Button, Drawer, Input, Typography } from "antd";
+import { Button, Drawer, Input, Spin, Typography } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
 import ViewPlaylist from "../../../Components/PlaylistFeed/ViewPlaylist";
@@ -26,6 +26,7 @@ const LearnContainer = () => {
   } = useUserDataContext();
   const userId = localStorage.getItem("skillUserId");
   const { getAllPlaylist } = usePlaylistContext();
+  const [isLoading, setIsLoading] = useState(true);
 
   const [playlist, setPlaylist] = useState<AllPlaylist[]>();
 
@@ -52,7 +53,8 @@ const LearnContainer = () => {
     [clips]
   );
 
-  const { getAllVideo, getRandomVideo, getStreamingUrl } = useClipFeedContext();
+  const { getAllVideo, getPreviewImageUrl, getStreamingUrl } =
+    useClipFeedContext();
 
   const token = canAccessService();
 
@@ -75,6 +77,10 @@ const LearnContainer = () => {
   };
 
   const handleClickSlide = (index: number) => {
+    const temp = clips.slice();
+    temp.forEach((item) => (item.isPlay = false));
+    temp[index].isPlay = true;
+    setClips(temp);
     setCurrentIndex(index);
   };
 
@@ -119,6 +125,7 @@ const LearnContainer = () => {
                 title: videoUploaded.title,
                 description: videoUploaded.description,
                 url: getStreamingUrl(videoUploaded.videoId),
+                previewImage: getPreviewImageUrl(videoUploaded.videoId),
                 name: `TEST ${index}`,
                 isPlay: false,
                 comments: [
@@ -131,103 +138,107 @@ const LearnContainer = () => {
           );
           setClips(temp);
         }
+        setIsLoading(false);
       });
       getAllPlaylist(token).then((data) => {
         if (data) {
           setPlaylist([...data]);
         }
+        setIsLoading(false);
       });
     }
   }, []);
 
   return (
-    <div id="search-page">
-      <Search
-        placeholder="search..."
-        allowClear
-        value={searchField ?? ""}
-        onChange={onSearch}
-        onFocus={() => setSearchShow(true)}
-        style={{ width: "90%" }}
-      />
-      {searchShow && playlist ? (
-        <Searching
-          searchField={searchField}
-          clips={clips}
-          handleOpen={handleOpen}
-          handleClickSlide={handleClickSlide}
-          handleSetIsDrag={handleSetIsDrag}
-          isDrag={isDrag}
-          playlist={playlist}
-          handleSelectPlaylist={handleSelectPlaylist}
+    <Spin spinning={isLoading} size={"large"}>
+      <div id="search-page">
+        <Search
+          placeholder="search..."
+          allowClear
+          value={searchField ?? ""}
+          onChange={onSearch}
+          onFocus={() => setSearchShow(true)}
+          style={{ width: "90%" }}
         />
-      ) : (
-        <div style={{ textAlign: "left" }}>
-          {clipTrending.length > 0 && (
-            <>
-              <Typography.Title level={3}>Trending</Typography.Title>
-              <BasicCarousel
-                itemList={clipTrending}
-                handleOpen={handleOpen}
-                handleClickSlide={handleClickSlide}
-                handleSetIsDrag={handleSetIsDrag}
-                isDrag={isDrag}
-              />
-            </>
-          )}
-          {clipRecommend.length > 0 && (
-            <>
-              <Typography.Title level={3}>Recommend</Typography.Title>
-              <BasicCarousel
-                itemList={clipRecommend}
-                handleOpen={handleOpen}
-                handleClickSlide={handleClickSlide}
-                handleSetIsDrag={handleSetIsDrag}
-                isDrag={isDrag}
-              />
-            </>
-          )}
-          {clipCooking.length > 0 && (
-            <>
-              <Typography.Title level={3}>Cooking</Typography.Title>
-              <BasicCarousel
-                itemList={clipCooking}
-                handleOpen={handleOpen}
-                handleClickSlide={handleClickSlide}
-                handleSetIsDrag={handleSetIsDrag}
-                isDrag={isDrag}
-              />
-            </>
-          )}
-        </div>
-      )}
-      <BottomNav username={username} />
-      <Drawer
-        placement={"right"}
-        visible={visible}
-        closable={false}
-        width={"100%"}
-        keyboard
-        destroyOnClose
-        className={"ant-drawer-body"}
-      >
-        <ClipFeed
-          handleClose={handleClose}
-          currentIndex={currentIndex}
-          setCurrentIndex={setCurrentIndex}
-          clips={clips}
-          setClips={setClips}
-        />
-      </Drawer>
-      {selectedPlaylist && (
-        <ViewPlaylist
-          state={selectedPlaylist.userId === userId ? STATE.EDIT : null}
-          playlist={selectedPlaylist}
-          visible={isShowPlaylist}
-          handleClose={handleClosePlaylist}
-        />
-      )}
-    </div>
+        {searchShow && playlist ? (
+          <Searching
+            searchField={searchField}
+            clips={clips}
+            handleOpen={handleOpen}
+            handleClickSlide={handleClickSlide}
+            handleSetIsDrag={handleSetIsDrag}
+            isDrag={isDrag}
+            playlist={playlist}
+            handleSelectPlaylist={handleSelectPlaylist}
+          />
+        ) : (
+          <div style={{ textAlign: "left" }}>
+            {clipTrending.length > 0 && (
+              <>
+                <Typography.Title level={3}>Trending</Typography.Title>
+                <BasicCarousel
+                  itemList={clipTrending}
+                  handleOpen={handleOpen}
+                  handleClickSlide={handleClickSlide}
+                  handleSetIsDrag={handleSetIsDrag}
+                  isDrag={isDrag}
+                />
+              </>
+            )}
+            {clipRecommend.length > 0 && (
+              <>
+                <Typography.Title level={3}>Recommend</Typography.Title>
+                <BasicCarousel
+                  itemList={clipRecommend}
+                  handleOpen={handleOpen}
+                  handleClickSlide={handleClickSlide}
+                  handleSetIsDrag={handleSetIsDrag}
+                  isDrag={isDrag}
+                />
+              </>
+            )}
+            {clipCooking.length > 0 && (
+              <>
+                <Typography.Title level={3}>Cooking</Typography.Title>
+                <BasicCarousel
+                  itemList={clipCooking}
+                  handleOpen={handleOpen}
+                  handleClickSlide={handleClickSlide}
+                  handleSetIsDrag={handleSetIsDrag}
+                  isDrag={isDrag}
+                />
+              </>
+            )}
+          </div>
+        )}
+        <BottomNav username={username} />
+        <Drawer
+          placement={"right"}
+          visible={visible}
+          closable={false}
+          width={"100%"}
+          keyboard
+          destroyOnClose
+          className={"ant-drawer-body"}
+        >
+          <ClipFeed
+            handleClose={handleClose}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            clips={clips}
+            setClips={setClips}
+          />
+        </Drawer>
+        {selectedPlaylist && (
+          <ViewPlaylist
+            state={selectedPlaylist.userId === userId ? STATE.EDIT : null}
+            playlist={selectedPlaylist}
+            visible={isShowPlaylist}
+            handleClose={handleClosePlaylist}
+          />
+        )}
+      </div>
+    </Spin>
   );
 };
 

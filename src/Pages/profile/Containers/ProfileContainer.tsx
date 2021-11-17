@@ -1,5 +1,5 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Button, message } from "antd";
+import { Button, message, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
@@ -18,6 +18,7 @@ import "../index.css";
 
 const ProfileContainer = (props: any) => {
   const [clips, setClips] = useState<ClipProp[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { usernameParam } = useParams<{ usernameParam: string }>();
   const username: string | null = localStorage.getItem("skillUsername");
   const [userData, setUserData] = useState<UserAccount>({
@@ -122,16 +123,19 @@ const ProfileContainer = (props: any) => {
                   );
                   setClips(temp);
                 }
+                setIsLoading(false);
               });
             getPlaylistByUserId(token, id).then((data) => {
               if (data) {
                 // console.log("playlist by user", data);
                 setPlaylist([...data]);
               }
+              setIsLoading(false);
             });
           })
           .catch((err) => {
             message.error(err.response.data.message);
+            setIsLoading(false);
           });
       }
     }
@@ -139,33 +143,35 @@ const ProfileContainer = (props: any) => {
 
   return (
     <>
-      <Navbar name={userData.username} />
-      <div id="profile" className="page-layout">
-        <UserAvatar>
-          <UserOutlined />
-        </UserAvatar>
-        <UserInformation
-          subscribing={subscribing}
-          subscribers={subscribers}
-          clips={clips}
-        />
-        {renderButton()}
-        <UserClipList
-          clips={clips}
-          setClips={setClips}
-          playlist={playlist}
-          handleSelectPlaylist={handleSelectPlaylist}
-        />
-        {selectedPlaylist && (
-          <ViewPlaylist
-            state={STATE.EDIT}
-            playlist={selectedPlaylist}
-            visible={isShowPlaylist}
-            handleClose={handleClosePlaylist}
+      <Spin spinning={isLoading} size={"large"}>
+        <Navbar name={userData.username} />
+        <div id="profile" className="page-layout">
+          <UserAvatar>
+            <UserOutlined />
+          </UserAvatar>
+          <UserInformation
+            subscribing={subscribing}
+            subscribers={subscribers}
+            clips={clips}
           />
-        )}
-      </div>
-      <BottomNav username={userData.username} />
+          {renderButton()}
+          <UserClipList
+            clips={clips}
+            setClips={setClips}
+            playlist={playlist}
+            handleSelectPlaylist={handleSelectPlaylist}
+          />
+          {selectedPlaylist && (
+            <ViewPlaylist
+              state={STATE.EDIT}
+              playlist={selectedPlaylist}
+              visible={isShowPlaylist}
+              handleClose={handleClosePlaylist}
+            />
+          )}
+        </div>
+        <BottomNav username={userData.username} />
+      </Spin>
     </>
   );
 };

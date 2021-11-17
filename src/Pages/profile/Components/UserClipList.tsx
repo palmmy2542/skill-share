@@ -44,6 +44,9 @@ const UserClipList = ({
   };
 
   const handleClickSlide = (index: number) => {
+    const temp = clips.slice();
+    temp.forEach((item) => (item.isPlay = false));
+    temp[index].isPlay = true;
     setCurrentIndex(index);
   };
 
@@ -59,42 +62,30 @@ const UserClipList = ({
           key="1"
         >
           <Row gutter={[8, 8]}>
-            {clips.map(
-              (
-                {
-                  name,
-                  url,
-                  isPlay,
-                  title,
-                  description,
-                  previewImage,
-                }: ClipProp,
-                index: number
-              ) => (
-                <Col
-                  xs={12}
-                  md={8}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    height: "250px",
-                  }}
+            {clips.map(({ url, previewImage }: ClipProp, index: number) => (
+              <Col
+                xs={12}
+                md={8}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  height: "250px",
+                }}
+                key={index}
+              >
+                <PreviewClip
+                  previewImage={previewImage}
+                  url={url}
+                  isPlay={false}
+                  index={index}
                   key={index}
-                >
-                  <PreviewClip
-                    previewImage={previewImage}
-                    url={url}
-                    isPlay={false}
-                    index={index}
-                    key={index}
-                    handleClickSlide={handleClickSlide}
-                    handleSetIsDrag={handleSetIsDrag}
-                    isDrag={isDrag}
-                    handleOpen={handleOpen}
-                  />
-                </Col>
-              )
-            )}
+                  handleClickSlide={handleClickSlide}
+                  handleSetIsDrag={handleSetIsDrag}
+                  isDrag={isDrag}
+                  handleOpen={handleOpen}
+                />
+              </Col>
+            ))}
           </Row>
         </TabPane>
         <TabPane

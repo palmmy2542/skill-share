@@ -92,6 +92,7 @@ const Clip = ({
   const handleOpenPlayList = () => {
     setIsShowPlaylist(true);
   };
+  console.log(isPlay);
 
   return (
     <div
@@ -244,7 +245,6 @@ const Clip = ({
       </Fader>
       <ReactPlayer
         url={url}
-        light={previewImage}
         autoPlay={true}
         playing={isPlay}
         onPlay={() => handlePlay()}

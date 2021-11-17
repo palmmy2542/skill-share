@@ -38,6 +38,7 @@ const PreviewClip = ({
     setIsPlaying(false);
   }
 
+  console.log("previewImage", previewImage);
   return (
     <div
       id={"@" + name + "." + index.toString()}
@@ -66,8 +67,8 @@ const PreviewClip = ({
       <ReactPlayer
         url={url}
         muted
-        previewImage={previewImage}
-        autoPlay={false}
+        light={previewImage}
+        autoPlay={true}
         playing={isPlaying}
         controls={false}
         width="100%"
@@ -75,7 +76,7 @@ const PreviewClip = ({
         onMouseLeave={() => pauseVideo()}
         onMouseEnter={() => playVideo()}
         className={"clip"}
-      ></ReactPlayer>
+      />
     </div>
   );
 };
