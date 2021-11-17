@@ -1,4 +1,4 @@
-import { Avatar, Col, Row } from "antd";
+import { Avatar, Col, Row, List } from "antd";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
 import "../index.css";
 
@@ -9,16 +9,20 @@ const SearchUsersTab = ({ searchWord }: { searchWord: string }) => {
   });
   return (
     <div id="search-users">
-      {filteredUsers.map((user, index) => (
-        <Row justify="start" style={{ paddingLeft: "5%" }} key={index}>
-          <Col style={{ paddingRight: "1%" }}>
-            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-          </Col>
-          <Col>
-            <h3>{user.name}</h3>
-          </Col>
-        </Row>
-      ))}
+      <List
+        size="large"
+        itemLayout="horizontal"
+        dataSource={filteredUsers}
+        style={{ textAlign: "left" }}
+        renderItem={(user) => (
+          <List.Item>
+            <List.Item.Meta
+              avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+              title={<a href="https://ant.design">{user.name}</a>}
+            />
+          </List.Item>
+        )}
+      />
     </div>
   );
 };
