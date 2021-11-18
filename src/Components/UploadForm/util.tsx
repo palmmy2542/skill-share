@@ -20,6 +20,7 @@ const formAxios = axios.create({
           } else {
             form.append(key, value);
           }
+          return null;
         });
         return form;
       }

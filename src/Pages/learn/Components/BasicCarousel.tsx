@@ -50,7 +50,6 @@ const BasicCarousel = ({
   handleSetIsDrag: (state: boolean) => void;
   isDrag: boolean;
 }) => {
-  console.log(itemList);
   return (
     <Carousel {...settings} draggable={true}>
       {itemList.map(

@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from "react";
-import { Avatar, Button, Input, List, Popover } from "antd";
 import { CloseOutlined, EditOutlined, RightOutlined } from "@ant-design/icons";
+import { Avatar, Button, Input, List } from "antd";
+import React, { useMemo, useState } from "react";
 import { CommentProps } from "../../interface";
 
 function timeSince(date: string) {

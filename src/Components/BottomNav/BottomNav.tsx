@@ -1,17 +1,15 @@
-import React, { useState } from "react";
 import {
   PlayCircleOutlined,
   PlusCircleTwoTone,
   UserOutlined,
 } from "@ant-design/icons";
-import "./index.css";
-import { Button, Divider, Drawer } from "antd";
+import { Drawer } from "antd";
+import React, { useState } from "react";
 import UploadForm from "../UploadForm/UploadForm";
-import { useHistory } from "react-router";
+import "./index.css";
 
 const BottomNav = ({ username }: { username: string }) => {
   const [visible, setVisible] = useState(false);
-  const history = useHistory();
 
   const handleClose = () => {
     setVisible(false);
@@ -21,9 +19,6 @@ const BottomNav = ({ username }: { username: string }) => {
     setVisible(true);
   };
 
-  const handlePush = (path: string) => {
-    history.push(path);
-  };
   return (
     <div className="bottom-nav">
       <a href={"/learn"} className={"bottom-nav-btn"}>

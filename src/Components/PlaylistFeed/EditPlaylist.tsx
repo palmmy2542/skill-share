@@ -1,18 +1,16 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import {
+  Button,
+  Col,
   Drawer,
   Form,
-  Input,
-  Button,
-  Switch,
-  Row,
-  Col,
-  Popconfirm,
   Image,
-  Modal,
+  Input,
   message,
+  Modal,
+  Row,
+  Switch,
 } from "antd";
-import { useState } from "react";
 import { useHistory } from "react-router";
 import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
 import "./index.css";
@@ -41,26 +39,9 @@ const EditPlaylist = ({
   userId: string | null;
   playlistId: string;
 }) => {
-  const [popUpVisible, setPopUpVisible] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
   const history = useHistory();
   const { canAccessService } = useUserAuthenticationContext();
 
-  const showPopconfirm = () => {
-    setPopUpVisible(true);
-  };
-
-  const handleOk = () => {
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setPopUpVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
-
-  const handleCancel = () => {
-    setPopUpVisible(false);
-  };
   const showConfirmDelete = () => {
     if (userId)
       confirm({

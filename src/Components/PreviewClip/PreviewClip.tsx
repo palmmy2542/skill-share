@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
-import useClipFeedContext from "../../Domains/ClipFeed/useClipFeed";
 import "./index.css";
 
 const PreviewClip = ({
@@ -26,9 +25,7 @@ const PreviewClip = ({
   isDrag: boolean;
   handleOpen: () => void;
 }) => {
-  const [isShowControl, setIsShowControl] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isExpandable, setIsExpandable] = useState(true);
 
   function playVideo() {
     setIsPlaying(true);
@@ -38,7 +35,6 @@ const PreviewClip = ({
     setIsPlaying(false);
   }
 
-  console.log("previewImage", previewImage);
   return (
     <div
       id={"@" + name + "." + index.toString()}

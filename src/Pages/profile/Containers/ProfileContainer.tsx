@@ -1,6 +1,5 @@
-import { UserOutlined } from "@ant-design/icons";
 import { Button, message, Spin } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
 import Navbar from "../../../Components/Navbar/Navbar";
@@ -30,14 +29,18 @@ const ProfileContainer = (props: any) => {
     subscribers: 0,
   });
 
-  const { isMe, isSubscribed, getMe } = useUserDataContext();
-  // const { playlist } = usePlaylistContext();
+  const { isSubscribed, getMe } = useUserDataContext();
   const { getVideoByUserId, getStreamingUrl, getPreviewImageUrl } =
     useClipFeedContext();
   const { canAccessService } = useUserAuthenticationContext();
   const { getPlaylistByUserId } = usePlaylistContext();
   const [isShowPlaylist, setIsShowPlaylist] = useState(false);
   const [playlist, setPlaylist] = useState<AllPlaylist[]>();
+  const isMe = useMemo(
+    () => username === usernameParam,
+    [username, usernameParam]
+  );
+  const token = canAccessService();
 
   const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>();
 
@@ -78,9 +81,8 @@ const ProfileContainer = (props: any) => {
   };
 
   useEffect(() => {
-    const token = canAccessService();
     if (token) {
-      if (username === usernameParam) {
+      if (isMe) {
         getMe()
           .then((res) => {
             if (res) {
@@ -123,7 +125,6 @@ const ProfileContainer = (props: any) => {
               });
             getPlaylistByUserId(token, id).then((data) => {
               if (data) {
-                // console.log("playlist by user", data);
                 setPlaylist([...data]);
               }
               setIsLoading(false);
@@ -133,16 +134,16 @@ const ProfileContainer = (props: any) => {
             message.error(err.response.data.message);
             setIsLoading(false);
           });
-      }
+      } else setIsLoading(false);
     }
-  }, []);
+  }, [isMe]);
 
   return (
     <>
       <Spin spinning={isLoading} size={"large"}>
-        <Navbar name={userData.username} />
+        <Navbar name={usernameParam} />
         <div id="profile" className="page-layout">
-          <UserAvatar>{userData.username[0]}</UserAvatar>
+          <UserAvatar>{usernameParam[0]}</UserAvatar>
           <UserInformation
             subscribing={subscribing}
             subscribers={subscribers}

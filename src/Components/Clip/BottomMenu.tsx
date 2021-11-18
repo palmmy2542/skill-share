@@ -1,4 +1,3 @@
-import { MoreOutlined } from "@ant-design/icons";
 import { Drawer, List } from "antd";
 import React from "react";
 

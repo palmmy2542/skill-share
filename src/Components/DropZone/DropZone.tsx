@@ -1,15 +1,8 @@
 import { VideoCameraAddOutlined } from "@ant-design/icons";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import ReactPlayer from "react-player";
 import "./index.css";
-
-const thumbsContainer = {
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  marginTop: 16,
-};
 
 const thumbInner = {
   display: "flex",

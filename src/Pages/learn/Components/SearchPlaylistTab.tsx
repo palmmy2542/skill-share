@@ -1,5 +1,5 @@
 import { Col, Row, Typography } from "antd";
-import React, { useEffect } from "react";
+import React from "react";
 import { AllPlaylist } from "../../../interface";
 import { getPlaylistPreviewImage } from "../../../utils";
 
@@ -53,6 +53,7 @@ const SearchPlaylistTab = ({
           >
             <Col xs={12}>
               <img
+                alt="playlist-preview"
                 src={getPlaylistPreviewImage(videoList?.[0])}
                 className={"preview-playlist-image"}
               />

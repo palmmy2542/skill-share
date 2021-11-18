@@ -18,7 +18,7 @@ const ErrorContainer = () => {
         height: "100vh",
       }}
     >
-      <img src={error} />
+      <img src={error} alt="error" />
       <Typography.Title>Page not found</Typography.Title>
       <Button onClick={handleBack} size="small">
         Back to home

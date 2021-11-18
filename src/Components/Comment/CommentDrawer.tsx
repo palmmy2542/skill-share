@@ -1,25 +1,12 @@
-import {
-  CloseOutlined,
-  ExclamationCircleOutlined,
-  RightOutlined,
-} from "@ant-design/icons";
-import {
-  Drawer,
-  List,
-  Avatar,
-  Form,
-  Input,
-  Affix,
-  Button,
-  Popover,
-} from "antd";
+import { ExclamationCircleOutlined, RightOutlined } from "@ant-design/icons";
+import { Button, Drawer, Input, List } from "antd";
+import confirm from "antd/lib/modal/confirm";
 import React, { useEffect, useRef, useState } from "react";
 import useClipCommentContext from "../../Domains/ClipComment/useClipComment";
 import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
-import Comment from "./Comment";
 import { CommentProps } from "../../interface";
+import Comment from "./Comment";
 import "./index.css";
-import confirm from "antd/lib/modal/confirm";
 
 const CommentDrawer = ({
   visible,
@@ -111,7 +98,7 @@ const CommentDrawer = ({
         setIsLoading(false);
         scrollToBottom();
       });
-  }, [isUpdated, videoId]);
+  }, [isUpdated, videoId, getVideoComment]);
 
   return (
     <Drawer

@@ -19,7 +19,6 @@ const ClipFeed = ({
   setClips: React.Dispatch<React.SetStateAction<any>>;
 }) => {
   const ref = useRef<CarouselRef | null>(null);
-  const [shouldPlay, setShouldPlay] = useState(true);
   const [visible, setVisible] = useState(false);
   const [isFade, setIsFade] = useState(true);
   const userId = localStorage.getItem("skillUserId");
@@ -27,7 +26,6 @@ const ClipFeed = ({
     const temp = clips.slice();
     temp.forEach((item) => (item.isPlay = false));
     temp[to].isPlay = true;
-    setShouldPlay(false);
     setClips(temp);
     setCurrentIndex(to);
   };
@@ -75,7 +73,6 @@ const ClipFeed = ({
         infinite={false}
         ref={ref}
         dots={false}
-        afterChange={() => setShouldPlay(true)}
         beforeChange={(from, to) => handleChange(from, to)}
         initialSlide={currentIndex}
       >

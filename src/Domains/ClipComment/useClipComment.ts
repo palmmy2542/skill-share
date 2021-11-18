@@ -21,7 +21,6 @@ const useClipComment = () => {
       })
         .then((response) => {
           if (response.status === 200 || response.status === 201) {
-            // console.log("All video: ", response.data);
             return response.data;
           }
         })
@@ -54,7 +53,6 @@ const useClipComment = () => {
           config
         )
         .then((response) => {
-          console.log(response.data);
           if (response.status === 200 || response.status === 201) {
             return response.data;
           }

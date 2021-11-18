@@ -1,13 +1,10 @@
-import { Upload, Button, Input, Form, message, Row, Switch, Col } from "antd";
-
-import { file } from "@babel/types";
+import { Button, Form, Input, message, Switch } from "antd";
 import { useState } from "react";
-import { upload } from "./util";
 import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
 import { UploadClip } from "../../interface";
 import DropZone from "../DropZone/DropZone";
 import "./index.css";
-import { useHistory } from "react-router";
+import { upload } from "./util";
 
 const UploadForm = () => {
   const [form] = Form.useForm();
@@ -16,7 +13,6 @@ const UploadForm = () => {
   const { canAccessService } = useUserAuthenticationContext();
   const username = localStorage.getItem("skillUsername");
   const { TextArea } = Input;
-  const history = useHistory();
 
   const handleAddVideo = (file: any) => {
     form.setFieldsValue({ video: file });

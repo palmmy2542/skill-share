@@ -1,4 +1,4 @@
-import { Avatar, Col, Row, List } from "antd";
+import { Avatar, List } from "antd";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
 import "../index.css";
 
@@ -17,7 +17,7 @@ const SearchUsersTab = ({ searchWord }: { searchWord: string }) => {
         renderItem={(user) => (
           <List.Item>
             <List.Item.Meta
-              avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+              avatar={<Avatar>{user.name[0]}</Avatar>}
               title={<a href="https://ant.design">{user.name}</a>}
             />
           </List.Item>

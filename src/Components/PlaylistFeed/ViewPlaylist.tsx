@@ -1,22 +1,20 @@
-import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
-import { Button, Col, Drawer, Row, Divider, Typography } from "antd";
-import React, { useEffect } from "react";
-import Playlist from "./Playlist";
-import PreviewClip from "../PreviewClip/PreviewClip";
-import EditPlaylist from "./EditPlaylist";
+import { Button, Col, Drawer, Row, Typography } from "antd";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
+import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
 import { AllPlaylist, ClipProp } from "../../interface";
-import { useState } from "react";
-import "./index.css";
 import {
   getAllVideoInPlaylist,
   getPlaylistPreviewImage,
   getStreamingUrl,
   STATE,
 } from "../../utils";
-import { editPlaylist } from "./utils";
-import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
 import ClipFeed from "../ClipFeed/index";
-import { useHistory } from "react-router";
+import PreviewClip from "../PreviewClip/PreviewClip";
+import EditPlaylist from "./EditPlaylist";
+import "./index.css";
+import Playlist from "./Playlist";
+import { editPlaylist } from "./utils";
 
 const ViewPlaylist = ({
   state,

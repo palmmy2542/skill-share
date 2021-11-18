@@ -1,15 +1,14 @@
 
-import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
-import { Button, Col, Drawer, Row, Space, Typography } from "antd";
+import { PlusCircleOutlined } from "@ant-design/icons";
+import { Col, Drawer, Row, Typography } from "antd";
 import React, { useEffect, useState } from "react";
+import usePlaylistContext from "../../Domains/Playlist/usePlaylist";
+import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
+import { AllPlaylist } from "../../interface";
 import { getPreviewImageUrl, STATE } from "../../utils";
-import PlaylistForm from "../PlaylistForm";
 import CreatePlaylist from "./CreatePlaylist";
 import Playlist from "./Playlist";
 import ViewPlaylist from "./ViewPlaylist";
-import { AllPlaylist } from "../../interface";
-import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
-import usePlaylistContext from "../../Domains/Playlist/usePlaylist";
 
 const PlaylistFeed = ({
   currentVideoId,

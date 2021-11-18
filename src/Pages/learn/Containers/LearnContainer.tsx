@@ -1,6 +1,7 @@
-import { Button, Drawer, Input, Spin, Typography } from "antd";
+import { Drawer, Input, Spin, Typography } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
+import ClipFeed from "../../../Components/ClipFeed/index";
 import ViewPlaylist from "../../../Components/PlaylistFeed/ViewPlaylist";
 import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
 import usePlaylistContext from "../../../Domains/Playlist/usePlaylist";
@@ -8,7 +9,6 @@ import useUserAuthenticationContext from "../../../Domains/UserAuthentication/us
 import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
 import { AllPlaylist, ClipProp } from "../../../interface";
 import { STATE } from "../../../utils";
-import ClipFeed from "../../../Components/ClipFeed/index";
 import BasicCarousel from "../Components/BasicCarousel";
 import Searching from "../Components/Searching";
 import "../index.css";
@@ -92,7 +92,6 @@ const LearnContainer = () => {
     videoList,
     userId,
   }: AllPlaylist) => {
-    console.log("userId", userId);
     setIsShowPlaylist(true);
     setSelectedPlaylist({
       title,

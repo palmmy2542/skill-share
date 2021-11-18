@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect } from "react";
 import "./index.css";
 
 const Fader = ({
@@ -10,15 +10,15 @@ const Fader = ({
   setIsFade: React.Dispatch<React.SetStateAction<boolean>>;
   children: ReactElement<any, any>;
 }) => {
-    useEffect(() => {
-      if (isFade) {
-        const timeOut = setTimeout(() => {
-          if (isFade) setIsFade(false);
-        }, 4000);
+  useEffect(() => {
+    if (isFade) {
+      const timeOut = setTimeout(() => {
+        if (isFade) setIsFade(false);
+      }, 4000);
 
-        return () => clearTimeout(timeOut);
-      }
-    }, [isFade]);
+      return () => clearTimeout(timeOut);
+    }
+  }, [isFade]);
   return <div className={isFade ? "fade-in" : "fade-out"}>{children}</div>;
 };
 

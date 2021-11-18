@@ -1,22 +1,20 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import {
+  Button,
+  Col,
   Drawer,
   Form,
   Input,
-  Button,
-  Switch,
-  Row,
-  Col,
-  Popconfirm,
-  Modal,
   message,
+  Modal,
+  Row,
+  Switch,
 } from "antd";
-import { useState } from "react";
 import { useHistory } from "react-router";
 import useUserAuthenticationContext from "../../Domains/UserAuthentication/useUserAuthentication";
 import { deleteVideo } from "../UploadForm/util";
 import "./index.css";
-import { convertPermission, updateVideo } from "./utils";
+import { updateVideo } from "./utils";
 
 const { confirm } = Modal;
 

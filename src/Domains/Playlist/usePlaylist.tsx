@@ -3,7 +3,7 @@ import axios from "axios";
 import constate from "constate";
 import { useState } from "react";
 import { GAYEWAY_HOST } from "../../const";
-import { AllPlaylist, ClipProp } from "../../interface";
+import { AllPlaylist } from "../../interface";
 
 const usePlaylist = () => {
   const [playlist, setPlaylist] = useState<AllPlaylist[]>([

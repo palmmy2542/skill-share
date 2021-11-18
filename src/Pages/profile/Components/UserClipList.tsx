@@ -2,10 +2,9 @@ import { Col, Drawer, Row, Tabs } from "antd";
 import React, { useState } from "react";
 import { ImFilm } from "react-icons/im";
 import PlayListIcon from "../../../Assets/playlist.png";
+import ClipFeed from "../../../Components/ClipFeed/index";
 import PreviewClip from "../../../Components/PreviewClip";
 import { AllPlaylist, ClipProp } from "../../../interface";
-import { getPreviewImageUrl } from "../../../utils";
-import ClipFeed from "../../../Components/ClipFeed/index";
 
 const { TabPane } = Tabs;
 
@@ -92,6 +91,7 @@ const UserClipList = ({
           tab={
             <span>
               <img
+                alt="playlist-icon"
                 src={PlayListIcon}
                 style={{ width: "32px", height: "32px" }}
               />
@@ -133,12 +133,7 @@ const UserClipList = ({
                         videoList,
                       })
                     }
-                  >
-                    <img
-                      src={getPreviewImageUrl(videoList?.[0])}
-                      style={{ width: "100%", height: "100%" }}
-                    />
-                  </Col>
+                  ></Col>
                 )
               )}
           </Row>

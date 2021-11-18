@@ -4,12 +4,10 @@ import {
   MessageOutlined,
   MoreOutlined,
   RightCircleOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 import { Avatar, Typography } from "antd";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
-import usePlaylistContext from "../../Domains/Playlist/usePlaylist";
 import Fader from "../Fader/Fader";
 import PlaylistFeed from "../PlaylistFeed";
 import BottomMenu from "./BottomMenu";
@@ -62,13 +60,11 @@ const Clip = ({
   handleClose: () => void;
 }) => {
   const playerRef = React.useRef<ReactPlayer | null>(null);
-  const [isShowControl, setIsShowControl] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+
   const [isExpandable, setIsExpandable] = useState(true);
   const [isShow, setIsShow] = useState(false);
   const [isShowEditClip, setIsShowEditClip] = useState(false);
   const [isShowPlaylist, setIsShowPlaylist] = useState(false);
-  const { playlist } = usePlaylistContext();
   const handleCloseBottomMenu = () => {
     setIsShow(false);
   };
