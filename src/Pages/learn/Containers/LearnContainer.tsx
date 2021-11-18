@@ -127,13 +127,8 @@ const LearnContainer = () => {
                 url: getStreamingUrl(videoUploaded.videoId),
                 previewImage: getPreviewImageUrl(videoUploaded.videoId),
                 userId: videoUploaded.creator,
-                name: `TEST ${index}`,
+                username: `TEST ${index}`,
                 isPlay: false,
-                comments: [
-                  { name: "Name_1", comment: "Comment_1" },
-                  { name: "Name_2", comment: "Comment_2" },
-                  { name: "Name_3", comment: "Comment_3" },
-                ],
               };
             }
           );

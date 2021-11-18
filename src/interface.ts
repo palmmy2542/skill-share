@@ -13,10 +13,10 @@ export interface ClipProp {
   previewImage: string;
   permission: string;
   userId: string;
-  name?: string;
+  username: string;
   url: string;
   isPlay: boolean;
-  comments: Array<{ name: string; comment: string }>;
+  videoId: string;
 }
 
 export interface UploadClip {

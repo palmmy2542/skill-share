@@ -1,6 +1,7 @@
 import { Carousel } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
 import React, { useRef, useState } from "react";
+import { ClipProp } from "../../interface";
 import Clip from "../Clip";
 import { CommentDrawer } from "../Comment/index";
 
@@ -82,24 +83,24 @@ const ClipFeed = ({
           (
             {
               videoId,
-              name,
+              username,
               url,
               isPlay,
               title,
               description,
               previewImage,
               permission,
-            },
+            }: ClipProp,
             index
           ) => (
             <Clip
               videoId={videoId}
               isFade={isFade}
               previewImage={previewImage}
-              name={name}
+              name={username}
               url={url}
               height={"100vh"}
-              key={index + name}
+              key={index + username}
               isFirst={index === 0}
               isLast={index === clips.length - 1}
               index={index}

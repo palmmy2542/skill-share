@@ -55,7 +55,7 @@ const BasicCarousel = ({
     <Carousel {...settings} draggable={true}>
       {itemList.map(
         (
-          { name, url, isPlay, title, description, previewImage }: ClipProp,
+          { username, url, isPlay, title, description, previewImage }: ClipProp,
           index
         ) => (
           <div

@@ -41,7 +41,7 @@ const Clip = ({
 }: {
   videoId: string;
   isFade: boolean;
-  name?: string | undefined;
+  name: string;
   previewImage: string;
   url: string;
   height?: string | undefined;
@@ -92,7 +92,6 @@ const Clip = ({
   const handleOpenPlayList = () => {
     setIsShowPlaylist(true);
   };
-  console.log(isPlay);
 
   return (
     <div
@@ -125,29 +124,7 @@ const Clip = ({
             }}
             onClick={handleClose}
           />
-          <div
-            style={{
-              position: "absolute",
-              bottom: 150,
-              right: 25,
-              zIndex: 100,
-            }}
-          >
-            <Avatar
-              style={{
-                width: "50px",
-                height: "50px",
-              }}
-            >
-              <UserOutlined
-                style={{
-                  color: "#FFF",
-                  fontSize: "60px",
-                }}
-              />
-            </Avatar>
-            <Typography style={{ color: "#FFF" }}>{name}</Typography>
-          </div>
+
           <div
             style={{
               display: "flex",
@@ -186,32 +163,51 @@ const Clip = ({
               />
             )}
           </div>
-          <MoreOutlined
+          <div
             style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
               position: "absolute",
-              bottom: 250,
-              right: 30,
-              color: "#FFF",
-              fontSize: "40px",
+              textAlign: "center",
               zIndex: 100,
-              transform: "rotate(90deg)",
-              borderRadius: "50%",
-              border: "1px solid #FFF",
-            }}
-            onClick={() => handleOpenBottomMenu()}
-          />
-
-          <MessageOutlined
-            style={{
-              position: "absolute",
+              right: 10,
               bottom: 100,
-              right: 30,
-              color: "#FFF",
-              fontSize: "40px",
-              zIndex: 100,
             }}
-            onClick={() => handleOpenVideoComment()}
-          />
+          >
+            <MoreOutlined
+              style={{
+                // position: "absolute",
+                // bottom: 230,
+                // right: 30,
+                color: "#FFF",
+                width: "40px",
+                height: "40px",
+                fontSize: "40px",
+                transform: "rotate(90deg)",
+                borderRadius: "50%",
+                border: "1px solid #FFF",
+                marginBottom: "10px",
+              }}
+              onClick={() => handleOpenBottomMenu()}
+            />
+            <div
+              style={{
+                textAlign: "center",
+              }}
+            >
+              <Avatar size={40}>{name[0]}</Avatar>
+              <Typography style={{ color: "#FFF" }}>{name}</Typography>
+            </div>
+            <MessageOutlined
+              style={{
+                color: "#FFF",
+                fontSize: "40px",
+              }}
+              onClick={() => handleOpenVideoComment()}
+            />
+          </div>
 
           <div
             style={{

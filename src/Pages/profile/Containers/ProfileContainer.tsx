@@ -112,13 +112,8 @@ const ProfileContainer = (props: any) => {
                         ),
                         userId: item.videoUploaded.creator,
                         permission: item.videoUploaded.permission,
-                        name: `TEST ${index}`,
+                        username: `TEST ${index}`,
                         isPlay: false,
-                        comments: [
-                          { name: "Name_1", comment: "Comment_1" },
-                          { name: "Name_2", comment: "Comment_2" },
-                          { name: "Name_3", comment: "Comment_3" },
-                        ],
                       };
                     }
                   );
@@ -147,9 +142,7 @@ const ProfileContainer = (props: any) => {
       <Spin spinning={isLoading} size={"large"}>
         <Navbar name={userData.username} />
         <div id="profile" className="page-layout">
-          <UserAvatar>
-            <UserOutlined />
-          </UserAvatar>
+          <UserAvatar>{userData.username[0]}</UserAvatar>
           <UserInformation
             subscribing={subscribing}
             subscribers={subscribers}
