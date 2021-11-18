@@ -12,6 +12,7 @@ export interface ClipProp {
   description: string;
   previewImage: string;
   permission: string;
+  userId: string;
   name?: string;
   url: string;
   isPlay: boolean;
@@ -35,3 +36,13 @@ export interface AllPlaylist {
   creatorId?: string;
 }
 
+export interface CommentProps {
+  id: string;
+  userId: string;
+  videoId: string;
+  username: string;
+  description: string;
+  updatedAt: string;
+  createdAt: string;
+  edited: boolean;
+}

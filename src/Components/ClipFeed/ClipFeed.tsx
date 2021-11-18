@@ -1,8 +1,7 @@
 import { Carousel } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Clip from "../Clip";
-import useClipFeedContext from "../../Domains/ClipFeed/useClipFeed";
 import { CommentDrawer } from "../Comment/index";
 
 const ClipFeed = ({
@@ -22,6 +21,7 @@ const ClipFeed = ({
   const [shouldPlay, setShouldPlay] = useState(true);
   const [visible, setVisible] = useState(false);
   const [isFade, setIsFade] = useState(true);
+  const userId = localStorage.getItem("skillUserId");
   const handleChange = (from: number, to: number) => {
     const temp = clips.slice();
     temp.forEach((item) => (item.isPlay = false));
@@ -64,9 +64,11 @@ const ClipFeed = ({
   return (
     <div style={{ overflow: "hidden" }}>
       <CommentDrawer
+        videoId={clips[currentIndex].videoId}
+        creatorId={clips[currentIndex].userId}
+        userId={userId}
         visible={visible}
         setVisible={setVisible}
-        comments={clips[currentIndex].comments}
       />
       <Carousel
         infinite={false}

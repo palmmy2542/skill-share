@@ -7,16 +7,14 @@ const useClipComment = () => {
   const getVideoComment = async ({
     token,
     videoId,
-    userId,
   }: {
     token: string;
     videoId: string;
-    userId: string;
   }): Promise<any> => {
-    if (token && userId) {
+    if (token && videoId) {
       return axios({
         method: "GET",
-        url: `${GAYEWAY_HOST}/comments/comment?video=${videoId}&userId=${userId}`,
+        url: `${GAYEWAY_HOST}/comments/comment?videoId=${videoId}`,
         headers: {
           Authorization: `${token.trim()}`,
         },
@@ -35,12 +33,12 @@ const useClipComment = () => {
   const postComment = async ({
     token,
     description,
-    videId,
+    videoId,
     userId,
   }: {
-    token: string | null;
+    token: string;
     description: string;
-    videId: string;
+    videoId: string;
     userId: string;
   }): Promise<any> => {
     if (token) {
@@ -52,10 +50,11 @@ const useClipComment = () => {
       return axios
         .post(
           `${GAYEWAY_HOST}/comments/comment`,
-          { videId, description, userId },
+          { videoId, description, userId },
           config
         )
         .then((response) => {
+          console.log(response.data);
           if (response.status === 200 || response.status === 201) {
             return response.data;
           }

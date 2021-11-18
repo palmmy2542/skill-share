@@ -166,6 +166,7 @@ const ViewPlaylist = ({
                 description: videoUploaded.description,
                 permission: videoUploaded.permission,
                 url: getStreamingUrl(videoUploaded.videoId),
+                userId: videoUploaded.creator,
                 name: `TEST ${index}`,
                 isPlay: false,
                 comments: [

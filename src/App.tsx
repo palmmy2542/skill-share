@@ -12,6 +12,7 @@ import useUserAuthenticationContext from "./Domains/UserAuthentication/useUserAu
 import { UserDataProvider } from "./Domains/UserData/useUserDataContext";
 import { PlayListProvider } from "./Domains/Playlist/usePlaylist";
 import Error from "./Pages/error";
+import { ClipCommentProvider } from "./Domains/ClipComment/useClipComment";
 
 function App() {
   const { canAccessService } = useUserAuthenticationContext();
@@ -20,12 +21,13 @@ function App() {
     <div className="App">
       <UserDataProvider>
         <ClipFeedProvider>
-          <PlayListProvider>
-            <Switch>
-              <Route exact path="/error">
-                <Error />
-              </Route>
-              {/* <Route
+          <ClipCommentProvider>
+            <PlayListProvider>
+              <Switch>
+                <Route exact path="/error">
+                  <Error />
+                </Route>
+                {/* <Route
                 exact
                 path="/"
                 render={() => {
@@ -36,34 +38,35 @@ function App() {
                   }
                 }}
               ></Route> */}
-              <Route exact path="/learn">
-                <Learn />
-              </Route>
-              <Route exact path="/test">
-                <Home />
-              </Route>
-              <Route exact path="/register">
-                <Register />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-              <Route exact path="/:usernameParam">
-                <Profile />
-              </Route>
-              <Route
-                exact
-                path="/"
-                render={() => {
-                  if (canAccessService()) {
-                    return <Redirect to={`/${username}`} />;
-                  } else {
-                    return <Redirect to={`/login`} />;
-                  }
-                }}
-              ></Route>
-            </Switch>
-          </PlayListProvider>
+                <Route exact path="/learn">
+                  <Learn />
+                </Route>
+                <Route exact path="/test">
+                  <Home />
+                </Route>
+                <Route exact path="/register">
+                  <Register />
+                </Route>
+                <Route exact path="/login">
+                  <Login />
+                </Route>
+                <Route exact path="/:usernameParam">
+                  <Profile />
+                </Route>
+                <Route
+                  exact
+                  path="/"
+                  render={() => {
+                    if (canAccessService()) {
+                      return <Redirect to={`/${username}`} />;
+                    } else {
+                      return <Redirect to={`/login`} />;
+                    }
+                  }}
+                ></Route>
+              </Switch>
+            </PlayListProvider>
+          </ClipCommentProvider>
         </ClipFeedProvider>
       </UserDataProvider>
     </div>

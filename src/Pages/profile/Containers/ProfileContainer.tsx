@@ -110,6 +110,7 @@ const ProfileContainer = (props: any) => {
                         previewImage: getPreviewImageUrl(
                           item.videoUploaded.videoId
                         ),
+                        userId: item.videoUploaded.creator,
                         permission: item.videoUploaded.permission,
                         name: `TEST ${index}`,
                         isPlay: false,
