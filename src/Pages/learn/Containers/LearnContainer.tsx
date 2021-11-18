@@ -16,6 +16,7 @@ import "../index.css";
 const { Search } = Input;
 
 const LearnContainer = () => {
+  const [users, setUsers] = useState<any[]>([]);
   const [isShowPlaylist, setIsShowPlaylist] = useState(false);
   const [searchField, setSearchField] = useState("");
   const [searchShow, setSearchShow] = useState(false);
@@ -26,6 +27,7 @@ const LearnContainer = () => {
   } = useUserDataContext();
   const userId = localStorage.getItem("skillUserId");
   const { getAllPlaylist } = usePlaylistContext();
+  const { getAllUser } = useUserDataContext();
   const [isLoading, setIsLoading] = useState(true);
 
   const [playlist, setPlaylist] = useState<AllPlaylist[]>();
@@ -38,7 +40,6 @@ const LearnContainer = () => {
     () => clips.slice(0, Math.round(clips.length / 3)),
     [clips]
   );
-
   const clipRecommend = useMemo(
     () =>
       clips.slice(
@@ -115,32 +116,41 @@ const LearnContainer = () => {
 
   useEffect(() => {
     if (token) {
-      getAllVideo(token).then((data) => {
-        if (data) {
-          const temp: ClipProp[] = data.map(
-            ({ videoUploaded }: { videoUploaded: any }, index: number) => {
-              return {
-                videoId: videoUploaded.videoId,
-                title: videoUploaded.title,
-                description: videoUploaded.description,
-                url: getStreamingUrl(videoUploaded.videoId),
-                previewImage: getPreviewImageUrl(videoUploaded.videoId),
-                userId: videoUploaded.creator,
-                username: `TEST ${index}`,
-                isPlay: false,
-              };
-            }
-          );
-          setClips(temp);
-        }
-        setIsLoading(false);
-      });
-      getAllPlaylist(token).then((data) => {
-        if (data) {
-          setPlaylist([...data]);
-        }
-        setIsLoading(false);
-      });
+      getAllVideo(token)
+        .then((data) => {
+          if (data) {
+            const temp: ClipProp[] = data.map(
+              ({ videoUploaded }: { videoUploaded: any }, index: number) => {
+                return {
+                  videoId: videoUploaded.videoId,
+                  title: videoUploaded.title,
+                  description: videoUploaded.description,
+                  url: getStreamingUrl(videoUploaded.videoId),
+                  previewImage: getPreviewImageUrl(videoUploaded.videoId),
+                  userId: videoUploaded.creator,
+                  username: `TEST ${index}`,
+                  isPlay: false,
+                };
+              }
+            );
+            setClips(temp);
+          }
+        })
+        .then(() =>
+          getAllPlaylist(token)
+            .then((data) => {
+              if (data) {
+                setPlaylist([...data]);
+              }
+            })
+            .then(() =>
+              getAllUser().then((data) => {
+                if (data) setUsers(data);
+                setIsLoading(false);
+              })
+            )
+        )
+        .catch(() => setIsLoading(false));
     }
   }, []);
 
@@ -158,6 +168,7 @@ const LearnContainer = () => {
         {searchShow && playlist ? (
           <Searching
             searchField={searchField}
+            users={users}
             clips={clips}
             handleOpen={handleOpen}
             handleClickSlide={handleClickSlide}

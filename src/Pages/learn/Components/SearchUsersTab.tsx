@@ -1,24 +1,36 @@
 import { Avatar, List } from "antd";
-import useClipFeedContext from "../../../Domains/ClipFeed/useClipFeed";
+import { useMemo } from "react";
+import { useHistory } from "react-router";
 import "../index.css";
 
-const SearchUsersTab = ({ searchWord }: { searchWord: string }) => {
-  const { clips } = useClipFeedContext();
-  const filteredUsers = clips.filter((user) => {
-    return user.name.toLowerCase().includes(searchWord.toLowerCase());
-  });
+const SearchUsersTab = ({
+  searchWord,
+  users,
+}: {
+  searchWord: string;
+  users: Array<any>;
+}) => {
+  const history = useHistory();
+  const filteredUsers = useMemo(() => {
+    return searchWord === ""
+      ? users
+      : users.filter((user) => {
+          return user.username.toLowerCase().includes(searchWord.toLowerCase());
+        });
+  }, [searchWord]);
+
   return (
     <div id="search-users">
       <List
         size="large"
         itemLayout="horizontal"
         dataSource={filteredUsers}
-        style={{ textAlign: "left" }}
+        style={{ textAlign: "left", cursor: "pointer" }}
         renderItem={(user) => (
-          <List.Item>
+          <List.Item onClick={() => history.push(`/${user.username}`)}>
             <List.Item.Meta
-              avatar={<Avatar>{user.name[0]}</Avatar>}
-              title={<a href="https://ant.design">{user.name}</a>}
+              avatar={<Avatar>{user?.username[0]}</Avatar>}
+              title={<a href="https://ant.design">{user?.username}</a>}
             />
           </List.Item>
         )}

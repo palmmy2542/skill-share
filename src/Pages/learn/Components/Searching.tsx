@@ -1,4 +1,7 @@
 import { Divider, Tabs } from "antd";
+import { useEffect, useState } from "react";
+import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
+import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
 import { AllPlaylist, ClipProp } from "../../../interface";
 import SearchClipsTab from "../Components/SearchClipsTab";
 import SearchUsersTab from "../Components/SearchUsersTab";
@@ -20,6 +23,7 @@ function callback(key: any) {
 const Searching = ({
   searchField,
   clips,
+  users,
   handleOpen,
   handleClickSlide,
   handleSetIsDrag,
@@ -28,6 +32,7 @@ const Searching = ({
   handleSelectPlaylist,
 }: {
   searchField: string;
+  users: Array<any>;
   clips: Array<ClipProp>;
   handleOpen: () => void;
   handleClickSlide: (index: number) => void;
@@ -46,9 +51,7 @@ const Searching = ({
   const searchList = (tab: string) => {
     switch (tab) {
       case SEARCH_TYPE.USERS:
-        return <SearchUsersTab searchWord={searchField} />;
-      // case "Tags":
-      //   return ( <SearchTagsTab searchWord={searchField}/> );
+        return <SearchUsersTab searchWord={searchField} users={users} />;
       case SEARCH_TYPE.CLIPS:
         return (
           <SearchClipsTab

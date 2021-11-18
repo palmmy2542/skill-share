@@ -37,10 +37,25 @@ const useUserData = () => {
     return null;
   };
 
+  const getAllUser = async (): Promise<any> => {
+    if (token) {
+      const response = await axios({
+        method: "GET",
+        url: `${GAYEWAY_HOST}/account/users`,
+        headers: {
+          Authorization: `${token.trim()}`,
+        },
+      });
+      if (response.status === 200) {
+        return response.data;
+      }
+    }
+    return null;
+  };
+
   return {
     userData,
-    // clips,
-    // setClips,
+    getAllUser,
     getMe,
     token,
     isSubscribed,
