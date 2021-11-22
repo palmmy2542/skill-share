@@ -238,6 +238,7 @@ const ViewPlaylist = ({
                   >
                     <PreviewClip
                       previewImage={getPlaylistPreviewImage(videoId)}
+                      isPrivate={permission === "private"}
                       url={url}
                       isPlay={isPlay}
                       index={index}

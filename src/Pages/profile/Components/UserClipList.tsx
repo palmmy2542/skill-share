@@ -62,30 +62,33 @@ const UserClipList = ({
           key="1"
         >
           <Row gutter={[8, 8]}>
-            {clips.map(({ url, previewImage }: ClipProp, index: number) => (
-              <Col
-                xs={12}
-                md={8}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  height: "250px",
-                }}
-                key={index}
-              >
-                <PreviewClip
-                  previewImage={previewImage}
-                  url={url}
-                  isPlay={false}
-                  index={index}
+            {clips.map(
+              ({ url, previewImage, permission }: ClipProp, index: number) => (
+                <Col
+                  xs={12}
+                  md={8}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    height: "250px",
+                  }}
                   key={index}
-                  handleClickSlide={handleClickSlide}
-                  handleSetIsDrag={handleSetIsDrag}
-                  isDrag={isDrag}
-                  handleOpen={handleOpen}
-                />
-              </Col>
-            ))}
+                >
+                  <PreviewClip
+                    isPrivate={permission === "private"}
+                    previewImage={previewImage}
+                    url={url}
+                    isPlay={false}
+                    index={index}
+                    key={index}
+                    handleClickSlide={handleClickSlide}
+                    handleSetIsDrag={handleSetIsDrag}
+                    isDrag={isDrag}
+                    handleOpen={handleOpen}
+                  />
+                </Col>
+              )
+            )}
           </Row>
         </TabPane>
         <TabPane

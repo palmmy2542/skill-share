@@ -1,3 +1,4 @@
+import { LockOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import "./index.css";
@@ -13,6 +14,7 @@ const PreviewClip = ({
   handleSetIsDrag,
   isDrag,
   handleOpen,
+  isPrivate,
 }: {
   name?: string | undefined;
   url: string;
@@ -20,6 +22,7 @@ const PreviewClip = ({
   previewImage: string;
   index: number;
   isPlay?: boolean;
+  isPrivate: boolean;
   handleClickSlide?: (index: number) => void;
   handleSetIsDrag: (state: boolean) => void;
   isDrag: boolean;
@@ -60,6 +63,16 @@ const PreviewClip = ({
         }
       }}
     >
+      {isPrivate && (
+        <LockOutlined
+          style={{
+            color: "#FFFF",
+            position: "absolute",
+            right: "2%",
+            bottom: "2%",
+          }}
+        />
+      )}
       <ReactPlayer
         url={url}
         muted

@@ -52,37 +52,33 @@ const BasicCarousel = ({
 }) => {
   return (
     <Carousel {...settings} draggable={true}>
-      {itemList.map(
-        (
-          { username, url, isPlay, title, description, previewImage }: ClipProp,
-          index
-        ) => (
-          <div
-            style={{
-              background: "#000",
-              display: "flex",
-              alignItems: "center",
-              position: "relative",
-              width: "100%",
-              cursor: "pointer",
-            }}
+      {itemList.map(({ url, permission, previewImage }: ClipProp, index) => (
+        <div
+          style={{
+            background: "#000",
+            display: "flex",
+            alignItems: "center",
+            position: "relative",
+            width: "100%",
+            cursor: "pointer",
+          }}
+          key={index}
+        >
+          <PreviewClip
+            previewImage={previewImage}
+            isPrivate={permission === "private"}
+            url={url}
+            isPlay={false}
+            index={index}
             key={index}
-          >
-            <PreviewClip
-              previewImage={previewImage}
-              url={url}
-              isPlay={false}
-              index={index}
-              key={index}
-              height={"250px"}
-              handleClickSlide={handleClickSlide}
-              handleSetIsDrag={handleSetIsDrag}
-              isDrag={isDrag}
-              handleOpen={handleOpen}
-            />
-          </div>
-        )
-      )}
+            height={"250px"}
+            handleClickSlide={handleClickSlide}
+            handleSetIsDrag={handleSetIsDrag}
+            isDrag={isDrag}
+            handleOpen={handleOpen}
+          />
+        </div>
+      ))}
     </Carousel>
   );
 };
