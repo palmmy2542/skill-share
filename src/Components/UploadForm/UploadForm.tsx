@@ -21,7 +21,6 @@ const UploadForm = () => {
 
   const onFinish = (values: UploadClip) => {
     message.loading("Uploading . . .");
-    console.log("values", values);
     setIsLoading(true);
     upload({ token: canAccessService(), body: values })
       .then(() => {

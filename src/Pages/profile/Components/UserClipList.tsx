@@ -5,6 +5,7 @@ import PlayListIcon from "../../../Assets/playlist.png";
 import ClipFeed from "../../../Components/ClipFeed/index";
 import PreviewClip from "../../../Components/PreviewClip";
 import { AllPlaylist, ClipProp } from "../../../interface";
+import { getPreviewImageUrl } from "../../../utils";
 
 const { TabPane } = Tabs;
 
@@ -133,7 +134,9 @@ const UserClipList = ({
                         videoList,
                       })
                     }
-                  ></Col>
+                  >
+                    <img src={getPreviewImageUrl(videoList[0])} />
+                  </Col>
                 )
               )}
           </Row>

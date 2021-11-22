@@ -155,21 +155,22 @@ const ViewPlaylist = ({
     getAllVideoInPlaylist({ token: canAccessService(), videoList })?.then(
       (data) => {
         if (data && data?.[0]) {
-          const temp: ClipProp[] = data.map((video: any, index: number) => {
-            if (video.length > 0) {
-              const { videoUploaded } = video[0];
-              return {
-                videoId: videoUploaded.videoId,
-                title: videoUploaded.title,
-                description: videoUploaded.description,
-                permission: videoUploaded.permission,
-                url: getStreamingUrl(videoUploaded.videoId),
-                userId: videoUploaded.creator,
-                username: `TEST ${index}`,
-                isPlay: false,
-              };
+          const temp: ClipProp[] = data.map(
+            (videoUploaded: any, index: number) => {
+              if (videoUploaded.length > 0) {
+                return {
+                  videoId: videoUploaded.videoId,
+                  title: videoUploaded.title,
+                  description: videoUploaded.description,
+                  permission: videoUploaded.permission,
+                  url: getStreamingUrl(videoUploaded.videoId),
+                  userId: videoUploaded.creator,
+                  username: videoUploaded.creatorName,
+                  isPlay: false,
+                };
+              }
             }
-          });
+          );
           const temp2 = temp.filter((item) => item !== undefined);
           if (temp2) setAllVideo(temp2);
         }

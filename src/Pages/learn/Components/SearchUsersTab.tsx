@@ -30,7 +30,7 @@ const SearchUsersTab = ({
           <List.Item onClick={() => history.push(`/${user.username}`)}>
             <List.Item.Meta
               avatar={<Avatar>{user?.username[0]}</Avatar>}
-              title={<a href="https://ant.design">{user?.username}</a>}
+              title={user?.username}
             />
           </List.Item>
         )}

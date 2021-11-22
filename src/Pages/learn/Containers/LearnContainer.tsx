@@ -120,7 +120,7 @@ const LearnContainer = () => {
         .then((data) => {
           if (data) {
             const temp: ClipProp[] = data.map(
-              ({ videoUploaded }: { videoUploaded: any }, index: number) => {
+              (videoUploaded: any, index: number) => {
                 return {
                   videoId: videoUploaded.videoId,
                   title: videoUploaded.title,
@@ -128,7 +128,7 @@ const LearnContainer = () => {
                   url: getStreamingUrl(videoUploaded.videoId),
                   previewImage: getPreviewImageUrl(videoUploaded.videoId),
                   userId: videoUploaded.creator,
-                  username: `TEST ${index}`,
+                  username: videoUploaded.creatorName,
                   isPlay: false,
                 };
               }

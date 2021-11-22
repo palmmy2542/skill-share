@@ -1,6 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
-import { GAYEWAY_HOST } from "./const";
+import { GAYEWAY_HOST, VIDEO_GAYEWAY_HOST } from "./const";
 
 export type Token = {
   token: string;
@@ -15,13 +15,13 @@ export const PERMISSION = (permission: boolean) => {
 };
 
 export const getPlaylistPreviewImage = (videoId: string) =>
-  `https://skill-share-streaming-service-znv5z.ondigitalocean.app/video/${videoId}/poster.jpg`;
+  `${VIDEO_GAYEWAY_HOST}/video/${videoId}/poster.jpg`;
 
 export const getStreamingUrl = (videoId: string) =>
-  `https://skill-share-streaming-service-znv5z.ondigitalocean.app/video/${videoId}/playlist.m3u8`;
+  `${VIDEO_GAYEWAY_HOST}/video/${videoId}/playlist.m3u8`;
 
 export const getPreviewImageUrl = (videoId: string) =>
-  `https://skill-share-streaming-service-znv5z.ondigitalocean.app/video/${videoId}/poster.jpg`;
+  `${VIDEO_GAYEWAY_HOST}/${videoId}/poster.jpg`;
 
 export const getAllVideoInPlaylist = ({
   token,

@@ -37,6 +37,27 @@ const useUserData = () => {
     return null;
   };
 
+
+  const getUserByUsername = async ({
+    username,
+  }: {
+    username: string;
+  }): Promise<any> => {
+    if (token) {
+      const response = await axios({
+        method: "GET",
+        url: `${GAYEWAY_HOST}/account/user?username=${username}`,
+        headers: {
+          Authorization: `${token.trim()}`,
+        },
+      });
+      if (response.status === 200) {
+        return response.data;
+      }
+    }
+    return null;
+  };
+
   const getAllUser = async (): Promise<any> => {
     if (token) {
       const response = await axios({
@@ -56,6 +77,7 @@ const useUserData = () => {
   return {
     userData,
     getAllUser,
+    getUserByUsername,
     getMe,
     token,
     isSubscribed,

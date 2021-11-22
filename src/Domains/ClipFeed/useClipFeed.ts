@@ -2,7 +2,7 @@ import { message } from "antd";
 import axios from "axios";
 import constate from "constate";
 import { useState } from "react";
-import { GAYEWAY_HOST } from "../../const";
+import { GAYEWAY_HOST, VIDEO_GAYEWAY_HOST } from "../../const";
 import { ClipProp } from "../../interface";
 
 const useClipFeed = () => {
@@ -101,10 +101,13 @@ const useClipFeed = () => {
   ]);
 
   const getStreamingUrl = (videoId: string) =>
-    `https://skill-share-streaming-service-znv5z.ondigitalocean.app/video/${videoId}/playlist.m3u8`;
+    `${VIDEO_GAYEWAY_HOST}/video/${videoId}/playlist.m3u8`;
+
+  // http://skillshare-gateway.ddns.net:9100/
+  // https://skill-share-streaming-service-znv5z.ondigitalocean.app/
 
   const getPreviewImageUrl = (videoId: string) =>
-    `https://skill-share-streaming-service-znv5z.ondigitalocean.app/video/${videoId}/poster.jpg`;
+    `${VIDEO_GAYEWAY_HOST}/${videoId}/poster.jpg`;
 
   const getAllVideo = async (token: string | undefined): Promise<any> => {
     if (token) {
@@ -179,7 +182,7 @@ const useClipFeed = () => {
     getStreamingUrl,
     getPreviewImageUrl,
   };
-};
+};;
 
 const [ClipFeedProvider, useClipFeedContext] = constate(useClipFeed);
 

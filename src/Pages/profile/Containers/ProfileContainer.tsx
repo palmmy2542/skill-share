@@ -1,6 +1,6 @@
 import { Button, message, Spin } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
 import Navbar from "../../../Components/Navbar/Navbar";
 import ViewPlaylist from "../../../Components/PlaylistFeed/ViewPlaylist";
@@ -29,7 +29,10 @@ const ProfileContainer = (props: any) => {
     subscribers: 0,
   });
 
-  const { isSubscribed, getMe } = useUserDataContext();
+  const { subscribing, subscribers } = userData;
+
+  const { isSubscribed, getMe, getUserByUsername } = useUserDataContext();
+  const history = useHistory();
   const { getVideoByUserId, getStreamingUrl, getPreviewImageUrl } =
     useClipFeedContext();
   const { canAccessService } = useUserAuthenticationContext();
@@ -64,79 +67,67 @@ const ProfileContainer = (props: any) => {
     });
   };
 
-  const { subscribing, subscribers } = userData;
-
   const renderButton = () => {
     if (isMe) {
       return;
     } else if (isSubscribed) {
       return <Button size={"middle"}>Un subscribe</Button>;
-    } else if (!isSubscribed) {
-      return (
-        <Button size={"middle"} type={"primary"}>
-          subscribe
-        </Button>
-      );
     }
   };
 
   useEffect(() => {
     if (token) {
-      if (isMe) {
-        getMe()
-          .then((res) => {
-            if (res) {
-              setUserData({
-                username: res.username,
-                id: res.id,
-                fname: res.fname,
-                lname: res.lname,
-                subscribers: res.subscribers ?? 0,
-                subscribing: res.subscribing ?? 0,
-              });
-              localStorage.setItem("skillUserId", res.id);
-              return res.id;
-            }
-          })
-          .then((id) => {
-            if (id)
-              getVideoByUserId(token, id).then((data) => {
-                if (data) {
-                  const temp: ClipProp[] = data.map(
-                    (item: any, index: number) => {
-                      return {
-                        videoId: item.videoUploaded.videoId,
-                        title: item.videoUploaded.title,
-                        description: item.videoUploaded.description,
-                        url: getStreamingUrl(item.videoUploaded.videoId),
-                        previewImage: getPreviewImageUrl(
-                          item.videoUploaded.videoId
-                        ),
-                        userId: item.videoUploaded.creator,
-                        permission: item.videoUploaded.permission,
-                        username: `TEST ${index}`,
-                        isPlay: false,
-                      };
-                    }
-                  );
-                  setClips(temp);
-                }
-                setIsLoading(false);
-              });
-            getPlaylistByUserId(token, id).then((data) => {
+      getUserByUsername({ username: usernameParam })
+        .then((res) => {
+          if (res) {
+            setUserData({
+              username: res.username,
+              id: res.id,
+              fname: res.fname,
+              lname: res.lname,
+              subscribers: res.subscribers ?? 0,
+              subscribing: res.subscribing ?? 0,
+            });
+            localStorage.setItem("skillUserId", res.id);
+            return res.id;
+          }
+        })
+        .then((id) => {
+          if (id)
+            getVideoByUserId(token, id).then((data) => {
               if (data) {
-                setPlaylist([...data]);
+                const temp: ClipProp[] = data.map(
+                  (videoUploaded: any, index: number) => {
+                    return {
+                      videoId: videoUploaded.videoId,
+                      title: videoUploaded.title,
+                      description: videoUploaded.description,
+                      url: getStreamingUrl(videoUploaded.videoId),
+                      previewImage: getPreviewImageUrl(videoUploaded.videoId),
+                      userId: videoUploaded.creator,
+                      permission: videoUploaded.permission,
+                      username: videoUploaded.creatorName,
+                      isPlay: false,
+                    };
+                  }
+                );
+                setClips(temp);
               }
               setIsLoading(false);
             });
-          })
-          .catch((err) => {
-            message.error(err.response.data.message);
+          getPlaylistByUserId(token, id).then((data) => {
+            if (data) {
+              setPlaylist([...data]);
+            }
             setIsLoading(false);
           });
-      } else setIsLoading(false);
+        })
+        .catch((err) => {
+          message.error(err.response.data.message);
+          history.push("/error");
+        });
     }
-  }, [isMe]);
+  }, [usernameParam]);
 
   return (
     <>
@@ -145,9 +136,8 @@ const ProfileContainer = (props: any) => {
         <div id="profile" className="page-layout">
           <UserAvatar>{usernameParam[0]}</UserAvatar>
           <UserInformation
-            subscribing={subscribing}
-            subscribers={subscribers}
-            clips={clips}
+            playlistNumber={playlist?.length}
+            clipNumber={clips.length}
           />
           {renderButton()}
           <UserClipList
