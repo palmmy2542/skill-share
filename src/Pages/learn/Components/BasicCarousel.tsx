@@ -43,12 +43,14 @@ const BasicCarousel = ({
   handleClickSlide,
   handleSetIsDrag,
   isDrag,
+  id,
 }: {
   itemList: Array<any>;
-  handleOpen: () => void;
-  handleClickSlide: (index: number) => void;
+  handleOpen: (index: number) => void;
+  handleClickSlide: (index: number, clips: ClipProp[]) => void;
   handleSetIsDrag: (state: boolean) => void;
   isDrag: boolean;
+  id: number;
 }) => {
   return (
     <Carousel {...settings} draggable={true}>
@@ -62,6 +64,11 @@ const BasicCarousel = ({
             width: "100%",
             cursor: "pointer",
           }}
+          onClick={() => {
+            handleClickSlide(index, itemList);
+            handleOpen(id);
+            console.log(itemList);
+          }}
           key={index}
         >
           <PreviewClip
@@ -72,10 +79,9 @@ const BasicCarousel = ({
             index={index}
             key={index}
             height={"250px"}
-            handleClickSlide={handleClickSlide}
             handleSetIsDrag={handleSetIsDrag}
             isDrag={isDrag}
-            handleOpen={handleOpen}
+            handleOpen={() => {}}
           />
         </div>
       ))}

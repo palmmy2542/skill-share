@@ -152,6 +152,36 @@ const ViewPlaylist = ({
     }
   };
 
+  const handleChange = (to: number) => {
+    if (allVideo) {
+      const temp = allVideo.slice();
+      console.log("temp", temp);
+      console.log("to", to);
+      temp.forEach((item) => (item.isPlay = false));
+      temp[to].isPlay = true;
+      setAllVideo(temp);
+      setCurrentIndex(to);
+    }
+  };
+
+  const handlePlay = () => {
+    if (allVideo) {
+      const temp = allVideo.slice();
+      temp.forEach((item) => (item.isPlay = false));
+      temp[currentIndex].isPlay = true;
+      setAllVideo(temp);
+    }
+  };
+
+  const handlePause = () => {
+    if (allVideo) {
+      const temp = allVideo.slice();
+      temp.forEach((item) => (item.isPlay = false));
+      temp[currentIndex].isPlay = true;
+      setAllVideo(temp);
+    }
+  };
+
   useEffect(() => {
     getAllVideoInPlaylist({ token: canAccessService(), videoList })?.then(
       (data) => {
@@ -288,6 +318,9 @@ const ViewPlaylist = ({
         >
           <ClipFeed
             handleClose={handleCloseClipFeed}
+            handleChange={handleChange}
+            handlePause={handlePause}
+            handlePlay={handlePlay}
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
             clips={allVideo}

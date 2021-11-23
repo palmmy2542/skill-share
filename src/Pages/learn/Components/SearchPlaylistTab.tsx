@@ -7,7 +7,6 @@ const SearchPlaylistTab = ({
   playlist,
   searchWord,
   handleOpen,
-  handleClickSlide,
   handleSetIsDrag,
   isDrag,
   handleSelectPlaylist,
@@ -15,7 +14,6 @@ const SearchPlaylistTab = ({
   playlist: AllPlaylist[];
   searchWord: string;
   handleOpen: () => void;
-  handleClickSlide: (index: number) => void;
   handleSetIsDrag: (state: boolean) => void;
   isDrag: boolean;
   handleSelectPlaylist: ({

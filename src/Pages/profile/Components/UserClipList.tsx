@@ -52,6 +52,37 @@ const UserClipList = ({
     setCurrentIndex(index);
   };
 
+
+  const handleChange = (to: number) => {
+    if (clips) {
+      const temp = clips.slice();
+      console.log("temp", temp);
+      console.log("to", to);
+      temp.forEach((item) => (item.isPlay = false));
+      temp[to].isPlay = true;
+      setClips(temp);
+      setCurrentIndex(to);
+    }
+  };
+
+  const handlePlay = () => {
+    if (clips) {
+      const temp = clips.slice();
+      temp.forEach((item) => (item.isPlay = false));
+      temp[currentIndex].isPlay = true;
+      setClips(temp);
+    }
+  };
+
+  const handlePause = () => {
+    if (clips) {
+      const temp = clips.slice();
+      temp.forEach((item) => (item.isPlay = false));
+      temp[currentIndex].isPlay = true;
+      setClips(temp);
+    }
+  };
+
   return (
     <>
       <Tabs defaultActiveKey="1" centered tabPosition={"top"}>
@@ -165,6 +196,9 @@ const UserClipList = ({
         className={"ant-drawer-body"}
       >
         <ClipFeed
+          handleChange={handleChange}
+          handlePause={handlePause}
+          handlePlay={handlePlay}
           handleClose={handleClose}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}

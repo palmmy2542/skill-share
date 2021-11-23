@@ -14,7 +14,7 @@ const SearchClipsTab = ({
   searchWord: string;
   clips: Array<ClipProp>;
   handleOpen: () => void;
-  handleClickSlide: (index: number) => void;
+  handleClickSlide: (index: number, clips: ClipProp[]) => void;
   handleSetIsDrag: (state: boolean) => void;
   isDrag: boolean;
 }) => {
@@ -40,6 +40,7 @@ const SearchClipsTab = ({
                 height: "250px",
               }}
               key={index}
+              onClick={() => handleClickSlide(index, filteredClips)}
             >
               <PreviewClip
                 previewImage={previewImage}
@@ -48,7 +49,7 @@ const SearchClipsTab = ({
                 isPlay={false}
                 index={index}
                 key={index}
-                handleClickSlide={handleClickSlide}
+                // handleClickSlide={handleClickSlide}
                 handleSetIsDrag={handleSetIsDrag}
                 isDrag={isDrag}
                 handleOpen={handleOpen}

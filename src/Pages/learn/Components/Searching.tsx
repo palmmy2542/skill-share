@@ -32,7 +32,7 @@ const Searching = ({
   users: Array<any>;
   clips: Array<ClipProp>;
   handleOpen: () => void;
-  handleClickSlide: (index: number) => void;
+  handleClickSlide: (index: number, clips: any[]) => void;
   handleSetIsDrag: (state: boolean) => void;
   isDrag: boolean;
   playlist: AllPlaylist[];
@@ -66,7 +66,6 @@ const Searching = ({
             searchWord={searchField}
             playlist={playlist}
             handleOpen={handleOpen}
-            handleClickSlide={handleClickSlide}
             handleSetIsDrag={handleSetIsDrag}
             isDrag={isDrag}
             handleSelectPlaylist={handleSelectPlaylist}

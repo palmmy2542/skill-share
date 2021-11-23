@@ -21,6 +21,7 @@ const LearnContainer = () => {
   const [searchField, setSearchField] = useState("");
   const [searchShow, setSearchShow] = useState(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [selectedTrend, setSelectedTrend] = useState<number | null>(null);
   const [isDrag, setIsDrag] = useState<boolean>(false);
   const userId = localStorage.getItem("skillUserId");
   const { getAllPlaylist } = usePlaylistContext();
@@ -34,6 +35,9 @@ const LearnContainer = () => {
 
   const { canAccessService } = useUserAuthenticationContext();
   const [clips, setClips] = useState<ClipProp[]>([]);
+  const [selectedClips, setSelectedClips] = useState<ClipProp[]>([]);
+  const [selectedTrendArray, setSelectedTrendArrary] = useState<ClipProp[]>([]);
+
   const clipTrending = useMemo(
     () => clips.slice(0, Math.round(clips.length / 3)),
     [clips]
@@ -63,7 +67,8 @@ const LearnContainer = () => {
     setVisible(false);
   };
 
-  const handleOpen = () => {
+  const handleOpen = (index?: number) => {
+    if (index !== undefined) setSelectedTrend(index);
     setVisible(true);
   };
 
@@ -75,11 +80,11 @@ const LearnContainer = () => {
     setIsDrag(state);
   };
 
-  const handleClickSlide = (index: number) => {
+  const handleClickSlide = (index: number, clips: ClipProp[]) => {
     const temp = clips.slice();
     temp.forEach((item) => (item.isPlay = false));
-    temp[index].isPlay = true;
-    setClips(temp);
+    temp[index]["isPlay"] = true;
+    setSelectedTrendArrary(temp);
     setCurrentIndex(index);
   };
 
@@ -109,6 +114,50 @@ const LearnContainer = () => {
       setSearchShow(false);
     } else {
       setSearchShow(true);
+    }
+  };
+
+  const renderClips = (id: number | null) => {
+    switch (id) {
+      case 0:
+        return clipTrending;
+      case 1:
+        return clipRecommend;
+      case 2:
+        return clipCooking;
+    }
+    return null;
+  };
+
+  const handleChange = (to: number) => {
+    if (selectedTrendArray) {
+      const temp = selectedTrendArray.slice();
+      temp.forEach((item) => (item.isPlay = false));
+      temp[to].isPlay = true;
+      setSelectedClips(temp);
+      setCurrentIndex(to);
+    }
+  };
+
+  const handlePlay = () => {
+    if (selectedTrendArray) {
+      const temp = selectedTrendArray.slice();
+      console.log("play");
+      console.log("temp", temp);
+      console.log("currentIndex", currentIndex);
+      temp.forEach((item) => (item.isPlay = false));
+      temp[currentIndex].isPlay = true;
+      setSelectedClips(temp);
+    }
+  };
+
+  const handlePause = () => {
+    if (selectedTrendArray) {
+      const temp = clips.slice();
+      console.log("pause");
+      temp.forEach((item) => (item.isPlay = false));
+      temp[currentIndex].isPlay = true;
+      setSelectedClips(temp);
     }
   };
 
@@ -153,6 +202,8 @@ const LearnContainer = () => {
     }
   }, []);
 
+  console.log("trend", selectedTrendArray);
+
   return (
     <Spin spinning={isLoading} size={"large"}>
       <div id="search-page">
@@ -186,6 +237,7 @@ const LearnContainer = () => {
                   handleClickSlide={handleClickSlide}
                   handleSetIsDrag={handleSetIsDrag}
                   isDrag={isDrag}
+                  id={0}
                 />
               </>
             )}
@@ -197,6 +249,7 @@ const LearnContainer = () => {
                   handleClickSlide={handleClickSlide}
                   handleSetIsDrag={handleSetIsDrag}
                   isDrag={isDrag}
+                  id={1}
                 />
               </>
             )}
@@ -208,12 +261,13 @@ const LearnContainer = () => {
                   handleClickSlide={handleClickSlide}
                   handleSetIsDrag={handleSetIsDrag}
                   isDrag={isDrag}
+                  id={2}
                 />
               </>
             )}
           </div>
         )}
-        <BottomNav username={username} />
+        <BottomNav username={username} />(
         <Drawer
           placement={"right"}
           visible={visible}
@@ -225,12 +279,16 @@ const LearnContainer = () => {
         >
           <ClipFeed
             handleClose={handleClose}
+            handleChange={handleChange}
+            handlePause={handlePause}
+            handlePlay={handlePlay}
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
-            clips={clips}
+            clips={selectedTrendArray}
             setClips={setClips}
           />
         </Drawer>
+        )
         {selectedPlaylist && (
           <ViewPlaylist
             state={selectedPlaylist.userId === userId ? STATE.EDIT : null}
