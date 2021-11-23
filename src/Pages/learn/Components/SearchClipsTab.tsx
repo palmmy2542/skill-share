@@ -40,7 +40,6 @@ const SearchClipsTab = ({
                 height: "250px",
               }}
               key={index}
-              onClick={() => handleClickSlide(index, filteredClips)}
             >
               <PreviewClip
                 previewImage={previewImage}
@@ -49,7 +48,7 @@ const SearchClipsTab = ({
                 isPlay={false}
                 index={index}
                 key={index}
-                // handleClickSlide={handleClickSlide}
+                handleClickSlide={() => handleClickSlide(index, filteredClips)}
                 handleSetIsDrag={handleSetIsDrag}
                 isDrag={isDrag}
                 handleOpen={handleOpen}
