@@ -21,7 +21,7 @@ export const getStreamingUrl = (videoId: string) =>
   `${VIDEO_GAYEWAY_HOST}/video/${videoId}/playlist.m3u8`;
 
 export const getPreviewImageUrl = (videoId: string) =>
-  `${VIDEO_GAYEWAY_HOST}/${videoId}/poster.jpg`;
+  `${VIDEO_GAYEWAY_HOST}/video/${videoId}/poster.jpg`;
 
 export const getAllVideoInPlaylist = ({
   token,

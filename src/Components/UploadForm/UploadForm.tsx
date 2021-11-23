@@ -21,6 +21,7 @@ const UploadForm = () => {
 
   const onFinish = (values: UploadClip) => {
     message.loading("Uploading . . .");
+    values.permission = values.permission ? "public" : "private";
     setIsLoading(true);
     upload({ token: canAccessService(), body: values })
       .then(() => {
@@ -28,7 +29,11 @@ const UploadForm = () => {
         setIsLoading(false);
         window.location.href = `/${username}`;
       })
-      .catch((err) => message.error("Found some error. Please try again."));
+      .catch((err) => {
+        setIsLoading(false);
+
+        message.error("Found some error. Please try again.");
+      });
   };
 
   return (
@@ -56,7 +61,7 @@ const UploadForm = () => {
         </Form.Item>
         <Form.Item
           name="permission"
-          initialValue="public"
+          initialValue={true}
           valuePropName="checked"
         >
           <Switch

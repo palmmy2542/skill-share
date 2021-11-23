@@ -12,11 +12,13 @@ const { TabPane } = Tabs;
 const UserClipList = ({
   clips,
   setClips,
+  isMe,
   playlist,
   handleSelectPlaylist,
 }: {
   clips: ClipProp[];
   setClips: React.Dispatch<React.SetStateAction<any>>;
+  isMe: boolean;
   playlist: AllPlaylist[] | undefined;
   handleSelectPlaylist: ({
     title,
@@ -63,31 +65,38 @@ const UserClipList = ({
         >
           <Row gutter={[8, 8]}>
             {clips.map(
-              ({ url, previewImage, permission }: ClipProp, index: number) => (
-                <Col
-                  xs={12}
-                  md={8}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    height: "250px",
-                  }}
-                  key={index}
-                >
-                  <PreviewClip
-                    isPrivate={permission === "private"}
-                    previewImage={previewImage}
-                    url={url}
-                    isPlay={false}
-                    index={index}
-                    key={index}
-                    handleClickSlide={handleClickSlide}
-                    handleSetIsDrag={handleSetIsDrag}
-                    isDrag={isDrag}
-                    handleOpen={handleOpen}
-                  />
-                </Col>
-              )
+              ({ url, previewImage, permission }: ClipProp, index: number) => {
+                const isPrivate = permission === "private" && isMe;
+                const shouldShow =
+                  (isMe && permission === "private") || permission === "public";
+                return (
+                  shouldShow && (
+                    <Col
+                      xs={12}
+                      md={8}
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        height: "250px",
+                      }}
+                      key={index}
+                    >
+                      <PreviewClip
+                        isPrivate={isPrivate}
+                        previewImage={previewImage}
+                        url={url}
+                        isPlay={false}
+                        index={index}
+                        key={index}
+                        handleClickSlide={handleClickSlide}
+                        handleSetIsDrag={handleSetIsDrag}
+                        isDrag={isDrag}
+                        handleOpen={handleOpen}
+                      />
+                    </Col>
+                  )
+                );
+              }
             )}
           </Row>
         </TabPane>

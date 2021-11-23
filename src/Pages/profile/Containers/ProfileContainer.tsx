@@ -29,8 +29,6 @@ const ProfileContainer = (props: any) => {
     subscribers: 0,
   });
 
-  const { subscribing, subscribers } = userData;
-
   const { isSubscribed, getMe, getUserByUsername } = useUserDataContext();
   const history = useHistory();
   const { getVideoByUserId, getStreamingUrl, getPreviewImageUrl } =
@@ -129,6 +127,8 @@ const ProfileContainer = (props: any) => {
     }
   }, [usernameParam]);
 
+  console.log(clips);
+
   return (
     <>
       <Spin spinning={isLoading} size={"large"}>
@@ -142,6 +142,7 @@ const ProfileContainer = (props: any) => {
           {renderButton()}
           <UserClipList
             clips={clips}
+            isMe={isMe}
             setClips={setClips}
             playlist={playlist}
             handleSelectPlaylist={handleSelectPlaylist}

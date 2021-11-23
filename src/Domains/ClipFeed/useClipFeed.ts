@@ -107,7 +107,7 @@ const useClipFeed = () => {
   // https://skill-share-streaming-service-znv5z.ondigitalocean.app/
 
   const getPreviewImageUrl = (videoId: string) =>
-    `${VIDEO_GAYEWAY_HOST}/${videoId}/poster.jpg`;
+    `${VIDEO_GAYEWAY_HOST}/video/${videoId}/poster.jpg`;
 
   const getAllVideo = async (token: string | undefined): Promise<any> => {
     if (token) {
