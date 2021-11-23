@@ -23,10 +23,10 @@ const PreviewClip = ({
   index: number;
   isPlay?: boolean;
   isPrivate: boolean;
-  handleClickSlide?: (index: number) => void;
+  handleClickSlide?: () => void;
   handleSetIsDrag: (state: boolean) => void;
   isDrag: boolean;
-  handleOpen: () => void;
+  handleOpen: (id?: number) => void;
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -57,8 +57,9 @@ const PreviewClip = ({
         if (!isDrag) handleSetIsDrag(true);
       }}
       onClick={() => {
+        console.log(typeof handleClickSlide === "function");
         if (typeof handleClickSlide === "function" && !isDrag) {
-          handleClickSlide(index);
+          handleClickSlide();
           handleOpen();
         }
       }}
@@ -76,7 +77,7 @@ const PreviewClip = ({
       <ReactPlayer
         url={url}
         muted
-        light={previewImage}
+        // light={previewImage}
         autoPlay={true}
         playing={isPlaying}
         controls={false}

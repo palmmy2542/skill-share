@@ -69,6 +69,7 @@ const ClipFeed = ({
               {
                 videoId,
                 username,
+                userId: creatorId,
                 url,
                 isPlay,
                 title,
@@ -79,6 +80,7 @@ const ClipFeed = ({
               index
             ) => (
               <Clip
+                isMe={userId === creatorId}
                 videoId={videoId}
                 isFade={isFade}
                 previewImage={previewImage}

@@ -17,6 +17,7 @@ import "./index.css";
 const Clip = ({
   videoId,
   isFade,
+  isMe,
   name,
   previewImage,
   url,
@@ -40,6 +41,7 @@ const Clip = ({
   videoId: string;
   isFade: boolean;
   name: string;
+  isMe: boolean;
   previewImage: string;
   url: string;
   height?: string | undefined;
@@ -263,6 +265,7 @@ const Clip = ({
       />
       <BottomMenu
         visible={isShow}
+        isMe={isMe}
         handleClose={handleCloseBottomMenu}
         handleOpenEditClip={handleOpenEditClip}
         handleOpenPlayList={handleOpenPlayList}

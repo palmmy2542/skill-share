@@ -282,7 +282,7 @@ const ViewPlaylist = ({
                           isPlay={isPlay}
                           index={index}
                           key={index}
-                          handleClickSlide={handleClickSlide}
+                          handleClickSlide={() => handleClickSlide(index)}
                           handleSetIsDrag={handleSetIsDrag}
                           isDrag={isDrag}
                           handleOpen={function (): void {}}

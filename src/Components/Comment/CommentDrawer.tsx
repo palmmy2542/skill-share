@@ -87,7 +87,7 @@ const CommentDrawer = ({
   useEffect(() => {
     if (token)
       getVideoComment({ token, videoId }).then((data) => {
-        if (data) {
+        if (Array.isArray(data)) {
           const t = data.map((item: any, index: number) => {
             data[data.length - index - 1].edited = true;
             return data[data.length - index - 1];

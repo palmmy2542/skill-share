@@ -119,7 +119,7 @@ const UserClipList = ({
                         isPlay={false}
                         index={index}
                         key={index}
-                        handleClickSlide={handleClickSlide}
+                        handleClickSlide={() => handleClickSlide(index)}
                         handleSetIsDrag={handleSetIsDrag}
                         isDrag={isDrag}
                         handleOpen={handleOpen}

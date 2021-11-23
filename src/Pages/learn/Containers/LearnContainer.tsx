@@ -69,6 +69,7 @@ const LearnContainer = () => {
 
   const handleOpen = (index?: number) => {
     if (index !== undefined) setSelectedTrend(index);
+    console.log("open!!!");
     setVisible(true);
   };
 
@@ -84,6 +85,7 @@ const LearnContainer = () => {
     const temp = clips.slice();
     temp.forEach((item) => (item.isPlay = false));
     temp[index]["isPlay"] = true;
+    console.log("click!!!!!!!!!!!!!!!!");
     setSelectedTrendArrary(temp);
     setCurrentIndex(index);
   };
