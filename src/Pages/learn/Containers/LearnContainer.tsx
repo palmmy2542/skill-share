@@ -1,4 +1,4 @@
-import { Drawer, Input, Spin, Typography } from "antd";
+import { Drawer, Input, Spin } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
 import ClipFeed from "../../../Components/ClipFeed/index";
@@ -22,9 +22,6 @@ const LearnContainer = () => {
   const [searchShow, setSearchShow] = useState(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isDrag, setIsDrag] = useState<boolean>(false);
-  const {
-    userData: { username },
-  } = useUserDataContext();
   const userId = localStorage.getItem("skillUserId");
   const { getAllPlaylist } = usePlaylistContext();
   const { getAllUser } = useUserDataContext();
@@ -33,6 +30,7 @@ const LearnContainer = () => {
   const [playlist, setPlaylist] = useState<AllPlaylist[]>();
 
   const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>();
+  const username: string | null = localStorage.getItem("skillUsername");
 
   const { canAccessService } = useUserAuthenticationContext();
   const [clips, setClips] = useState<ClipProp[]>([]);
@@ -127,6 +125,7 @@ const LearnContainer = () => {
                   description: videoUploaded.description,
                   url: getStreamingUrl(videoUploaded.videoId),
                   previewImage: getPreviewImageUrl(videoUploaded.videoId),
+                  isMe: videoUploaded.creatorName === username,
                   userId: videoUploaded.creator,
                   username: videoUploaded.creatorName,
                   isPlay: false,
@@ -181,7 +180,6 @@ const LearnContainer = () => {
           <div style={{ textAlign: "left" }}>
             {clipTrending.length > 0 && (
               <>
-                <Typography.Title level={3}>Trending</Typography.Title>
                 <BasicCarousel
                   itemList={clipTrending}
                   handleOpen={handleOpen}
@@ -193,7 +191,6 @@ const LearnContainer = () => {
             )}
             {clipRecommend.length > 0 && (
               <>
-                <Typography.Title level={3}>Recommend</Typography.Title>
                 <BasicCarousel
                   itemList={clipRecommend}
                   handleOpen={handleOpen}
@@ -205,7 +202,6 @@ const LearnContainer = () => {
             )}
             {clipCooking.length > 0 && (
               <>
-                <Typography.Title level={3}>Cooking</Typography.Title>
                 <BasicCarousel
                   itemList={clipCooking}
                   handleOpen={handleOpen}

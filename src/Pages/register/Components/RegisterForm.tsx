@@ -13,10 +13,8 @@ const RegisterForm = (props: any) => {
     setIsloading(true);
     handleRegister(values)
       .then((res: any) => {
-        if (res) {
-          console.log("Register success!");
-          history.push("/login");
-        }
+        console.log("Register success!");
+        history.push("/login");
         setIsloading(false);
       })
       .catch((err: any) => {

@@ -17,7 +17,7 @@ const SearchUsersTab = ({
       : users.filter((user) => {
           return user.username.toLowerCase().includes(searchWord.toLowerCase());
         });
-  }, [searchWord]);
+  }, [searchWord, users]);
 
   return (
     <div id="search-users">

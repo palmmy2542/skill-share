@@ -14,12 +14,10 @@ const PlaylistFeed = ({
   currentVideoId,
   visible,
   handleClose,
-}: // playlist,
-{
+}: {
   currentVideoId: string;
   visible: boolean;
   handleClose: () => void;
-  // playlist: AllPlaylist[];
 }) => {
   const [selectedPlaylist, setSelectedPlaylist] = useState<AllPlaylist>();
   const userId = localStorage.getItem("skillUserId");
@@ -35,9 +33,7 @@ const PlaylistFeed = ({
   const handleCloseCreatePlayList = () => {
     setIsShowCreatePlaylist(false);
   };
-  const handleOpenCreatePlayList = () => {
-    setIsShowCreatePlaylist(true);
-  };
+
   const handleCloseSaveToPlaylist = () => {
     setIsShowSave(false);
   };
@@ -99,7 +95,6 @@ const PlaylistFeed = ({
       <Row gutter={[8, 8]}>
         <Col
           xs={8}
-          md={4}
           style={{
             display: "flex",
             flexDirection: "column",
@@ -118,38 +113,46 @@ const PlaylistFeed = ({
         {playlist &&
           playlist.map(
             (
-              { title, description, permission, id, videoList }: AllPlaylist,
+              {
+                title,
+                description,
+                permission,
+                id,
+                videoList,
+                creatorId,
+              }: AllPlaylist,
               index
-            ) => (
-              <Col
-                xs={8}
-                md={4}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  height: "250px",
-                  width: "100%",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  if (userId)
-                    handleSelectPlaylist({
-                      title,
-                      description,
-                      videoList,
-                      id,
-                      userId,
-                      permission,
-                    });
-                }}
-              >
-                <Playlist
-                  title={title}
-                  previewImage={getPreviewImageUrl(videoList?.[0])}
-                  key={index}
-                />
-              </Col>
-            )
+            ) => {
+              return (
+                <Col
+                  xs={8}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    height: "250px",
+                    width: "100%",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    if (userId)
+                      handleSelectPlaylist({
+                        title,
+                        description,
+                        videoList,
+                        id,
+                        userId,
+                        permission,
+                      });
+                  }}
+                >
+                  <Playlist
+                    title={title}
+                    previewImage={getPreviewImageUrl(videoList?.[0])}
+                    key={index}
+                  />
+                </Col>
+              );
+            }
           )}
       </Row>
       {/* <PlaylistForm

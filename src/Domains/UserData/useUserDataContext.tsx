@@ -6,7 +6,7 @@ import { UserAccount } from "../../interface";
 import useUserAuthenticationContext from "../UserAuthentication/useUserAuthentication";
 
 const useUserData = () => {
-  const [userData, setUserData] = useState<UserAccount>({
+  const [userData] = useState<UserAccount>({
     id: "",
     username: "",
     fname: "",
@@ -14,12 +14,10 @@ const useUserData = () => {
     subscribing: 0,
     subscribers: 0,
   });
-  const [isSubscribed, setIsScribed] = useState(false);
+  const [isSubscribed] = useState(false);
 
   const { canAccessService } = useUserAuthenticationContext();
   const token = canAccessService();
-
-  const handleSubscribe = () => {};
 
   const getMe = async (): Promise<any> => {
     if (token) {

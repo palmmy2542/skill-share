@@ -1,7 +1,4 @@
 import { Divider, Tabs } from "antd";
-import { useEffect, useState } from "react";
-import useUserAuthenticationContext from "../../../Domains/UserAuthentication/useUserAuthentication";
-import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
 import { AllPlaylist, ClipProp } from "../../../interface";
 import SearchClipsTab from "../Components/SearchClipsTab";
 import SearchUsersTab from "../Components/SearchUsersTab";

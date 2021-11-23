@@ -42,6 +42,7 @@ const ViewPlaylist = ({
   const [isDrag, setIsDrag] = useState<boolean>(false);
   const [isOpenEditPlaylist, setIsOpenEditPlaylist] = useState<boolean>(false);
   const { canAccessService } = useUserAuthenticationContext();
+  const username: string | null = localStorage.getItem("skillUsername");
   const token = canAccessService();
   const userId = localStorage.getItem("skillUserId");
   const history = useHistory();
@@ -159,13 +160,13 @@ const ViewPlaylist = ({
             (videoUploaded: any, index: number) => {
               if (videoUploaded.length > 0) {
                 return {
-                  videoId: videoUploaded.videoId,
-                  title: videoUploaded.title,
-                  description: videoUploaded.description,
-                  permission: videoUploaded.permission,
-                  url: getStreamingUrl(videoUploaded.videoId),
-                  userId: videoUploaded.creator,
-                  username: videoUploaded.creatorName,
+                  videoId: videoUploaded[0].videoId,
+                  title: videoUploaded[0].title,
+                  description: videoUploaded[0].description,
+                  permission: videoUploaded[0].permission,
+                  url: getStreamingUrl(videoUploaded[0].videoId),
+                  userId: videoUploaded[0].creator,
+                  username: videoUploaded[0].creatorName,
                   isPlay: false,
                 };
               }
@@ -214,42 +215,52 @@ const ViewPlaylist = ({
               allVideo.map(
                 (
                   {
-                    name,
+                    username: creator,
                     url,
                     isPlay,
                     title,
                     description,
                     permission,
                     videoId,
-                  }: any,
+                  }: ClipProp,
                   index: number
-                ) => (
-                  <Col
-                    xs={12}
-                    md={8}
-                    lg={6}
-                    xl={4}
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      height: "250px",
-                    }}
-                    key={index}
-                  >
-                    <PreviewClip
-                      previewImage={getPlaylistPreviewImage(videoId)}
-                      isPrivate={permission === "private"}
-                      url={url}
-                      isPlay={isPlay}
-                      index={index}
-                      key={index}
-                      handleClickSlide={handleClickSlide}
-                      handleSetIsDrag={handleSetIsDrag}
-                      isDrag={isDrag}
-                      handleOpen={function (): void {}}
-                    />
-                  </Col>
-                )
+                ) => {
+                  const isMe = creator === username;
+                  const isPrivate = permission === "private" && isMe;
+                  const shouldShow =
+                    (isMe && permission === "private") ||
+                    permission === "public";
+
+                  return (
+                    shouldShow && (
+                      <Col
+                        xs={12}
+                        md={8}
+                        lg={6}
+                        xl={4}
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          height: "250px",
+                        }}
+                        key={index}
+                      >
+                        <PreviewClip
+                          previewImage={getPlaylistPreviewImage(videoId)}
+                          isPrivate={isPrivate}
+                          url={url}
+                          isPlay={isPlay}
+                          index={index}
+                          key={index}
+                          handleClickSlide={handleClickSlide}
+                          handleSetIsDrag={handleSetIsDrag}
+                          isDrag={isDrag}
+                          handleOpen={function (): void {}}
+                        />
+                      </Col>
+                    )
+                  );
+                }
               )}
           </Row>
         </div>

@@ -14,15 +14,15 @@ const UserInformation = (props: any) => {
           <Divider type="vertical" />
         </Col>
         <Col span={9}>
-          <Title level={2}>{playlistNumber ?? 0}</Title>
-          <Text>Playlists</Text>
+          <Title level={2}>{clipNumber ?? 0}</Title>
+          <Text>Clips</Text>
         </Col>
         <Col span={1}>
           <Divider type="vertical" />
         </Col>
         <Col span={9}>
-          <Title level={2}>{clipNumber ?? 0}</Title>
-          <Text>Clips</Text>
+          <Title level={2}>{playlistNumber ?? 0}</Title>
+          <Text>Playlists</Text>
         </Col>
         <Col span={2}>
           <Divider type="vertical" />

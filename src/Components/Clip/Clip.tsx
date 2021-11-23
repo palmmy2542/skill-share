@@ -259,7 +259,6 @@ const Clip = ({
       <PlaylistFeed
         currentVideoId={videoId}
         visible={isShowPlaylist}
-        // playlist={playlist}
         handleClose={handleClosePlayList}
       />
       <BottomMenu

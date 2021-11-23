@@ -27,6 +27,7 @@ const SearchPlaylistTab = ({
     userId,
   }: AllPlaylist) => void;
 }) => {
+  const userId = localStorage.getItem("skillUserId");
   const filteredPlaylist = playlist.filter((item) => {
     return (
       item.title.toLowerCase().includes(searchWord.toLowerCase()) ||
@@ -39,37 +40,45 @@ const SearchPlaylistTab = ({
         (
           { title, description, videoList, creatorId, permission, id },
           index
-        ) => (
-          <Row
-            key={index}
-            style={{ textAlign: "left", cursor: "pointer" }}
-            gutter={[8, 8]}
-            onClick={() =>
-              handleSelectPlaylist({
-                title,
-                description,
-                videoList,
-                userId: creatorId,
-                permission,
-                id,
-              })
-            }
-          >
-            <Col xs={12}>
-              <img
-                alt="playlist-preview"
-                src={getPlaylistPreviewImage(videoList?.[0])}
-                className={"preview-playlist-image"}
-              />
-            </Col>
-            <Col xs={12}>
-              <Typography.Title level={5}>{title}</Typography.Title>
-              <Typography.Paragraph ellipsis={{ rows: 4 }}>
-                {description}
-              </Typography.Paragraph>
-            </Col>
-          </Row>
-        )
+        ) => {
+          const isMe = creatorId === userId;
+          const isPrivate = permission === "private" && isMe;
+          const shouldShow =
+            (isMe && permission === "private") || permission === "public";
+          return (
+            shouldShow && (
+              <Row
+                key={index}
+                style={{ textAlign: "left", cursor: "pointer" }}
+                gutter={[8, 8]}
+                onClick={() =>
+                  handleSelectPlaylist({
+                    title,
+                    description,
+                    videoList,
+                    userId: creatorId,
+                    permission,
+                    id,
+                  })
+                }
+              >
+                <Col xs={12}>
+                  <img
+                    alt="playlist-preview"
+                    src={getPlaylistPreviewImage(videoList?.[0])}
+                    className={"preview-playlist-image"}
+                  />
+                </Col>
+                <Col xs={12}>
+                  <Typography.Title level={5}>{title}</Typography.Title>
+                  <Typography.Paragraph ellipsis={{ rows: 4 }}>
+                    {description}
+                  </Typography.Paragraph>
+                </Col>
+              </Row>
+            )
+          );
+        }
       )}
     </>
   );

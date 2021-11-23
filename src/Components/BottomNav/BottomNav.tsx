@@ -8,7 +8,7 @@ import React, { useState } from "react";
 import UploadForm from "../UploadForm/UploadForm";
 import "./index.css";
 
-const BottomNav = ({ username }: { username: string }) => {
+const BottomNav = ({ username }: { username: string | null }) => {
   const [visible, setVisible] = useState(false);
 
   const handleClose = () => {

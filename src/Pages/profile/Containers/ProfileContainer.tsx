@@ -29,7 +29,7 @@ const ProfileContainer = (props: any) => {
     subscribers: 0,
   });
 
-  const { isSubscribed, getMe, getUserByUsername } = useUserDataContext();
+  const { isSubscribed, getUserByUsername } = useUserDataContext();
   const history = useHistory();
   const { getVideoByUserId, getStreamingUrl, getPreviewImageUrl } =
     useClipFeedContext();

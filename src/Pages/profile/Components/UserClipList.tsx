@@ -147,7 +147,7 @@ const UserClipList = ({
                       })
                     }
                   >
-                    <img src={getPreviewImageUrl(videoList[0])} />
+                    <img alt="preview" src={getPreviewImageUrl(videoList[0])} />
                   </Col>
                 )
               )}
