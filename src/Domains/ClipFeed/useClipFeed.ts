@@ -120,7 +120,6 @@ const useClipFeed = () => {
       })
         .then((response) => {
           if (response.status === 200) {
-            // console.log("All video: ", response.data);
             return response.data;
           }
         })
@@ -142,7 +141,6 @@ const useClipFeed = () => {
         },
       }).then((response) => {
         if (response.status === 200) {
-          // console.log("Random video: ", response.data);
           return response.data;
         }
       });
@@ -164,7 +162,6 @@ const useClipFeed = () => {
       })
         .then((response) => {
           if (response.status === 200) {
-            // console.log("video by ", `${id}:`, response.data);
             return response.data;
           }
         })

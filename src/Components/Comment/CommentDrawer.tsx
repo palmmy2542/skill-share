@@ -79,7 +79,7 @@ const CommentDrawer = ({
         if (token) deleteComment({ token, id }).then(() => setIsUpdated(true));
       },
       onCancel() {
-        console.log("Cancel delete video");
+        console.log("Cancel delete comment");
       },
     });
   };

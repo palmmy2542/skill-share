@@ -127,8 +127,6 @@ const ProfileContainer = (props: any) => {
     }
   }, [usernameParam]);
 
-  console.log(clips);
-
   return (
     <>
       <Spin spinning={isLoading} size={"large"}>

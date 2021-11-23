@@ -45,7 +45,7 @@ const EditPlaylist = ({
   const showConfirmDelete = () => {
     if (userId)
       confirm({
-        title: "Do you want to delete this video?",
+        title: "Do you want to delete this playlist?",
         icon: <ExclamationCircleOutlined />,
         onOk() {
           deletePlaylist({
@@ -55,7 +55,7 @@ const EditPlaylist = ({
           }).then(() => history.push("/"));
         },
         onCancel() {
-          console.log("Cancel delete video");
+          console.log("Cancel delete playlist");
         },
       });
   };
