@@ -227,13 +227,6 @@ const Clip = ({
             >
               {description}
             </Typography.Paragraph>
-            {/* <span style={{ display: "inline-flex" }}>
-              {tags.map((tag) => (
-                <Typography.Paragraph style={{ color: "#FFF" }}>
-                  {`#${tag}`}
-                </Typography.Paragraph>
-              ))}
-            </span> */}
           </div>
         </div>
       </Fader>
@@ -243,12 +236,16 @@ const Clip = ({
         playing={isPlay}
         onPlay={() => handlePlay()}
         onPause={() => handlePause()}
+        onEnded={() => {
+          if (isLast) handleBack();
+          else handleNext();
+        }}
         controls={true}
         width="100%"
         height="100vh"
         ref={playerRef}
         className={"clip"}
-        loop
+        loop={false}
       />
       <EditClip
         videoId={videoId}
