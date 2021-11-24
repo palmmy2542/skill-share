@@ -1,4 +1,5 @@
 import { VideoCameraAddOutlined } from "@ant-design/icons";
+import { message } from "antd";
 import React, { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import ReactPlayer from "react-player";
@@ -24,6 +25,7 @@ const DropZone = ({
   const { getRootProps, getInputProps } = useDropzone({
     accept: "video/mp4",
     maxFiles: 1,
+    maxSize: Math.pow(10, 9),
     onDrop: (acceptedFiles) => {
       acceptedFiles.map((file) =>
         Object.assign(file, {
@@ -31,6 +33,9 @@ const DropZone = ({
         })
       );
       handleAddVideo(acceptedFiles);
+    },
+    onDropRejected: () => {
+      message.error("Video size should not exceed 100MB. Please try again.");
     },
   });
 
@@ -46,7 +51,7 @@ const DropZone = ({
         position: "relative",
         margin: "auto",
       }}
-      key={file?.[0].name}
+      key={file?.[0]?.name}
     >
       <div style={thumbInner}>
         {file === undefined || file?.length === 0 ? (
@@ -75,7 +80,7 @@ const DropZone = ({
   useEffect(
     () => () => {
       if (file !== undefined && file?.length > 0)
-        file.forEach((item: any) => URL.revokeObjectURL(item.preview));
+        file?.forEach((item: any) => URL.revokeObjectURL(item.preview));
     },
     [file]
   );

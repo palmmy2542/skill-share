@@ -155,8 +155,6 @@ const ViewPlaylist = ({
   const handleChange = (to: number) => {
     if (allVideo) {
       const temp = allVideo.slice();
-      console.log("temp", temp);
-      console.log("to", to);
       temp.forEach((item) => (item.isPlay = false));
       temp[to].isPlay = true;
       setAllVideo(temp);
@@ -264,10 +262,7 @@ const ViewPlaylist = ({
                   return (
                     shouldShow && (
                       <Col
-                        xs={12}
-                        md={8}
-                        lg={6}
-                        xl={4}
+                        xs={8}
                         style={{
                           display: "flex",
                           justifyContent: "center",

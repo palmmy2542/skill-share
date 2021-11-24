@@ -69,7 +69,6 @@ const LearnContainer = () => {
 
   const handleOpen = (index?: number) => {
     if (index !== undefined) setSelectedTrend(index);
-    console.log("open!!!");
     setVisible(true);
   };
 
@@ -85,7 +84,6 @@ const LearnContainer = () => {
     const temp = clips.slice();
     temp.forEach((item) => (item.isPlay = false));
     temp[index]["isPlay"] = true;
-    console.log("click!!!!!!!!!!!!!!!!");
     setSelectedTrendArrary(temp);
     setCurrentIndex(index);
   };
@@ -144,9 +142,6 @@ const LearnContainer = () => {
   const handlePlay = () => {
     if (selectedTrendArray) {
       const temp = selectedTrendArray.slice();
-      console.log("play");
-      console.log("temp", temp);
-      console.log("currentIndex", currentIndex);
       temp.forEach((item) => (item.isPlay = false));
       temp[currentIndex].isPlay = true;
       setSelectedClips(temp);
@@ -156,7 +151,6 @@ const LearnContainer = () => {
   const handlePause = () => {
     if (selectedTrendArray) {
       const temp = clips.slice();
-      console.log("pause");
       temp.forEach((item) => (item.isPlay = false));
       temp[currentIndex].isPlay = true;
       setSelectedClips(temp);
@@ -203,8 +197,6 @@ const LearnContainer = () => {
         .catch(() => setIsLoading(false));
     }
   }, []);
-
-  console.log("trend", selectedTrendArray);
 
   return (
     <Spin spinning={isLoading} size={"large"}>
@@ -269,7 +261,7 @@ const LearnContainer = () => {
             )}
           </div>
         )}
-        <BottomNav username={username} />(
+        <BottomNav username={username} />
         <Drawer
           placement={"right"}
           visible={visible}
@@ -290,7 +282,6 @@ const LearnContainer = () => {
             setClips={setClips}
           />
         </Drawer>
-        )
         {selectedPlaylist && (
           <ViewPlaylist
             state={selectedPlaylist.userId === userId ? STATE.EDIT : null}

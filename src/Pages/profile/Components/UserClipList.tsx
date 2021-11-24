@@ -56,8 +56,6 @@ const UserClipList = ({
   const handleChange = (to: number) => {
     if (clips) {
       const temp = clips.slice();
-      console.log("temp", temp);
-      console.log("to", to);
       temp.forEach((item) => (item.isPlay = false));
       temp[to].isPlay = true;
       setClips(temp);

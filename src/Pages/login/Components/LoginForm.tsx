@@ -53,13 +53,6 @@ const LoginForm = (props: any) => {
           placeholder="Password"
         />
       </Form.Item>
-
-      <Form.Item>
-        <a className="login-form-forgot" href="/#">
-          Forgot password?
-        </a>
-      </Form.Item>
-
       <Form.Item>
         <Button
           type="primary"

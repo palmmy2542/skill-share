@@ -8,7 +8,6 @@ const Playlist = ({
   title: string;
   previewImage: string;
 }) => {
-  console.log(previewImage);
   return (
     <Image src={previewImage} preview={false} width={"100%"} height={"100%"} />
   );

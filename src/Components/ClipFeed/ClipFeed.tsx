@@ -45,8 +45,6 @@ const ClipFeed = ({
     setIsFade(!isFade);
   };
 
-  console.log(clips);
-
   return (
     clips && (
       <div style={{ overflow: "hidden" }}>

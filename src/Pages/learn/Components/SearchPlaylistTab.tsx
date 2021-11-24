@@ -40,7 +40,6 @@ const SearchPlaylistTab = ({
           index
         ) => {
           const isMe = creatorId === userId;
-          const isPrivate = permission === "private" && isMe;
           const shouldShow =
             (isMe && permission === "private") || permission === "public";
           return (
