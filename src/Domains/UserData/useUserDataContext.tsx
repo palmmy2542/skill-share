@@ -1,3 +1,4 @@
+import { message } from "antd";
 import axios from "axios";
 import constate from "constate";
 import { useState } from "react";
@@ -6,14 +7,6 @@ import { UserAccount } from "../../interface";
 import useUserAuthenticationContext from "../UserAuthentication/useUserAuthentication";
 
 const useUserData = () => {
-  const [userData] = useState<UserAccount>({
-    id: "",
-    username: "",
-    fname: "",
-    lname: "",
-    subscribing: 0,
-    subscribers: 0,
-  });
   const [isSubscribed] = useState(false);
 
   const { canAccessService } = useUserAuthenticationContext();
@@ -34,7 +27,6 @@ const useUserData = () => {
     }
     return null;
   };
-
 
   const getUserByUsername = async ({
     username,
@@ -72,13 +64,51 @@ const useUserData = () => {
     return null;
   };
 
+  const editProfile = ({
+    token,
+    fname,
+    lname,
+    tel,
+    email,
+  }: {
+    token: string;
+    fname: string;
+    lname: string;
+    tel: string;
+    email: string;
+  }): Promise<any> => {
+    let config = {
+      headers: {
+        Authorization: `${token}`,
+      },
+    };
+
+    return axios
+      .put(
+        `${GAYEWAY_HOST}/account/user`,
+        {
+          fname,
+          lname,
+          tel,
+          email,
+        },
+        config
+      )
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          return response.data;
+        }
+      })
+      .catch((err) => message.error(err.response.data.message));
+  };
+
   return {
-    userData,
     getAllUser,
     getUserByUsername,
     getMe,
     token,
     isSubscribed,
+    editProfile,
   };
 };
 

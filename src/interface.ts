@@ -1,10 +1,10 @@
 export interface UserAccount {
   id: string;
   username: string;
+  email: string;
+  tel: string;
   fname: string;
   lname: string;
-  subscribing: number;
-  subscribers: number;
 }
 
 export interface ClipProp {

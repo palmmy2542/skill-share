@@ -57,7 +57,6 @@ const PreviewClip = ({
         if (!isDrag) handleSetIsDrag(true);
       }}
       onClick={() => {
-        console.log(typeof handleClickSlide === "function");
         if (typeof handleClickSlide === "function" && !isDrag) {
           handleClickSlide();
           handleOpen();

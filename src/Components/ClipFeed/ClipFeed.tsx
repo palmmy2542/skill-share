@@ -59,7 +59,9 @@ const ClipFeed = ({
           infinite={false}
           ref={ref}
           dots={false}
-          beforeChange={(from, to) => handleChange(to)}
+          beforeChange={(from, to) => {
+            handleChange(to);
+          }}
           initialSlide={currentIndex}
         >
           {clips.map(

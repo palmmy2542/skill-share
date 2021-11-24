@@ -1,4 +1,4 @@
-import { Button, message, Spin } from "antd";
+import { Button, Drawer, message, Spin } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import BottomNav from "../../../Components/BottomNav/BottomNav";
@@ -10,6 +10,7 @@ import useUserAuthenticationContext from "../../../Domains/UserAuthentication/us
 import useUserDataContext from "../../../Domains/UserData/useUserDataContext";
 import { AllPlaylist, ClipProp, UserAccount } from "../../../interface";
 import { STATE } from "../../../utils";
+import EditProfile from "../Components/EditProfile";
 import UserAvatar from "../Components/UserAvatar";
 import UserClipList from "../Components/UserClipList";
 import UserInformation from "../Components/UserInformation";
@@ -23,11 +24,12 @@ const ProfileContainer = (props: any) => {
   const [userData, setUserData] = useState<UserAccount>({
     id: "",
     username: username ?? "USERNAME",
+    email: "",
+    tel: "",
     fname: "",
     lname: "",
-    subscribing: 0,
-    subscribers: 0,
   });
+  const { editProfile } = useUserDataContext();
 
   const { isSubscribed, getUserByUsername } = useUserDataContext();
   const history = useHistory();
@@ -35,6 +37,7 @@ const ProfileContainer = (props: any) => {
     useClipFeedContext();
   const { canAccessService } = useUserAuthenticationContext();
   const { getPlaylistByUserId } = usePlaylistContext();
+  const [showEditProfileForm, setShowEditProfileForm] = useState(false);
   const [isShowPlaylist, setIsShowPlaylist] = useState(false);
   const [playlist, setPlaylist] = useState<AllPlaylist[]>();
   const isMe = useMemo(
@@ -67,10 +70,16 @@ const ProfileContainer = (props: any) => {
 
   const renderButton = () => {
     if (isMe) {
-      return;
-    } else if (isSubscribed) {
-      return <Button size={"middle"}>Un subscribe</Button>;
+      return (
+        <Button onClick={() => setShowEditProfileForm(true)}>
+          Edit Profile
+        </Button>
+      );
     }
+  };
+
+  const handleClose = () => {
+    setShowEditProfileForm(false);
   };
 
   useEffect(() => {
@@ -83,8 +92,8 @@ const ProfileContainer = (props: any) => {
               id: res.id,
               fname: res.fname,
               lname: res.lname,
-              subscribers: res.subscribers ?? 0,
-              subscribing: res.subscribing ?? 0,
+              email: res.email,
+              tel: res.tel,
             });
             localStorage.setItem("skillUserId", res.id);
             return res.id;
@@ -133,6 +142,9 @@ const ProfileContainer = (props: any) => {
         <Navbar name={usernameParam} />
         <div id="profile" className="page-layout">
           <UserAvatar>{usernameParam[0]}</UserAvatar>
+          <div>
+            {userData.fname} {userData.lname}
+          </div>
           <UserInformation
             playlistNumber={playlist?.length}
             clipNumber={clips.length}
@@ -153,6 +165,24 @@ const ProfileContainer = (props: any) => {
               handleClose={handleClosePlaylist}
             />
           )}
+          <Drawer
+            placement={"bottom"}
+            closable={true}
+            onClose={(e) => {
+              setShowEditProfileForm(false);
+            }}
+            height={"100%"}
+            visible={showEditProfileForm}
+            key={"bottom"}
+            destroyOnClose
+          >
+            <EditProfile
+              editProfile={editProfile}
+              handleClose={handleClose}
+              userData={userData}
+              token={token}
+            />
+          </Drawer>
         </div>
         <BottomNav username={userData.username} />
       </Spin>
